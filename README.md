@@ -103,7 +103,7 @@ modelo:
 <!-- dev -->
 <span>
 <!--link github aqui -->
- <a href="https://github.com/fabiaalv3">
+ <a href="https://github.com/fabiaalv3s">
  <!-- card aqui -->
   <img src="https://user-images.githubusercontent.com/111146527/187033602-f9f4156f-c825-4ce0-8976-492af00080aa.png" width="350px">
  </a>
