@@ -136,7 +136,6 @@ modelo:
   <img src="https://user-images.githubusercontent.com/111146527/187034045-f07125c8-2f11-4222-97ff-6bd0e1623ea7.png" width="350px">
  </a>
 </span>
-
 <!-- ------------------------------------------------------------------LICENÇA MIT------------------------------------------------------------------------- -->
 ## :page_facing_up: Licença MIT
 Este projeto está sob a licença MIT. <a href="https://github.com/meta-build/Projeto-Embraer/blob/main/LICENSE"> Clique aqui</a> para mais detalhes.
