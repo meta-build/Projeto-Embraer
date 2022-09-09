@@ -1,0 +1,135 @@
+/*RESET-----------------------------------------*/
+*,*::before,*::after{
+    margin: 0%;
+    padding: 0%;
+}
+
+a{
+    text-decoration: none;
+}
+
+input{
+    outline: none;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    color: #2c3e50;
+}
+
+.tabletTemplate{
+    width: 64rem;
+    height: 48rem;
+    margin: 0 auto;
+}
+
+.navezin{
+    background-color: #0F1D59;
+    height: 5.5rem;
+}
+
+.navezin h3{
+    margin: -0.4rem 0 0 1rem;
+
+    color: #F0F9FF;
+    font-weight: normal;
+}
+
+.navezin i {
+    color:#2c3e50;
+    font-size: 23px;
+}
+
+.logout{
+    text-align: center;
+
+    margin: -3.6rem 1.2rem 0 0;
+    float: right;
+}
+
+.logout a{
+    color: #F0F9FF;
+    text-decoration: none;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.leftSide{
+    padding: 40px 0 0 20px;
+}
+
+.rightSide{
+    padding-top: 40px;
+}
+
+.leftContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.inputPilot{
+    width: 260px;
+    height: 30px;
+    margin: 15px 8px 10px 8px;
+    font-size: 15px;
+    padding: 2px 15px 2px 15px;
+
+    /* border */
+    border-style: double;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    border-color: #0F1D59;
+}
+
+#diferent{
+    width: 592px;
+}
+
+.containerFooter{
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+}
+
+.leftFooterSide{
+    display: flex;
+    align-items: center;
+}
+
+button{
+    width: 200px;
+    margin: 10px 30px;
+    height: 30px;
+    font-size: 15px;
+
+    border: none;
+    border-radius: 5px;
+}
+
+.blueColorful{
+    background-color: #0F1D59;
+    color: #F0F9FF;
+}
+
+.greyColorful{
+    background-color: #666666;
+    color: #F0F9FF;
+}
+
+.rightFooterSide{
+    display: flex;
+    align-items: center;
+
+    padding-left: 43px;
+}
+
+textarea{
+    resize: none;
+    border-radius: 8px;
+    outline: none;
+}
