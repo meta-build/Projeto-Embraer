@@ -40,7 +40,9 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 <!-- ------------------------------------------------------------------BACKLOG-------------------------------------------------------------------------- -->
 ## :repeat: Backlog
-<img src="https://user-images.githubusercontent.com/90328897/183754169-d53ec32c-cf02-4135-9bbb-a39c5b414254.png" width="90%">
+
+<img src= "https://user-images.githubusercontent.com/111146527/189669523-2929a463-5ea7-4962-991f-96caed5b3e1a.png">
+
 
 <!-- ------------------------------------------------------------------SPRINTS-------------------------------------------------------------------------- -->
 ## :gear: Sprints
