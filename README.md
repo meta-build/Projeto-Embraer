@@ -45,7 +45,7 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 <!-- ------------------------------------------------------------------SPRINTS-------------------------------------------------------------------------- -->
 ## :gear: Sprints
 <h2>1ª Sprint</h2>
-<p>Entrega: 01/01/2022 à 18/09/2022</p>
+<p>Entrega: 29/08/2022 à 18/09/2022</p>
 
 ### Funcionalidade 1
 (gif aqui)
@@ -54,8 +54,6 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 ### Funcionalidade 2
 (gif aqui)
 <br>
-
-...
 
 <!-- -----------------------------------------------------------------TECNOLOGIAS------------------------------------------------------------------------- -->
 ## :computer: Tecnologias utilizadas
