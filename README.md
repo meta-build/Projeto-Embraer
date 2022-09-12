@@ -33,7 +33,7 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 <!-- ------------------------------------------------------------------OBJETIVO-------------------------------------------------------------------------- -->
 ## :dart: Objetivo
 <p>
-    Donec lacus dui, eleifend et mi non, mollis cursus lectus. Praesent ut finibus tortor, vitae faucibus turpis. Sed nec eros eu orci ullamcorper ullamcorper. Integer eleifend at nisi non egestas. Curabitur venenatis et sapien id pulvinar. 
+    Os pilotos precisam fazer uma análise do comprimento de pista requerida para o pouso de acordo com alguns parâmetros. Em função dos parâmetros passados, o piloto será capaz de calcular a distância necessária para pousar a aeronave. Se a pista do aeroporto de destino não for grande o suficiente para realização do pouso com segurança, o piloto deve buscar alguma alternativa.  
 </p>
 
 <br>
