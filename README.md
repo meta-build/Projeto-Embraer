@@ -21,11 +21,11 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 </span>
 
 <!-- cabeçalho -->
-<h4>Aprendizagem por projeto Integrado <h1>Nome projeto</h1></h4>
+<h4>Aprendizagem por projeto Integrado <h1>Embraer Operational Landing Distance</h1></h4>
 
 <!-- ------------------------------------------------------------------RESUMO-------------------------------------------------------------------------- -->
 <p>
-    Donec lacus dui, eleifend et mi non, mollis cursus lectus. Praesent ut finibus tortor, vitae faucibus turpis. Sed nec eros eu orci ullamcorper ullamcorper. Integer eleifend at nisi non egestas. Curabitur venenatis et sapien id pulvinar. 
+    Embraer OLD(Operational Landing Distance) é uma aplicação web com a finalidade de cálculo de pouso destinado à empresa de aviações.
 </p>
 
 <br>
