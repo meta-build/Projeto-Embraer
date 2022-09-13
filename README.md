@@ -49,6 +49,11 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 <h2>1ª Sprint</h2>
 <p>Entrega: 29/08/2022 à 18/09/2022</p>
 
+### Backlog da Sprint
+
+![Backlog S1](https://user-images.githubusercontent.com/111146527/189878555-a587c82e-6a1c-4e5a-9725-913edced7672.png)
+
+
 ### Funcionalidade 1
 (gif aqui)
 <br>
