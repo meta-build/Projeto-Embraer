@@ -2,7 +2,7 @@ import { Component, ReactNode } from "react";
 import '../../App.css';
 
 type props = {
-    resultado: number
+    result: number
 }
 
 export default class Results extends Component<props> {
@@ -11,7 +11,7 @@ export default class Results extends Component<props> {
         return (
             <div className="results">
                 <h5>Result:</h5>
-                <h1>{this.props.resultado}</h1>
+                <h1>{this.props.result}</h1>
             </div>
         )
     }
