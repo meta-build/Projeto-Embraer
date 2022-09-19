@@ -12,11 +12,12 @@ type state = {
     motor: string,
     temp: number,
     slope: number,
+    slopeDirection: number,
     weight: number,
     certification: string,
     airportAltitude: number,
     overspeed: number,
-    reverser: string,
+    reverser: number,
     airstripCondition: string,
     brakingApplication: string,
     iceBuildup: string,
@@ -35,11 +36,12 @@ export default class InputArea extends Component<{}, state> {
             motor: '',
             temp: 0,
             slope: 0,
+            slopeDirection: 0,
             weight: 0,
             certification: '',
             airportAltitude: 0,
             overspeed: 0,
-            reverser: '',
+            reverser: 0,
             airstripCondition: '',
             brakingApplication: '',
             iceBuildup: '',
@@ -53,8 +55,10 @@ export default class InputArea extends Component<{}, state> {
 
         this.getAircraft = this.getAircraft.bind(this)
         this.getWind = this.getWind.bind(this)
+        this.getWindDirection = this.getWindDirection.bind(this)
         this.getMotor = this.getMotor.bind(this)
         this.getTemp = this.getTemp.bind(this)
+        this.getSlopeDirection = this.getSlopeDirection.bind(this)
         this.getSlope = this.getSlope.bind(this)
         this.getWeight = this.getWeight.bind(this)
         this.getCertification = this.getCertification.bind(this)
@@ -75,8 +79,10 @@ export default class InputArea extends Component<{}, state> {
 
     getAircraft(e: any){this.setState({aircraftModel: e.target.value})}
     getWind(e: any){this.setState({wind: e.target.value})}
+    getWindDirection(e: any){this.setState({windDirection: e.target.value})}
     getMotor(e: any){this.setState({motor: e.target.value})}
     getTemp(e: any){this.setState({temp: e.target.value})}
+    getSlopeDirection(e: any){this.setState({slopeDirection: e.target.value})}
     getSlope(e: any){this.setState({slope: e.target.value})}
     getWeight(e: any){this.setState({weight: e.target.value})}
     getCertification(e: any){this.setState({certification: e.target.value})}
@@ -92,7 +98,7 @@ export default class InputArea extends Component<{}, state> {
     // procedimento para enviar parâmetros p/ back-ned e puxar resultado
     submeterParametros(e: any){
         e.preventDefault();
-        // this.cadastrarCalculo(this.state)
+        this.cadastrarCalculo(this.state)
         this.getResultado();
     }
 
@@ -113,13 +119,18 @@ export default class InputArea extends Component<{}, state> {
                             <option value={'default-model'}>Default model</option>
                         </select>
                         <input onChange={this.getMotor} className="inputPilot" name="motor" id='sm' placeholder="Motor" type="text" />
-                        <select className="inputPilot" name="windDirection" id="sm">
+                        <select onChange={this.getWindDirection} className="inputPilot" name="windDirection" id="sm">
                             <option selected disabled>Wind Direction</option>
                             <option value={1}>Head wind</option>
                             <option value={2}>Tail wind</option>
                         </select>
                         <input onChange={this.getWind} className="inputPilot" name="wind" id='sm' placeholder="Wind (kt)" type="number" />
                         <input onChange={this.getTemp} className="inputPilot" name="temp" id='sm' placeholder="Temperature (°C)" type="number" />
+                        <select onChange={this.getSlopeDirection} className="inputPilot" name="slopeAngle" id="sm">
+                            <option selected disabled>Slope Angle</option>
+                            <option value={1}>Uphill</option>
+                            <option value={2}>Downhill</option>
+                        </select>
                         <input onChange={this.getSlope} className="inputPilot" name="slope" id='sm' placeholder="Slope (%)" type="number" />
                         <input onChange={this.getWeight} className="inputPilot" name="weight" id='sm' placeholder="Aircraft Weight (kg)" type="number" min={10000} step={1000}/>
                         <input onChange={this.getCertification} className="inputPilot" name="certification" id='sm' placeholder="Certification" type="text" />
@@ -128,7 +139,7 @@ export default class InputArea extends Component<{}, state> {
                         <select onChange={this.getReverser} className="inputPilot" name="reverser" id='sm'>
                             <option selected disabled>Reverser</option>
                             <option value={1}>Yes</option>
-                            <option value={0}>No</option>
+                            <option value={2}>No</option>
                         </select>
                         <select onChange={this.getAirstripCondition} className="inputPilot" name="airstripCondition" id='sm'>
                             <option selected disabled>Airstrip Condition</option>

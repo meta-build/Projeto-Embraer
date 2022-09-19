@@ -1,4 +1,4 @@
 export enum URL {
-    CALCULAR = 'URL para envio de parâmetros',
-    RETORNO = 'URL para pegar resultado'
+    CALCULAR = 'http://localhost:3001/calc',
+    RETORNO = 'http://localhost:3001/result'
 }
