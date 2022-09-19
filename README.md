@@ -58,11 +58,8 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 ![Burndown S1](https://user-images.githubusercontent.com/111146527/190936234-f4935a9c-34ba-4534-9e26-c88f2234a562.png)
 
 ### Funcionalidade 1
-(gif aqui)
-<br>
 
-### Funcionalidade 2
-(gif aqui)
+
 <br>
 
 <!-- -----------------------------------------------------------------TECNOLOGIAS------------------------------------------------------------------------- -->
