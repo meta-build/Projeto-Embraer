@@ -1,4 +1,5 @@
 import "../../App.css";
+import './login.css'
 import { useNavigate } from 'react-router-dom'
 import { useState } from "react";
 
@@ -13,15 +14,15 @@ export const Login = () => {
   };
     
   return (
-    <div>
+    <div className="loginComponent">
       <form>
         <label>
-          <span>Email</span>
+          <span>Email:</span>
           <input value={email} onChange={(e) => setEmail(e.target.value)} />
         </label>
 
         <label>
-          <span>Senha</span>
+          <span>Password:</span>
           <input
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
@@ -29,8 +30,8 @@ export const Login = () => {
           />
         </label>
 
-        <button type="button" onClick={handleEntrar}>
-          Entrar
+        <button className="enterButton" type="button" onClick={handleEntrar}>
+          Enter
         </button>
       </form>
     </div>
