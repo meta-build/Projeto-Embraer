@@ -1,10 +1,9 @@
-import './App.css';
-import InputArea from './Components/InputArea';
+import { Caminhos } from './app/routes';
 
 function App() {
   return (
     <>
-      <InputArea />
+    <Caminhos />
     </>
   );
 }

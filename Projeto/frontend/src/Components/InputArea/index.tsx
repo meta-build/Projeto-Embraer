@@ -1,7 +1,7 @@
 import { Component } from "react";
 import '../../App.css';
-import CadastradorParametros from "../../Cadastrar/cadastradorParametros";
-import ResgatarResultado from "../../Resgatar/resgateResultado";
+import CadastradorParametros from "../Cadastrar/cadastradorParametros";
+import ResgatarResultado from "../Resgatar/resgateResultado";
 import Results from "../Results";
 
 type state = {
@@ -114,46 +114,58 @@ export default class InputArea extends Component<{}, state> {
             <>
                 <div className="container">
                     <form onSubmit={(e) => {this.submeterParametros(e)}}>
-                        <select onChange={this.getAircraft} className="inputPilot" name="aircraftModel" id='md' placeholder="Aircraft Model">
-                            <option selected disabled>Aircraft Model</option>
-                            <option value={'default-model'}>Default model</option>
-                        </select>
-                        <input onChange={this.getMotor} className="inputPilot" name="motor" id='sm' placeholder="Motor" type="text" />
-                        <select onChange={this.getWindDirection} className="inputPilot" name="windDirection" id="sm">
-                            <option selected disabled>Wind Direction</option>
-                            <option value={1}>Head wind</option>
-                            <option value={2}>Tail wind</option>
-                        </select>
-                        <input onChange={this.getWind} className="inputPilot" name="wind" id='sm' placeholder="Wind (kt)" type="number" />
-                        <input onChange={this.getTemp} className="inputPilot" name="temp" id='sm' placeholder="Temperature (°C)" type="number" />
-                        <select onChange={this.getSlopeDirection} className="inputPilot" name="slopeAngle" id="sm">
-                            <option selected disabled>Slope Angle</option>
-                            <option value={1}>Uphill</option>
-                            <option value={2}>Downhill</option>
-                        </select>
-                        <input onChange={this.getSlope} className="inputPilot" name="slope" id='sm' placeholder="Slope (%)" type="number" />
-                        <input onChange={this.getWeight} className="inputPilot" name="weight" id='sm' placeholder="Aircraft Weight (kg)" type="number" min={10000} step={1000}/>
-                        <input onChange={this.getCertification} className="inputPilot" name="certification" id='sm' placeholder="Certification" type="text" />
-                        <input onChange={this.getAirportAltitude} className="inputPilot" name="airportAltitude" id='sm' placeholder="Airport Altitude (ft)" type="number" />
-                        <input onChange={this.getOverspeed} className="inputPilot" name="overspeed" id='sm' placeholder="Overspeed (kt)" type="number" />
-                        <select onChange={this.getReverser} className="inputPilot" name="reverser" id='sm'>
-                            <option selected disabled>Reverser</option>
-                            <option value={1}>Yes</option>
-                            <option value={2}>No</option>
-                        </select>
-                        <select onChange={this.getAirstripCondition} className="inputPilot" name="airstripCondition" id='sm'>
-                            <option selected disabled>Airstrip Condition</option>
-                            <option value={6}>Dry</option>
-                            <option value={5}>Wet</option>
-                            <option value={4}>Compact Snow</option>
-                            <option value={3}>Loose Snow</option>
-                            <option value={2}>Standing Water/Slush</option>
-                            <option value={1}>ICE</option>
-                        </select>
-                        <input onChange={this.getBrakingApplication} className="inputPilot" name="brakingApplication" id='sm' placeholder="Braking Application" type="number" min={1} max={6}/>
-                        <input onChange={this.getIceBuildup} className="inputPilot" name="iceBuildup" id='sm' placeholder="Ice Buildup" type="text" />
-                        <input onChange={this.getLandingFlap} className="inputPilot" name="landingFlap" id='sm' placeholder="Landing Flap" type="text" />
-                        <input onChange={this.getTrackConditions} className="inputPilot" name="trackConditions" id='sm' placeholder="Track Conditions" type="text" />
+                        <div className="inputArea">
+                            <select onChange={this.getAircraft} className="inputPilot" name="aircraftModel" id='md' placeholder="Aircraft Model">
+                                <option selected disabled>Aircraft Model</option>
+                                <option value={'default-model'}>Default model</option>
+                            </select>
+                            <select onChange={this.getMotor} className="inputPilot" name="motor" id='sm'>
+                                <option disabled selected>Motor</option>
+                                <option value={''}>Default motor</option>
+                            </select>
+                            <select onChange={this.getWindDirection} className="inputPilot" name="windDirection" id="sm">
+                                <option selected disabled>Wind Direction</option>
+                                <option value={1}>Head wind</option>
+                                <option value={2}>Tail wind</option>
+                            </select>
+                            <input onChange={this.getWind} className="inputPilot" name="wind" id='sm' placeholder="Wind (kt)" type="number" />
+                            <input onChange={this.getTemp} className="inputPilot" name="temp" id='sm' placeholder="Temperature (°C)" type="number" />
+                            <select onChange={this.getSlopeDirection} className="inputPilot" name="slopeAngle" id="sm">
+                                <option selected disabled>Slope Angle</option>
+                                <option value={1}>Uphill</option>
+                                <option value={2}>Downhill</option>
+                            </select>
+                            <input onChange={this.getSlope} className="inputPilot" name="slope" id='sm' placeholder="Slope (%)" type="number" />
+                            <input onChange={this.getWeight} className="inputPilot" name="weight" id='sm' placeholder="Aircraft Weight (kg)" type="number" min={10000} step={1000}/>
+                            <input onChange={this.getCertification} className="inputPilot" name="certification" id='sm' placeholder="Certification" type="text" />
+                            <input onChange={this.getAirportAltitude} className="inputPilot" name="airportAltitude" id='sm' placeholder="Airport Altitude (ft)" type="number" />
+                            <input onChange={this.getOverspeed} className="inputPilot" name="overspeed" id='sm' placeholder="Overspeed (kt)" type="number" />
+                            <select onChange={this.getReverser} className="inputPilot" name="reverser" id='sm'>
+                                <option selected disabled>Reverser</option>
+                                <option value={1}>Yes</option>
+                                <option value={2}>No</option>
+                            </select>
+                            <select onChange={this.getAirstripCondition} className="inputPilot" name="airstripCondition" id='sm'>
+                                <option selected disabled>Airstrip Condition</option>
+                                <option value={6}>Dry</option>
+                                <option value={5}>Wet</option>
+                                <option value={4}>Compact Snow</option>
+                                <option value={3}>Loose Snow</option>
+                                <option value={2}>Standing Water/Slush</option>
+                                <option value={1}>ICE</option>
+                            </select>
+                            <input onChange={this.getBrakingApplication} className="inputPilot" name="brakingApplication" id='sm' placeholder="Braking Application" type="number" min={1} max={6}/>
+                            <select onChange={this.getIceBuildup} className="inputPilot" name="iceBuildup" id='sm' placeholder="Ice Build Up">
+                                <option selected disabled>Ice Buildup</option>
+                                <option value={''}>With Ice</option>
+                                <option value={''}>Wihtout Ice</option>
+                            </select>
+                            <select onChange={this.getLandingFlap} className="inputPilot" name="landingFlap" id='sm'>
+                                <option selected disabled>Landing Flap</option>
+                                <option value={''}>Flap 220</option>
+                                <option value={''}>Flap 450</option>
+                            </select>
+                        </div>
                         <div className="footer">
                             <span className="btn-section">
                                 <button type="submit" className="botao azul">Calculate</button>

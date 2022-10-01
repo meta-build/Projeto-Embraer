@@ -114,20 +114,6 @@ body{
   grid-template-columns: 1fr 1fr;
 }
 
-.inputPilot{
-  height: 30px;
-  margin: 15px 8px 10px 8px;
-  font-size: 15px;
-  padding: 2px 15px 2px 15px;
-
-  /* border */
-  border-style: double;
-  border-right: none;
-  border-top: none;
-  border-left: none;
-  border-color: #0F1D59;
-}
-
 select {
   border-bottom: 2px;
 }
@@ -148,16 +134,6 @@ select {
   align-items: center;
 }
 
-button{
-  width: 200px;
-  margin: 10px 30px;
-  height: 30px;
-  font-size: 15px;
-
-  border: none;
-  border-radius: 5px;
-}
-
 .blueColorful{
   background-color: #0F1D59;
   color: #F0F9FF;
@@ -168,32 +144,11 @@ button{
   color: #F0F9FF;
 }
 
-.botao {
-  color: #F0F9FF;
-  display: block;
-}
-
-.botao.azul {
-  background-color: #0F1D59;
-}
-
-.botao.cinza {
-  background-color: #666666;
-}
-
 .rightFooterSide{
   display: flex;
   align-items: center;
 
   padding-left: 43px;
-}
-
-#md {
-  width: 61.1%;
-}
-
-#sm {
-  width: 30%
 }
 
 .btn-section {
@@ -202,18 +157,11 @@ button{
   float: left;
 }
 
-.results {
-  border: 1px solid #666666;
-  padding: 15px;
-  width: 75%;
-  float: right;
-  border-radius: 10px;
-}
-
-.results h5 {
-  color: #666666;
-}
-
 .footer {
   margin-top: 30px;
+}
+
+.inputArea{
+  margin: 0px auto;
+  width: 600px;
 }

@@ -1,0 +1,25 @@
+.inputPilot{
+    height: 30px;
+    margin: 15px 8px 10px 8px;
+    font-size: 15px;
+    padding: 2px 15px 2px 15px;
+  
+    /* border */
+    border-style: double;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    border-color: #0F1D59;
+}
+
+#gg {
+    width: 475px;
+}
+
+#md {
+    width: 300px;
+}
+  
+#sm {
+    width: 142px
+}
