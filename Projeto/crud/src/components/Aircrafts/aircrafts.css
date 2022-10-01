@@ -1,0 +1,89 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+ .firstTh{
+    width: 78%;
+ }
+
+ .alinhamento{
+  width: 10.5%;
+  text-align: center;
+ }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  button{
+    background-color: transparent;
+    border-radius: 0;
+    width: 20px;
+    margin: 0;
+  }
+
+  .backButton{
+    font-size: 22px;
+    color: #0F1D59;
+
+    margin-top: 0;
+    margin-left: 6px;
+
+    width: 20px;
+  }
+
+  .title{
+    width: 188px;
+    margin: 0 9px;
+
+    border-style: solid;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    border-color: #0F1D59;
+  }
+
+  .inputComponent{
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 70px;
+  }
+
+  .inputAircraft{
+    width: 78%;
+    padding: 2px;
+
+    border-style: double;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    border-color: #0F1D59;
+  }
+
+  .inputButton{
+    font-size: 20px;
+    margin: 0 2px;
+    width: 10.5%;
+    background-color: #0F1D59;
+    color: #FFF;
+
+    border-radius: 10px;
+  }
+
+  .inputButton:hover{
+    background: rgba(15,29,89,0.8)
+  }
+
+  .tableButton{
+    color: #0F1D59;
+  }
