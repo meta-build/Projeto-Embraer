@@ -1,0 +1,27 @@
+button {
+  padding: 20px;
+  width: 80%;
+  font-size: 20px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.botao.azul {
+  background-color: #0F1D59;
+}
+
+.botao.azul:hover {
+  cursor: pointer;
+  background-color: #1e3497;
+}
+
+.botao.cinza {
+  background-color: #666666;
+}
+
+.botao.cinza:hover {
+  cursor: pointer;
+  background-color: #9b9b9b;
+}
