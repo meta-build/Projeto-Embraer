@@ -1,5 +1,5 @@
-.title {
-    margin: 10px;
+.calcTitle {
+    margin: -10px 10px;
     margin-left: 20px;
     font-weight: bold;
 }
@@ -20,7 +20,19 @@
     flex-wrap: wrap;
 }
 
-.botoes {
+.calcBotoes {
     display: flex;
     justify-content: center;
 }
+
+.calcBackButton{
+    background-color: transparent;
+    font-size: 22px;
+    color: #0F1D59;
+
+    padding: 0;
+    margin-top: 0;
+    margin-left: 6px;
+
+    width: 20px;
+  }

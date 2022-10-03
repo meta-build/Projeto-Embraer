@@ -11,6 +11,7 @@ table {
  }
 
  .alinhamento{
+  padding: 0;
   width: 10.5%;
   text-align: center;
  }
@@ -25,35 +26,38 @@ table {
     background-color: #dddddd;
   }
 
-  button{
+  .tableButton{
+    padding: 0;
     background-color: transparent;
     border-radius: 0;
     width: 20px;
     margin: 0;
+
+    
+    color: #0F1D59;
   }
 
-  .backButton{
+  .aircraftBackButton{
+    background-color: transparent;
+
     font-size: 22px;
     color: #0F1D59;
 
+    padding: 0;
     margin-top: 0;
     margin-left: 6px;
 
     width: 20px;
   }
 
-  .title{
-    width: 188px;
-    margin: 0 9px;
-
-    border-style: solid;
-    border-right: none;
-    border-top: none;
-    border-left: none;
-    border-color: #0F1D59;
+  .aircraftTitle{
+    margin: -10px 10px;
+    margin-left: 20px;
+    font-weight: bold;
   }
 
   .inputComponent{
+
     margin: 0 auto;
     width: 80%;
     margin-top: 70px;
@@ -70,7 +74,8 @@ table {
     border-color: #0F1D59;
   }
 
-  .inputButton{
+  .aircraftInputButton{
+    padding: 0;
     font-size: 20px;
     margin: 0 2px;
     width: 10.5%;
@@ -82,8 +87,4 @@ table {
 
   .inputButton:hover{
     background: rgba(15,29,89,0.8)
-  }
-
-  .tableButton{
-    color: #0F1D59;
   }

@@ -1,5 +1,5 @@
 .loginComponent{
-    background-color: #FFF;
+    background-color: rgb(255, 255, 255);
     border: 2px solid #C0C0C0;
     border-width: 2px;
     width: 27.5%;
@@ -10,15 +10,20 @@
     color: #0F1D59 ;
 }
 
-input {
+.inputLogin {
+
+    width: 293px;
     margin: 5px 0;
     padding: 2px;
+    outline: none;
 }
 
 
 .enterButton{
+    padding: 10px;
     color: #FFF;
     font-weight: bold;
+
     background-color: #0F1D59;
     width: 45%;
     margin: 20px 0 0 0 ;
