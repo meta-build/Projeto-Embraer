@@ -17,7 +17,7 @@ export const Selecionar = (props:config) => {
 
     return(
         <>
-        <select onChange={props.onChange()} className="inputPilot" name={props.id} id={props.tamanho}>
+        <select onChange={(e) => props.onChange(e.target.value)} className="inputPilot" name={props.id} id={props.tamanho}>
             <option disabled selected>{props.label}</option>
             {opcoesTag}
         </select>

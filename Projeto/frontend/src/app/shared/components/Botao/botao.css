@@ -1,7 +1,7 @@
 button {
   padding: 20px;
   width: 80%;
-  font-size: 15px;
+  font-size: 20px;
   color: white;
   border: none;
   border-radius: 10px;
@@ -13,7 +13,8 @@ button {
 }
 
 .botao.azul:hover {
-  background-color: #091238;
+  cursor: pointer;
+  background-color: #1e3497;
 }
 
 .botao.cinza {
@@ -21,5 +22,6 @@ button {
 }
 
 .botao.cinza:hover {
-  background-color: #464646;
+  cursor: pointer;
+  background-color: #9b9b9b;
 }

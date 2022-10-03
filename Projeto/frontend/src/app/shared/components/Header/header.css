@@ -1,0 +1,35 @@
+.navezin {
+  background-color: #0F1D59;
+  height: 55px;
+}
+
+.navezin h3 {
+  margin: -0.4rem 0 0 1rem;
+  color: #F0F9FF;
+  font-weight: normal;
+}
+
+.navezin img {
+  width: 180px;
+  margin-top: -60px;
+  margin-left: 15px;
+}
+
+.logout-btn {
+  margin: 7px;
+  text-decoration: none;
+  line-height: 18px;
+  color: white;
+  float: right;
+  width: 50px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.logout-btn:hover{
+  color: rgb(216, 216, 216);
+}
+
+.logout-icon{
+  font-size: 25px;
+}

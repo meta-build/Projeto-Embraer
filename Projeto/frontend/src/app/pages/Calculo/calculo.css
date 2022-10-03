@@ -1,6 +1,12 @@
+.title {
+    margin: 10px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
 .calculadora {
     margin: 15px auto;
-    width: 70%;
+    width: 80%;
 }
 
 .insercao {

@@ -13,7 +13,7 @@ interface config {
 export const InserirNumero = (props:config) => {
     return(
         <>
-        <input onChange={props.onChange()} className="inputPilot" name={props.id} id={props.tamanho}type="number" min={props.min} max={props.max} step={props.intervalo} placeholder={props.label}/>
+        <input onChange={(e) => props.onChange(e.target.value)} className="inputPilot" name={props.id} id={props.tamanho}type="number" min={props.min} max={props.max} step={props.intervalo} placeholder={props.label}/>
         </>
     )
 };
