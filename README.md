@@ -61,6 +61,16 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 ![sprint1](https://user-images.githubusercontent.com/111146527/193828523-8f67f104-898e-4559-a682-cd4c3960e971.gif)
 
 
+<h2>2ª Sprint</h2>
+<p>Entrega: 29/08/2022 à 18/09/2022</p>
+
+### Backlog da Sprint
+
+![uyadfsgsduyaofgawusy](https://user-images.githubusercontent.com/111146527/193831921-a2120ae6-1258-4059-8535-a2f4608d1220.png)
+
+### Burndown da Sprint
+
+### Funcionalidade
 
 <br>
 
@@ -79,10 +89,14 @@ modelo:
 <span><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"></span>
 <span><img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white"></span>
 
-### Back-end
-<span><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"></span>
+### Back-end 
+
+<span><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"></span>
+<span><img src = "https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"></span>
+<span><img src = "https://img.shields.io/badge/Express.js-404D59?style=for-the-badge"></span> 
 
 ### Design
+
 <span><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"></span>
 
 <!-- ------------------------------------------------------------------EQUIPE-------------------------------------------------------------------------- -->
