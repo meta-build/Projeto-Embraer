@@ -12,12 +12,12 @@ import {
 // import tentativa CRUD
 
 import { useState } from "react";
-import FormDialog from "./dialog/dialog";
+// import FormDialog from "./dialog/dialog";
 import CadastradorAeronave from "../../shared/services/Cadastrar/cadastrar_aeronave";
-import ListarAeronaves from "../../shared/services/Resgatar/resgatar_aeronave";
+import ListarAeronaves from "../../shared/services/Resgatar/listarAeronaves";
 
 
-export const Aircraft = (props) => {
+export const Aircraft = () => {
   const history = useNavigate();
 
   const handleVoltar = () => {
@@ -26,69 +26,50 @@ export const Aircraft = (props) => {
 
   // Tentativa de CRUD
 
-  const [open, setOpen] = useState(false);
   const [aircraft, setAircraft] = useState('');
-
-  const handleClickAircraft = () => {
-    setOpen(true);
-  }
-
-  var nome = {
-    name: aircraft
-  }
-
-  var listAircrafts = {};
+  const [aeronaves, setarenoaves] = useState();
 
   const cadastrarAeronave = (e) => {
     e.preventDefault();
-    // enviar parametros
     let cadastrar = new CadastradorAeronave();
-    cadastrar.cadastrar(nome);
+    cadastrar.cadastrar({name: aircraft});
   };
 
-  const resgatarAeronave = () => {
-    // pegar resultado
-    let resgatarResultado = new ListarAeronaves();
-    const retorno = resgatarResultado.resgatar();
-    retorno.then((aeronaves) => {
-      listAircrafts = aeronaves
+
+  const getAeronaves = () => {
+    let listarAeronaves = new ListarAeronaves();
+    let retorno = listarAeronaves.resgatar()
+    retorno.then((elementos) => {
+      setarenoaves(elementos.map(aviao =>
+      <tr key={aviao.idcadastro}>
+        <td>{aviao.name}</td>
+        <td className="alinhamento">
+          <button className="tableButton">
+            <FontAwesomeIcon icon={faPen} />
+          </button>
+        </td>
+        <td className="alinhamento">
+          <button className="tableButton">
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </td>
+      </tr>
+      ))
     });
-  };
-
-  resgatarAeronave()
-
-  let montarTabela = () => {
-
   }
 
-  listAircrafts.map((aviao) => {
-    return (<tr>
-      <td>{aviao['name']}</td>
-      <td className="alinhamento">
-        <button className="tableButton">
-          <FontAwesomeIcon icon={faPen} />
-        </button>
-      </td>
-      <td className="alinhamento">
-        <button className="tableButton">
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
-      </td>
-    </tr>)
-  })
-
-  let tabelinha = montarTabela()
+  getAeronaves();
   return (
     <div className="aircraftComponent">
 
-      <FormDialog
+      {/* <FormDialog
         open={open}
         setOpen={setOpen}
         name={props.name}
         listAircraft={props.listAircraft}
         setListAircraft={props.setListAircraft}
         id={props.id}
-      />
+      /> */}
 
       <button type="button" className="aircraftBackButton" onClick={handleVoltar}>
         <FontAwesomeIcon icon={faArrowLeft} />
@@ -98,7 +79,6 @@ export const Aircraft = (props) => {
       <div className="inputComponent">
         <input
           onChange={(e) => {
-            console.log(e.target.value)
             setAircraft(e.target.value)
           }}
           className="inputAircraft"
@@ -114,12 +94,16 @@ export const Aircraft = (props) => {
       </div>
 
       <table>
-        <tr>
-          <th className="firstTh">Aircraft Name</th>
-          <th className="alinhamento">Edit</th>
-          <th className="alinhamento">Delete</th>
-        </tr>
-        {tabelinha}
+        <thead>
+          <tr>
+            <th className="firstTh">Aircraft Name</th>
+            <th className="alinhamento">Edit</th>
+            <th className="alinhamento">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {aeronaves}
+        </tbody>
       </table>
     </div>
   );

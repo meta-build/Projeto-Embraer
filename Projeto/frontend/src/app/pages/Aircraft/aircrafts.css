@@ -1,90 +1,95 @@
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 20px;
-  }
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
 
- .firstTh{
-    width: 78%;
- }
+input{
+  outline: none;
+}
 
- .alinhamento{
+.firstTh {
+  width: 78%;
+}
+
+.alinhamento {
   padding: 0;
   width: 10.5%;
   text-align: center;
- }
+}
 
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
 
-  .tableButton{
-    padding: 0;
-    background-color: transparent;
-    border-radius: 0;
-    width: 20px;
-    margin: 0;
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 
-    
-    color: #0F1D59;
-  }
+.tableButton {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  width: 20px;
+  margin: 0;
 
-  .aircraftBackButton{
-    background-color: transparent;
 
-    font-size: 22px;
-    color: #0F1D59;
+  color: #0F1D59;
+}
 
-    padding: 0;
-    margin-top: 0;
-    margin-left: 6px;
+.aircraftBackButton {
+  background-color: transparent;
 
-    width: 20px;
-  }
+  font-size: 22px;
+  color: #0F1D59;
 
-  .aircraftTitle{
-    margin: -10px 10px;
-    margin-left: 20px;
-    font-weight: bold;
-  }
+  padding: 0;
+  margin-top: 0;
+  margin-left: 6px;
 
-  .inputComponent{
+  width: 20px;
+}
 
-    margin: 0 auto;
-    width: 80%;
-    margin-top: 70px;
-  }
+.aircraftTitle {
+  margin: -10px 10px;
+  margin-left: 20px;
+  font-weight: bold;
+}
 
-  .inputAircraft{
-    width: 78%;
-    padding: 2px;
+.inputComponent {
 
-    border-style: double;
-    border-right: none;
-    border-top: none;
-    border-left: none;
-    border-color: #0F1D59;
-  }
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 70px;
+}
 
-  .aircraftInputButton{
-    padding: 0;
-    font-size: 20px;
-    margin: 0 2px;
-    width: 10.5%;
-    background-color: #0F1D59;
-    color: #FFF;
+.inputAircraft {
+  width: 78%;
+  padding: 2px;
 
-    border-radius: 10px;
-  }
+  border-style: double;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  border-color: #0F1D59;
+}
 
-  .inputButton:hover{
-    background: rgba(15,29,89,0.8)
-  }
+.aircraftInputButton {
+  padding: 0;
+  font-size: 20px;
+  margin: 0 2px;
+  width: 10.5%;
+  background-color: #0F1D59;
+  color: #FFF;
+
+  border-radius: 10px;
+}
+
+.inputButton:hover {
+  background: rgba(15, 29, 89, 0.8)
+}
