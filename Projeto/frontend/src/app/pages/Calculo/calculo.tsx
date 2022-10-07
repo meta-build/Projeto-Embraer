@@ -54,16 +54,16 @@ export const Calculo = () => {
   let modelos = [{ nome: "Default airplane", valor: 0 }];
   let motors = [{ nome: "Default motor", valor: 0 }];
   let winds = [
-    { nome: "Head Wind", valor: 1 },
-    { nome: "Tail Wind", valor: 2 },
+    { nome: "Head Wind", valor: 0 },
+    { nome: "Tail Wind", valor: 1 },
   ];
   let slopeAngles = [
-    { nome: "Uphill", valor: 1 },
-    { nome: "Downhill", valor: 2 },
+    { nome: "Uphill", valor: 0 },
+    { nome: "Downhill", valor: 1 },
   ];
   let reversers = [
-    { nome: "Yes", valor: 1 },
-    { nome: "No", valor: 2 },
+    { nome: "Yes", valor: 0 },
+    { nome: "No", valor: 1 },
   ];
   let airstripConditions = [
     { nome: "Dry", valor: 6 },
@@ -74,12 +74,12 @@ export const Calculo = () => {
     { nome: "Ice", valor: 1 },
   ];
   let iceOptions = [
-    { nome: "With Ice", valor: 1 },
-    { nome: "Without Ice", valor: 2 },
+    { nome: "With Ice", valor: 0 },
+    { nome: "Without Ice", valor: 1 },
   ];
   let flapOptions = [
-    { nome: "Flap 220", valor: 1 },
-    { nome: "Flap 450", valor: 2 },
+    { nome: "Flap 220", valor: 0 },
+    { nome: "Flap 450", valor: 1 },
   ];
   let certifications = [{ nome: "Default Certification", valor: 0 }];
 
@@ -93,11 +93,6 @@ export const Calculo = () => {
     let resgatarResultado = new ResgatarResultado();
     const retorno = resgatarResultado.resgatar();
     retorno.then((resultado) => setresult(resultado["result"]));
-  };
-
-  const imprimir = (e: any) => {
-    e.preventDefault();
-    console.log(params);
   };
 
   //voltar para o menu!!!!
@@ -188,7 +183,7 @@ export const Calculo = () => {
               id="airportAltitude"
               min={0}
               max={16000}
-              intervalo={20}
+              intervalo={1000}
               tamanho="md"
               onChange={setairportAltitude}
             />
@@ -213,7 +208,7 @@ export const Calculo = () => {
               label="Slope (%)"
               min={0}
               max={10}
-              intervalo={0.5}
+              intervalo={1}
               tamanho="sm"
               id="slope"
               onChange={setslope}
@@ -230,8 +225,8 @@ export const Calculo = () => {
             <InserirNumero
               label="Wind (kt)"
               min={0}
-              max={18}
-              intervalo={2}
+              max={40}
+              intervalo={5}
               tamanho="sm"
               id="wind"
               onChange={setwind}
@@ -241,7 +236,7 @@ export const Calculo = () => {
               label="Temperature (ºC)"
               min={-30}
               max={60}
-              intervalo={2}
+              intervalo={5}
               tamanho="md"
               id="temp"
               onChange={settemp}

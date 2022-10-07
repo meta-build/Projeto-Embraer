@@ -1,12 +1,12 @@
 const express = require ("express");
 const app = express();
-const mysql = require ("mysql");
+const mysql = require ("mysql2");
 const cors = require("cors");
 
 const db = mysql.createPool({
     host:"localhost",
-    user: "root",
-    password: "9WidxTm7",
+    user: "rodrigo",
+    password: "fatec",
     database: "cadastro_aeronave",
 });
 
@@ -63,7 +63,7 @@ app.put("/edit", (req, res) => {
 });
 
 //usar o usestate e puxar a função de deletar
-app.delete("/delete/:id", (req, res) => {
+app.delete("/delete", (req, res) => {
     const { id } = req.params;
 
     let SQL = "DELETE FROM cadastro WHERE idcadastro = ?";

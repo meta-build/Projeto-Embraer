@@ -1,14 +1,18 @@
-.inputPilot{
+.inputPilot {
     height: 30px;
     margin: 5px 5px 10px 5px;
     font-size: 15px;
-  
+
     /* border */
     border-style: double;
     border-right: none;
     border-top: none;
     border-left: none;
     border-color: #0F1D59;
+}
+
+select {
+    outline: none;
 }
 
 #gg {
@@ -18,7 +22,7 @@
 #md {
     width: 300px;
 }
-  
+
 #sm {
     width: 142px
 }

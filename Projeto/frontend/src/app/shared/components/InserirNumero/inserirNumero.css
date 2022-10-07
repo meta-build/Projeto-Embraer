@@ -1,13 +1,17 @@
-.inputPilot{
+.inputPilot {
     height: 30px;
     margin: 0px 8px 10px 8px;
     font-size: 15px;
     padding: 2px 15px 2px 15px;
-  
+
     /* border */
     border: none;
     border-bottom: #0F1D59 1px solid;
     border-color: #0F1D59;
+}
+
+input {
+    outline: none;
 }
 
 #gg {
@@ -17,7 +21,7 @@
 #md {
     width: 300px;
 }
-  
+
 #sm {
     width: 142px
 }
