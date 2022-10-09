@@ -22,13 +22,13 @@ input{
 
 td,
 th {
-  border: 1px solid #dddddd;
+  border: 1px solid #bdbcbc;
   text-align: left;
   padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #f0f0f0;
 }
 
 .tableButton {
@@ -37,8 +37,6 @@ tr:nth-child(even) {
   border-radius: 0;
   width: 20px;
   margin: 0;
-
-
   color: #0F1D59;
 }
 

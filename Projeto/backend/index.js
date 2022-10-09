@@ -114,7 +114,7 @@ app.put("/edit", (req, res) => {
 
 //usar o usestate e puxar a função de deletar
 app.delete("/delete", (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
 
     let SQL = "DELETE FROM cadastro WHERE idcadastro = ?";
 
