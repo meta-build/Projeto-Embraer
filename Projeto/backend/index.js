@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql2");
-const cors = require("cors")
+const cors = require("cors");
+const CalcularLD = require("./calculo/calculo.js");
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -13,8 +14,8 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 
-var obj;
-var resultado;
+let obj;
+let resultado;
 
 app.post('/calc', (req, res) => {
     const { aircraftModel } = req.body;
@@ -31,7 +32,7 @@ app.post('/calc', (req, res) => {
     const { airstripCondition } = req.body;
     const { iceBuildup } = req.body;
     const { landingFlap } = req.body;
-    const { slopeAngle } = req.body;
+    const { slopeDirection } = req.body;
 
     obj = {
         "aircraftModel": aircraftModel,
@@ -40,7 +41,7 @@ app.post('/calc', (req, res) => {
         "motor": motor,
         "temp": temp,
         "slope": slope,
-        "slopeDirection": slopeAngle,
+        "slopeDirection": slopeDirection,
         "weight": weight,
         "certification": certification,
         "airportAltitude": airportAltitude,
@@ -51,7 +52,7 @@ app.post('/calc', (req, res) => {
         "landingFlap": landingFlap,
     }
 
-    resultado = Math.floor(Math.random() * 5000) + 1000;
+    resultado = CalcularLD(obj);
 });
 
 app.get('/result', (req, res) => {

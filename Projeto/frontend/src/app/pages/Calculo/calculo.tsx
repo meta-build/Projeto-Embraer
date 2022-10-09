@@ -62,8 +62,9 @@ export const Calculo = () => {
     { nome: "Downhill", valor: 1 },
   ];
   let reversers = [
-    { nome: "Yes", valor: 0 },
-    { nome: "No", valor: 1 },
+    { nome: "All operating", valor: 0 },
+    { nome: "One inoperating", valor: 1 },
+    { nome: "All inoperating", valor: 2 }
   ];
   let airstripConditions = [
     { nome: "Dry", valor: 6 },
@@ -74,8 +75,8 @@ export const Calculo = () => {
     { nome: "Ice", valor: 1 },
   ];
   let iceOptions = [
-    { nome: "With Ice", valor: 0 },
-    { nome: "Without Ice", valor: 1 },
+    { nome: "Without Ice", valor: 0 },
+    { nome: "With Ice", valor: 1 },
   ];
   let flapOptions = [
     { nome: "Flap 220", valor: 0 },
@@ -208,7 +209,7 @@ export const Calculo = () => {
               label="Slope (%)"
               min={0}
               max={10}
-              intervalo={1}
+              intervalo={0.1}
               tamanho="sm"
               id="slope"
               onChange={setslope}
