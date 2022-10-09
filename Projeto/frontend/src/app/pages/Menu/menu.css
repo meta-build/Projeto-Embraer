@@ -1,10 +1,9 @@
 .menu{
     display: flex;
     flex-direction : row;
-    justify-content: space-evenly;
 
-    margin: 10% auto;
-    width: 50%;
+    margin: 30px auto;
+    width: 400px;
     height: 300px;
 }
 
@@ -12,11 +11,11 @@
     padding: 6px;
     text-align: center;
     background-color: #0F1D59;
-    width: 40%;
+    width: 400px;
     height: 100px;
     border-radius: 10px;
     color: #fff;
-
+    margin: 10px;
     
     box-shadow: 5px 5px 10px grey;
     font-size: 30px;

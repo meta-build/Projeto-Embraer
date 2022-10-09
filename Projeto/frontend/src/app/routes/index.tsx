@@ -7,7 +7,8 @@ export const Caminhos = () => {
             <Routes>
                 <Route path='/calc' element={<Calculo/>} />
                 <Route path='/aircraft' element={<Aircraft />} />
-                <Route path='/' element={<Login />} />
+                {/* <Route path='/' element={<Login />} /> */}
+                <Route path='/' element={<Navigate to={'/menu'} />} />
                 <Route path='/menu' element={<Menu />} />
                 <Route path='*' element={<Navigate to={'/'} />} />
             </Routes>

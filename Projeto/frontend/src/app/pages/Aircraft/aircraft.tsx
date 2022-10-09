@@ -15,6 +15,7 @@ import { useState } from "react";
 // import FormDialog from "./dialog/dialog";
 import CadastradorAeronave from "../../shared/services/Cadastrar/cadastrar_aeronave";
 import ListarAeronaves from "../../shared/services/Resgatar/listarAeronaves";
+import ExcluirAeronave from "../../shared/services/Excluir/excluir_aeronave";
 
 
 export const Aircraft = () => {
@@ -29,11 +30,17 @@ export const Aircraft = () => {
   const [aircraft, setAircraft] = useState('');
   const [aeronaves, setarenoaves] = useState();
 
-  const cadastrarAeronave = (e) => {
+  const cadastrarAeronave = (e: any) => {
     e.preventDefault();
     let cadastrar = new CadastradorAeronave();
     cadastrar.cadastrar({name: aircraft});
   };
+
+  const excluirAeronave = (id: number) => {
+    let excluir = new ExcluirAeronave();
+    excluir.excluir({id: id});
+    console.log('excluido');
+  }
 
 
   const getAeronaves = () => {
@@ -43,13 +50,13 @@ export const Aircraft = () => {
       setarenoaves(elementos.map(aviao =>
       <tr key={aviao.idcadastro}>
         <td>{aviao.name}</td>
-        <td className="alinhamento">
+        {/* <td className="alinhamento">
           <button className="tableButton">
             <FontAwesomeIcon icon={faPen} />
           </button>
-        </td>
+        </td> */}
         <td className="alinhamento">
-          <button className="tableButton">
+          <button className="tableButton" onClick={() => {excluirAeronave(aviao.idcadastro)}}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </td>
@@ -97,7 +104,7 @@ export const Aircraft = () => {
         <thead>
           <tr>
             <th className="firstTh">Aircraft Name</th>
-            <th className="alinhamento">Edit</th>
+            {/* <th className="alinhamento">Edit</th> */}
             <th className="alinhamento">Delete</th>
           </tr>
         </thead>
