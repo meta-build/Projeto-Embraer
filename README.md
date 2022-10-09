@@ -70,7 +70,25 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 ### Burndown da Sprint
 
+![Burndown S2](https://user-images.githubusercontent.com/111146527/194782829-c8599b89-3773-4f3b-9057-53a15640d2bd.png)
+
 ### Funcionalidade
+
+#### Menu
+
+![Menu](https://user-images.githubusercontent.com/111146527/194783173-e007c7ea-2bfc-4d7e-998d-dcfe01b4cf2b.gif)
+
+#### CRUD - Excluir
+
+![CRUD-Excluir](https://user-images.githubusercontent.com/111146527/194783198-21f47615-2a7d-464d-a8f9-b881d62ad05e.gif)
+
+#### CRUD - Adicionar
+
+![CRUD-Adicionar](https://user-images.githubusercontent.com/111146527/194783217-79a20550-d369-48be-8783-e862c36b4795.gif)
+
+#### Cálculo
+
+![Cálculo](https://user-images.githubusercontent.com/111146527/194783234-8f2c3461-974c-4a2f-98e6-2ba915d7336f.gif)
 
 <br>
 
