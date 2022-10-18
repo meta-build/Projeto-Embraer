@@ -1,6 +1,7 @@
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { BotaoComFuncao, InserirTexto } from "../../shared/components";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,28 +16,23 @@ export const Login = () => {
   return (
     <div className="loginComponent">
       <form>
-        <label>
-          <span>Email:</span>
-          <input
-            className="inputLogin"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
+        <InserirTexto
+          children="Email"
+          type="email"
+          value={email}
+          onChange={setEmail}
+        />
 
-        <label>
-          <span>Password:</span>
-          <input
-            className="inputLogin"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            type="password"
-          />
-        </label>
+        <InserirTexto
+          children="Senha"
+          type="password"
+          value={senha}
+          onChange={setSenha}
+        />
 
-        <button className="enterButton" type="button" onClick={handleEntrar}>
+        <BotaoComFuncao type="submit" onClick={handleEntrar} tipo="submit">
           Enter
-        </button>
+        </BotaoComFuncao>
       </form>
     </div>
   );

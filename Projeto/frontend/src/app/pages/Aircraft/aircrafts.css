@@ -6,10 +6,6 @@ table {
   margin-top: 20px;
 }
 
-input{
-  outline: none;
-}
-
 .firstTh {
   width: 78%;
 }
@@ -29,65 +25,4 @@ th {
 
 tr:nth-child(even) {
   background-color: #f0f0f0;
-}
-
-.tableButton {
-  padding: 0;
-  background-color: transparent;
-  border-radius: 0;
-  width: 20px;
-  margin: 0;
-  color: #0F1D59;
-}
-
-.aircraftBackButton {
-  background-color: transparent;
-
-  font-size: 22px;
-  color: #0F1D59;
-
-  padding: 0;
-  margin-top: 0;
-  margin-left: 6px;
-
-  width: 20px;
-}
-
-.aircraftTitle {
-  margin: -10px 10px;
-  margin-left: 20px;
-  font-weight: bold;
-}
-
-.inputComponent {
-
-  margin: 0 auto;
-  width: 80%;
-  margin-top: 70px;
-}
-
-.inputAircraft {
-  width: 78%;
-  padding: 2px;
-
-  border-style: double;
-  border-right: none;
-  border-top: none;
-  border-left: none;
-  border-color: #0F1D59;
-}
-
-.aircraftInputButton {
-  padding: 0;
-  font-size: 20px;
-  margin: 0 2px;
-  width: 10.5%;
-  background-color: #0F1D59;
-  color: #FFF;
-
-  border-radius: 10px;
-}
-
-.inputButton:hover {
-  background: rgba(15, 29, 89, 0.8)
 }

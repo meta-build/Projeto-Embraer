@@ -9,7 +9,7 @@ button {
 }
 
 .botao.azul {
-  background-color: #0F1D59;
+  background-color: #0f1d59;
 }
 
 .botao.azul:hover {
@@ -24,4 +24,101 @@ button {
 .botao.cinza:hover {
   cursor: pointer;
   background-color: #9b9b9b;
+}
+
+.enterButton {
+  padding: 10px;
+  color: #fff;
+  font-weight: bold;
+
+  background-color: #0f1d59;
+  width: 100%;
+  margin: 20px 0 0 0;
+  border-radius: 8px;
+
+  box-shadow: 2px 2px 10px grey;
+}
+
+.enterButton:hover {
+  background: rgba(15, 29, 89, 0.8);
+}
+
+.botao.vermelho {
+  background-color: red;
+}
+
+.botao.vermelho:hover {
+  cursor: pointer;
+  background-color: lightcoral;
+}
+
+.aircraftBackButton {
+  background-color: transparent;
+
+  font-size: 22px;
+  color: #0f1d59;
+
+  padding: 0;
+  margin-top: 0;
+  margin-left: 6px;
+
+  width: 20px;
+}
+
+.tableButton {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  width: 20px;
+  margin: 0;
+  color: #0f1d59;
+}
+
+.aircraftInputButton {
+  padding: 0;
+  font-size: 20px;
+  margin: 0 2px;
+  width: 10.5%;
+  background-color: #0f1d59;
+  color: #fff;
+
+  border-radius: 10px;
+}
+
+.inputButton:hover {
+  background: rgba(15, 29, 89, 0.8);
+}
+
+.calcBotoes {
+  display: flex;
+  justify-content: center;
+}
+
+.menuButton {
+  padding: 6px;
+  text-align: center;
+  background-color: #0f1d59;
+  width: 400px;
+  height: 100px;
+  border-radius: 10px;
+  color: #fff;
+  margin: 10px;
+
+  box-shadow: 5px 5px 10px grey;
+  font-size: 30px;
+}
+
+.menuButton:hover {
+  cursor: pointer;
+  background: rgba(15, 29, 89, 0.8);
+}
+
+.menuButton button {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  color: #fff;
+  font-size: 30px;
+
+  background-color: transparent;
 }
