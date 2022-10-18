@@ -5,6 +5,8 @@ import {
   Resultado,
   Selecionar,
   InserirNumero,
+  BotaoVoltar,
+  Text,
 } from "../../shared/components";
 import "./calculo.css";
 import ResgatarResultado from "../../shared/services/Resgatar/resgateResultado";
@@ -64,7 +66,7 @@ export const Calculo = () => {
   let reversers = [
     { nome: "All operating", valor: 0 },
     { nome: "One inoperating", valor: 1 },
-    { nome: "All inoperating", valor: 2 }
+    { nome: "All inoperating", valor: 2 },
   ];
   let airstripConditions = [
     { nome: "Dry", valor: 6 },
@@ -104,10 +106,18 @@ export const Calculo = () => {
 
   return (
     <>
-      <button type="button" className="calcBackButton" onClick={handleVoltar}>
-        <FontAwesomeIcon className="icon" icon={faArrowLeft} />
-      </button>
-      <h1 className="calcTitle">Landing Distance Calculator</h1>
+      <BotaoVoltar
+        tipo="button"
+        className="aircraftBackButton"
+        onClick={handleVoltar}
+      >
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </BotaoVoltar>
+
+      <Text tipo="aircraftTitle">
+      Landing Distance Calculator
+      </Text>
+      
       <div className="calculadora">
         <form onSubmit={submeterCalculo}>
           <div className="insercao">

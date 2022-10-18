@@ -1,37 +1,8 @@
-.menu{
-    display: flex;
-    flex-direction : row;
+.menu {
+  display: flex;
+  flex-direction: row;
 
-    margin: 30px auto;
-    width: 400px;
-    height: 300px;
-}
-
-.menuButton{
-    padding: 6px;
-    text-align: center;
-    background-color: #0F1D59;
-    width: 400px;
-    height: 100px;
-    border-radius: 10px;
-    color: #fff;
-    margin: 10px;
-    
-    box-shadow: 5px 5px 10px grey;
-    font-size: 30px;
-}
-
-.menuButton:hover{
-    cursor: pointer;
-    background: rgba(15,29,89,0.8)
-}
-
-.menuButton button{
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    color: #fff;
-    font-size: 30px;
-
-    background-color: transparent;
+  margin: 30px auto;
+  width: 400px;
+  height: 300px;
 }

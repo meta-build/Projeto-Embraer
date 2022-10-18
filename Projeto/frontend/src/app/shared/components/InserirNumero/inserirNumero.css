@@ -1,27 +1,27 @@
 .inputPilot {
-    height: 30px;
-    margin: 0px 8px 10px 8px;
-    font-size: 15px;
-    padding: 2px 15px 2px 15px;
+  height: 30px;
+  margin: 0px 8px 10px 8px;
+  font-size: 15px;
+  padding: 2px 15px 2px 15px;
 
-    /* border */
-    border: none;
-    border-bottom: #0F1D59 1px solid;
-    border-color: #0F1D59;
+  /* border */
+  border: none;
+  border-bottom: #0f1d59 1px solid;
+  border-color: #0f1d59;
 }
 
 input {
-    outline: none;
+  outline: none;
 }
 
 #gg {
-    width: 475px;
+  width: 475px;
 }
 
 #md {
-    width: 300px;
+  width: 300px;
 }
 
 #sm {
-    width: 142px
+  width: 142px;
 }

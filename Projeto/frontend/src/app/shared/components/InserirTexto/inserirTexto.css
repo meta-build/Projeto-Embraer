@@ -1,0 +1,24 @@
+.inputTexto {
+  position: relative;
+  width: 100%;
+  margin: 5px 0;
+  padding: 2px;
+  outline: none;
+}
+
+.inputAircraft {
+  width: 78%;
+  padding: 2px;
+
+  border-style: double;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  border-color: #0f1d59;
+}
+
+.inputComponent {
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 70px;
+}
