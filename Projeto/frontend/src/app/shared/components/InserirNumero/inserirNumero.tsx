@@ -1,29 +1,34 @@
+import {ReactNode } from "react";
 import "./inserirNumero.css";
 
 interface config {
-  label: string;
+  // label: string;
+  Children: ReactNode;
   onChange: Function;
-  tamanho: "sm" | "md" | "gg";
   id: string;
   min: number;
   max: number;
   intervalo: number;
+  // tamanho: "sm" | "md" | "gg";
 }
 
-export const InserirNumero = (props: config) => {
+export const InserirNumero = ({Children,onChange,id,min,max,intervalo}: config) => {
   return (
     <>
-      <input
-        onChange={(e) => props.onChange(e.target.value)}
-        className="inputPilot"
-        name={props.id}
-        id={props.tamanho}
-        type="number"
-        min={props.min}
-        max={props.max}
-        step={props.intervalo}
-        placeholder={props.label}
-      />
+      <div className="input">
+        <input
+          required
+          onChange={(e) => onChange(e.target.value)}
+          className="inputPilot"
+          name={id}
+          id={id}
+          type="number"
+          min={min}
+          max={max}
+          step={intervalo}
+        />
+        <label htmlFor={id}>{Children}</label>
+      </div>
     </>
   );
 };

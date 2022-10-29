@@ -2,6 +2,7 @@ import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BotaoComFuncao, InserirTexto } from "../../shared/components";
+import { Logo } from "../../../Logo";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,16 +16,19 @@ export const Login = () => {
 
   return (
     <div className="loginComponent">
+        <Logo />
       <form>
         <InserirTexto
-          children="Email"
+          id="Email"
+          children="Endereço de e-mail:"
           type="email"
           value={email}
           onChange={setEmail}
         />
 
         <InserirTexto
-          children="Senha"
+          id="Senha"
+          children="Sua senha:"
           type="password"
           value={senha}
           onChange={setSenha}

@@ -1,9 +1,28 @@
-.inputTexto {
+.inputText{
   position: relative;
-  width: 100%;
+}
+
+.inputTexto {
+  /* width: 100%;
   margin: 5px 0;
   padding: 2px;
+  outline: none; */
+  background-color: transparent;
+  height: 30px;
+  margin: 5px;
+  padding: 20px 15px;
+
+  font-size: 15px;
+  color: #D9D9D9;
+
   outline: none;
+  border: none;
+  border-bottom: 3px solid #D9D9D9;
+  width: 90%;
+}
+
+.label{
+  color: #D9D9D9;
 }
 
 .inputAircraft {
@@ -22,3 +41,29 @@
   width: 80%;
   margin-top: 70px;
 }
+
+
+label {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input ~ label {
+  position: absolute;
+  width: 70%;
+  top: 16px;
+  left: 10px;
+  transition: 0.4s;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  transform: translateY(-24px);
+  font-size: 0.8em;
+  letter-spacing: 0.1em;
+}
+

@@ -1,18 +1,80 @@
-.inputPilot {
+div.select{
+  align-items: center;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly; 
+}
+
+.inputSelectPilot{
+  height: 43px;
+  margin: 5px ;
+  /* padding: 20px 15px; */
+
+  
+  font-size: 15px;
+  color: black;
+  
+  outline: none;
+  border: none;
+  border-bottom: 3px solid #0f1d59;
+  width: 90%;
+}
+
+label {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+select ~ label {
+  position: absolute;
+  width: 70%;
+  top: 16px;
+  left: 10px;
+  transition: 0.4s;
+}
+
+select:focus ~ label,
+select:valid ~ label {
+  transform: translateY(-24px);
+  font-size: 0.8em;
+  letter-spacing: 0.1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .inputSeletPilot {
   height: 30px;
   margin: 5px 5px 10px 5px;
   font-size: 15px;
 
-  /* border */
   border-style: double;
   border-right: none;
   border-top: none;
   border-left: none;
   border-color: #0f1d59;
-}
-
-select {
-  outline: none;
 }
 
 #gg {
@@ -25,4 +87,4 @@ select {
 
 #sm {
   width: 142px;
-}
+} */
