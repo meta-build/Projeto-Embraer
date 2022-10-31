@@ -1,27 +1,44 @@
+div.input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly; 
+}
+
 .inputPilot {
   height: 30px;
-  margin: 0px 8px 10px 8px;
+  margin: 5px;
+  padding: 20px 15px;
+
   font-size: 15px;
-  padding: 2px 15px 2px 15px;
+  color: black;
 
-  /* border */
-  border: none;
-  border-bottom: #0f1d59 1px solid;
-  border-color: #0f1d59;
-}
-
-input {
   outline: none;
+  border: none;
+  border-bottom: 3px solid #0f1d59;
+  width: 90%;
 }
 
-#gg {
-  width: 475px;
+label {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-#md {
-  width: 300px;
+input ~ label {
+  position: absolute;
+  width: 70%;
+  top: 16px;
+  left: 10px;
+  transition: 0.4s;
 }
 
-#sm {
-  width: 142px;
+input:focus ~ label,
+input:valid ~ label {
+  transform: translateY(-24px);
+  font-size: 0.8em;
+  letter-spacing: 0.1em;
 }

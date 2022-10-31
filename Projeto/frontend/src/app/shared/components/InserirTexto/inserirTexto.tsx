@@ -5,6 +5,7 @@ interface configInserirTexto {
   onChange: Function;
   value: string;
   type: string;
+  id: string;
 }
 
 interface configInputSearch {
@@ -13,18 +14,24 @@ interface configInputSearch {
   placeholder: string;
 }
 
-export const InserirTexto = (props: configInserirTexto) => {
+export const InserirTexto = ({
+  onChange,
+  type,
+  children,
+  value,
+  id,
+}: configInserirTexto) => {
   return (
-    <>
-      <label htmlFor="">
-        <span>{props.children}</span>
-        <input
-          className="inputTexto"
-          onChange={(e) => props.onChange(e.target.value)}
-          value=""
-        />
-      </label>
-    </>
+    <div className="inputText">
+      <input
+        required
+        className="inputTexto"
+        onChange={(e) => onChange(e.target.value)}
+        value=""
+        id={id}
+      />
+      <label className="label" htmlFor={id}>{children}</label>
+    </div>
   );
 };
 

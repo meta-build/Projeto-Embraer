@@ -15,7 +15,7 @@ import ExcluirAeronave from "../../shared/services/Excluir/excluir_aeronave";
 import {
   BotaoAircraft,
   BotaoVoltar,
-  InputSearch,
+  // InputSearch,
   Text,
 } from "../../shared/components";
 
@@ -69,6 +69,10 @@ export const Aircraft = () => {
       );
     });
   };
+
+
+
+  
 
   getAeronaves();
   return (
