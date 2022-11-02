@@ -1,10 +1,16 @@
 import "./selecionar.css";
+import { ReactNode } from "react";
 
 interface config {
   label: string;
   id: string;
   onChange: Function;
   opcoes: Array<Object>;
+}
+interface config2 {
+  set: string;
+  id: string;
+  children: ReactNode;
 }
 
 export const Selecionar = ({
@@ -38,3 +44,24 @@ config) => {
   );
 };
 
+export const SelecionarComRetorno = ({
+  set,
+  id,
+  children
+}: config2) => {
+
+  return (
+    <div className="select">
+      <select
+        required
+        className="inputSelectPilot"
+        name=""
+        id={id}
+      >
+        <option></option>
+        {set}
+      </select>
+      <label htmlFor={id}>{children}</label>
+    </div>
+  );
+};
