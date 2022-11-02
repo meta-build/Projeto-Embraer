@@ -3,7 +3,7 @@ table {
   border-collapse: collapse;
   width: 80%;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .firstTh {
@@ -25,4 +25,25 @@ th {
 
 tr:nth-child(even) {
   background-color: #f0f0f0;
+}
+
+.newAircraftModel {
+  text-decoration: none;
+  color: #0f1d59;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.newAircraftModel:hover {
+  text-decoration: underline;
+}
+
+.searchArea {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.searchIcon {
+  margin-right: 10px;
 }

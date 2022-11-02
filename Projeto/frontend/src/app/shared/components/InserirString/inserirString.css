@@ -1,0 +1,43 @@
+div.input {
+    display: flex;
+    align-items: start;
+  }
+  
+  .inputPilot {
+    height: 30px;
+    /* margin: 5px; */
+    padding: 20px 15px;
+  
+    font-size: 15px;
+    color: black;
+  
+    outline: none;
+    border: none;
+    border-bottom: 3px solid #0f1d59;
+    width: 100%;
+  }
+  
+  label {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  input ~ label {
+    position: absolute;
+    width: 70%;
+    top: 16px;
+    left: 15px;
+    transition: 0.4s;
+  }
+  
+  input:focus ~ label,
+  input:valid ~ label {
+    transform: translateY(-24px);
+    font-size: 0.8em;
+    letter-spacing: 0.1em;
+  }
+  

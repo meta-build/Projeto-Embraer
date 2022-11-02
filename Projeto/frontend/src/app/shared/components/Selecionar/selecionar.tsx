@@ -3,9 +3,7 @@ import "./selecionar.css";
 interface config {
   label: string;
   id: string;
-  //   Children: ReactNode;
   onChange: Function;
-  //   tamanho: "sm" | "md" | "gg";
   opcoes: Array<Object>;
 }
 
@@ -15,7 +13,7 @@ export const Selecionar = ({
   onChange,
   opcoes,
 }: //   tamanho,
-config) => {
+  config) => {
   let opcoesTag = [];
   opcoes.forEach((elemento) => {
     opcoesTag.push(
