@@ -34,7 +34,6 @@ export const Calculo = () => {
   const [landingFlap, setlandingFlap] = useState<number>(0);
 
   const [aeronavesNome, setarenoavesNome] = useState();
-  const [aeronavesMotor, setarenoavesMotor] = useState();
 
   // history para volta ao menu
   const history = useNavigate();
@@ -57,9 +56,8 @@ export const Calculo = () => {
     landingFlap: landingFlap,
   };
 
-  let aircrafts: any = [];
   // let opcoes: Array<Object>;
-  // let modelos = [{ nome: "Default airplane", valor: "aisjioasj" }];
+  // let modelos = [{ nome: "Default airplane", valor: 1 }];
   let motors = [{ nome: "Default motor", valor: 0 }];
   let winds = [
     { nome: "Head Wind", valor: 0 },
@@ -123,7 +121,7 @@ export const Calculo = () => {
   };
 
 
-  getAeronaves();
+  useEffect(getAeronaves,[])
   return (
     <>
       <BotaoVoltar
@@ -139,12 +137,6 @@ export const Calculo = () => {
       <div className="calculadora">
         <form onSubmit={submeterCalculo}>
           <div className="insercao">
-            {/* <Selecionar
-              label="Aircraft Model"
-              id="aircraftModel"
-              opcoes={modelos}
-              onChange={setaircraftModel}
-            /> */}
 
             <div className="select">
               <select
