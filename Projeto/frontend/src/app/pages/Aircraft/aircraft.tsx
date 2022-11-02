@@ -20,6 +20,7 @@ import {
 } from "../../shared/components";
 
 export const Aircraft = () => {
+
   const history = useNavigate();
 
   const handleVoltar = () => {
@@ -49,11 +50,6 @@ export const Aircraft = () => {
         elementos.map((aviao) => (
           <tr key={aviao.idcadastro}>
             <td>{aviao.name}</td>
-            {/* <td className="alinhamento">
-          <button className="tableButton">
-            <FontAwesomeIcon icon={faPen} />
-          </button>
-        </td> */}
             <td className="alinhamento">
               <button
                 className="tableButton"
@@ -109,7 +105,6 @@ export const Aircraft = () => {
         <thead>
           <tr>
             <th className="firstTh">Aircraft Name</th>
-            {/* <th className="alinhamento">Edit</th> */}
             <th className="alinhamento">Delete</th>
           </tr>
         </thead>
