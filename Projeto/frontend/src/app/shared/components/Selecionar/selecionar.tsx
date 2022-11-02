@@ -12,8 +12,8 @@ export const Selecionar = ({
   id,
   onChange,
   opcoes,
-}: //   tamanho,
-  config) => {
+}: // tamanho,
+config) => {
   let opcoesTag = [];
   opcoes.forEach((elemento) => {
     opcoesTag.push(
@@ -37,3 +37,4 @@ export const Selecionar = ({
     </div>
   );
 };
+

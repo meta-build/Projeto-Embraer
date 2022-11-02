@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CadastradorParametros from "../../shared/services/Cadastrar/cadastradorParametros";
 import {
   Botao,
@@ -13,6 +13,7 @@ import ResgatarResultado from "../../shared/services/Resgatar/resgateResultado";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import ListarAeronaves from "../../shared/services/Resgatar/listarAeronaves";
 
 export const Calculo = () => {
   const [result, setresult] = useState<number>(0);
@@ -32,15 +33,7 @@ export const Calculo = () => {
   const [iceBuildup, seticeBuildup] = useState<number>(0);
   const [landingFlap, setlandingFlap] = useState<number>(0);
 
-  // const [aircraftModelError, setAircraftModelError] = useState("");
-  // const [motorError, setmotorError] = useState("");
-  // const [flapError, setflapError] = useState("");
-  // const [weightError, setweightError] = useState("");
-  // const [temperatureError, settemperatureError] = useState("");
-  // const [windError, setwindError] = useState("");
-  // const [airstripConditionError, setairstripConditionError] = useState("");
-  // const [altitudeError, setaltitudeError] = useState("");
-  // const [slopeError, setslopeError] = useState("");
+  const [aeronavesNome, setarenoavesNome] = useState();
 
   // history para volta ao menu
   const history = useNavigate();
@@ -63,7 +56,8 @@ export const Calculo = () => {
     landingFlap: landingFlap,
   };
 
-  let modelos = [{ nome: "Default airplane", valor: 1 }];
+  // let opcoes: Array<Object>;
+  // let modelos = [{ nome: "Default airplane", valor: 1 }];
   let motors = [{ nome: "Default motor", valor: 0 }];
   let winds = [
     { nome: "Head Wind", valor: 0 },
@@ -102,119 +96,32 @@ export const Calculo = () => {
     history("/menu");
   };
 
-  // const validate = () => {
-  //   let aircraftModelError = "";
-  //   let motorError = "";
-  //   let flapError = "";
-  //   let weightError = "";
-  //   let temperatureError = "";
-  //   let windError = "";
-  //   let airstripConditionError = "";
-  //   let altitudeError = "";
-  //   let slopeError = "";
+  const getAeronaves = () => {
+      let listarAeronaves = new ListarAeronaves();
+      let retorno = listarAeronaves.resgatar();
 
-  //   if (!aircraftModel) {
-  //     aircraftModelError = "Select an aircraft";
-  //   } else {
-  //     aircraftModelError = "";
-  //   }
-
-  //   if (!motor) {
-  //     motorError = "Select an motor";
-  //   } else {
-  //     motorError = "";
-  //   }
-
-  //   if (!landingFlap) {
-  //     flapError = "Select an flap";
-  //   } else {
-  //     flapError = "";
-  //   }
-
-  //   if (!weight) {
-  //     weightError = "The weight is required";
-  //   } else if (weight < 10000) {
-  //     weightError = "The weight must be above 10000";
-  //   } else {
-  //     weightError = "";
-  //   }
-
-  //   if (!temp) {
-  //     temperatureError = "The temperature is required";
-  //   } else {
-  //     temperatureError = "";
-  //   }
-
-  //   if (!wind) {
-  //     windError = "The wind is required";
-  //   } else if (wind === 0) {
-  //     windError = "The wind must be different than 0";
-  //   } else {
-  //     windError = "";
-  //   }
-
-  //   if (!airstripCondition) {
-  //     airstripConditionError = "Select a runway condition";
-  //   } else {
-  //     airstripConditionError = "";
-  //   }
-
-  //   if (!airportAltitude) {
-  //     altitudeError = "The airport altitude is required";
-  //   } else {
-  //     altitudeError = "";
-  //   }
-
-  //   if (!slope) {
-  //     console.log(slope);
-
-  //     slopeError = "The slope is required";
-  //   } else {
-  //     slopeError = "";
-  //   }
-
-  //   setAircraftModelError(aircraftModelError);
-  //   setmotorError(motorError);
-  //   setweightError(weightError);
-  //   settemperatureError(temperatureError);
-  //   setwindError(temperatureError);
-  //   setairstripConditionError(airstripConditionError);
-  //   setaltitudeError(altitudeError);
-  //   setslopeError(slopeError);
-
-  //   if (
-  //     aircraftModelError ||
-  //     motorError ||
-  //     altitudeError ||
-  //     airstripConditionError ||
-  //     slopeError ||
-  //     temperatureError ||
-  //     weightError ||
-  //     windError
-  //   ) {
-  //     return false;
-  //   }
-
-  //   return true;
-  // };
+    retorno.then((elementos) => {
+      setarenoavesNome(
+        elementos.map((aviao) => (
+          <option key={aviao.idcadastro} value={aviao.name}>{aviao.name}</option>
+        ))
+      );
+    });
+  };
 
   const submeterCalculo = (e) => {
     e.preventDefault();
     // enviar parametros
     let resgatarResultado = new ResgatarResultado();
     let cadastrar = new CadastradorParametros();
-    // const isValid = validate();
-
-    // if (isValid) {
     const retorno = resgatarResultado.resgatar();
     retorno.then((resultado) => setresult(resultado["result"]));
-    // } else {
-    cadastrar.cadastrar(params);
-    // }
 
-    // pegar resultado
+    cadastrar.cadastrar(params);
   };
 
+
+  useEffect(getAeronaves,[])
   return (
     <>
       <BotaoVoltar
@@ -230,19 +137,25 @@ export const Calculo = () => {
       <div className="calculadora">
         <form onSubmit={submeterCalculo}>
           <div className="insercao">
-            <Selecionar
-              label="Aircraft Model"
-              id="aircraftModel"
-              // tamanho="md"
-              opcoes={modelos}
-              onChange={setaircraftModel}
-            />
+
+            <div className="select">
+              <select
+                required
+                // onChange={setaircraftModel}
+                className="inputSelectPilot"
+                name=""
+                id="aircraftModels"
+              >
+                <option></option>
+                {aeronavesNome}
+              </select>
+              <label htmlFor="aircraftModels">Aircraft Models</label>
+            </div>
 
             <Selecionar
               label="Motor"
               id="motor"
               onChange={setmotor}
-              // tamanho="md"
               opcoes={motors}
             />
 
@@ -250,7 +163,6 @@ export const Calculo = () => {
               label="Landing Flap"
               id="landingFlap"
               onChange={setlandingFlap}
-              // tamanho="md"
               opcoes={flapOptions}
             />
 
@@ -258,15 +170,13 @@ export const Calculo = () => {
               label="Certification"
               id="certification"
               onChange={setcertification}
-              // tamanho="md"
               opcoes={certifications}
             />
-            
+
             <Selecionar
               label="Ice Build Up"
               id="iceBuildup"
               onChange={seticeBuildup}
-              // tamanho="md"
               opcoes={iceOptions}
             />
 
@@ -274,7 +184,7 @@ export const Calculo = () => {
               label="Reverser"
               id="reverser"
               onChange={setreverser}
-              // tamanho="sm"
+              
               opcoes={reversers}
             />
 
@@ -282,7 +192,6 @@ export const Calculo = () => {
               label="Airstrip Condition"
               id="airstripCondition"
               onChange={setairstripCondition}
-              // tamanho="md"
               opcoes={airstripConditions}
             />
 
@@ -290,14 +199,12 @@ export const Calculo = () => {
               label="Slope Angle"
               id="slopeAngle"
               onChange={setslopeDirection}
-              // tamanho="md"
               opcoes={slopeAngles}
             />
 
             <Selecionar
               label="Wind Direction"
               id="windDirection"
-              // tamanho="md"
               opcoes={winds}
               onChange={setwindDirection}
             />
@@ -308,7 +215,6 @@ export const Calculo = () => {
               max={100000}
               intervalo={1000}
               id="weight"
-              // tamanho="md"
               onChange={setweight}
             />
 
@@ -318,14 +224,13 @@ export const Calculo = () => {
               min={0}
               max={16000}
               intervalo={1000}
-              // tamanho="md"
               onChange={setairportAltitude}
             />
 
             <InserirNumero
               Children="Overspeed (kt)"
               id="overspeed"
-              // tamanho="sm"
+              
               min={0}
               max={60}
               intervalo={5}
@@ -337,7 +242,7 @@ export const Calculo = () => {
               min={0}
               max={10}
               intervalo={0.1}
-              // tamanho="sm"
+              
               id="slope"
               onChange={setslope}
             />
@@ -347,7 +252,7 @@ export const Calculo = () => {
               min={0}
               max={40}
               intervalo={5}
-              // tamanho="sm"
+              
               id="wind"
               onChange={setwind}
             />

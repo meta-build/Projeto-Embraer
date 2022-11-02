@@ -16,6 +16,7 @@ import {
 import PesquisarAeronave from "../../shared/services/Resgatar/pesquisarAeronave";
 
 export const Aircraft = () => {
+
   const history = useNavigate();
 
   const handleVoltar = () => {
