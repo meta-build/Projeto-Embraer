@@ -75,13 +75,17 @@ button {
 }
 
 .aircraftInputButton {
-  padding: 0;
+  display: flex;
+  align-items: center;
+
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 20px;
   margin: 0 2px;
-  width: 10.5%;
   background-color: #0f1d59;
   color: #fff;
-
+  width: fit-content;
+  height: 40px;
   border-radius: 10px;
 }
 

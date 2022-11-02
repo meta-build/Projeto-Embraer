@@ -6,8 +6,8 @@ const CalcularLD = require("./calculo/calculo.js");
 
 const db = mysql.createPool({
     host: 'localhost',
-    user: 'root',
-    password: 'root',
+    user: 'rodrigo',
+    password: 'fatec',
     database: 'cadastro_aeronave'
 });
 
@@ -74,12 +74,12 @@ app.post("/register", (req, res) => {
     });
 });
 
-app.post("/search", (req, res) => {
-    const { name } = req.body;
-  
+app.get("/search", (req, res) => {
+    const { name } = req.query;
+    console.log('pesquisando')
     let SQL =
-      "SELECT * from cadastro WHERE name = ? ";
-    db.query(SQL, [name], (err, result) => {
+      "SELECT * from cadastro WHERE name LIKE ? ";
+    db.query(SQL, [`%${name}%`], (err, result) => {
       if (err) res.send(err);
       res.send(result);
     });
