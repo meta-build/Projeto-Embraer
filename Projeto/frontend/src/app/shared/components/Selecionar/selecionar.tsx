@@ -12,7 +12,7 @@ export const Selecionar = ({
   id,
   onChange,
   opcoes,
-}: 
+}: // tamanho,
 config) => {
   let opcoesTag = [];
   opcoes.forEach((elemento) => {
