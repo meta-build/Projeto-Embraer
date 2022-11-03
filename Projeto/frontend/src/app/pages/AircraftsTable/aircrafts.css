@@ -4,6 +4,7 @@ table {
   width: 80%;
   margin: 0 auto;
   margin-top: 10px;
+  border: 1px solid #bdbcbc;
 }
 
 .firstTh {
@@ -32,10 +33,13 @@ tr:nth-child(even) {
   color: #0f1d59;
   font-weight: bold;
   font-size: 18px;
+  width: fit-content;
 }
 
 .newAircraftModel:hover {
-  text-decoration: underline;
+  border-bottom: 1px solid #1732e7;
+  cursor: pointer;
+  color: #1732e7;
 }
 
 .searchArea {
@@ -46,4 +50,14 @@ tr:nth-child(even) {
 
 .searchIcon {
   margin-right: 10px;
+}
+
+.aircraftLink {
+  padding: 10px;
+  width: fit-content;
+}
+
+.aircraftLink:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

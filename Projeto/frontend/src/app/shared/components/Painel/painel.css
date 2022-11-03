@@ -1,0 +1,22 @@
+.borda {
+    width: 80%;
+    margin: 30px auto;
+    border: 2px solid #0F1D59;
+    border-radius: 25px;
+}
+
+.cabecalho {
+    background-color: #0F1D59;
+    border-radius: 23px 23px 0px 0px;
+    height: 36px;
+    
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 24px;
+}
+
+.conteudo {
+    margin: 16px 20px 16px 20px;
+}

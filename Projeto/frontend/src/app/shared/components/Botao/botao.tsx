@@ -1,5 +1,7 @@
 import "./botao.css";
 import { ButtonHTMLAttributes, ReactNode } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleArrowDown, faCircleArrowUp, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface configBotao {
   tipo: "submit" | "reset";
@@ -15,6 +17,11 @@ interface configBotaoVoltar extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 interface configBotaoComIcon extends ButtonHTMLAttributes<HTMLButtonElement> {
   tipo: "aircraftInputButton";
+  children: ReactNode;
+}
+
+interface configDownloadButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+  tipo: 'download' | 'upload' | 'edit' | 'delete';
   children: ReactNode;
 }
 
@@ -93,3 +100,27 @@ export const BotaoAircraft = ({ tipo, children, ...props }: configBotaoComIcon) 
     </>
   );
 };
+
+export const FileButton = (props: configDownloadButton) => {
+
+  let icon;
+
+  if (props.tipo === 'download') {
+    icon = (<FontAwesomeIcon icon={faCircleArrowDown} className='icon'/>);
+  } else if (props.tipo === 'upload') {
+    icon = (<FontAwesomeIcon icon={faCircleArrowUp} className='icon'/>);
+  } else if (props.tipo === 'edit') {
+    icon = (<FontAwesomeIcon icon={faPenToSquare} className='icon'/>)
+  } else {
+    icon = (<FontAwesomeIcon icon={faTrash} className='icon'/>)
+  }
+
+  return (
+    <>
+      <button className={props.tipo} onClick={props.onClick}>
+        {icon}
+        {props.children}
+      </button>
+    </>
+  )
+}

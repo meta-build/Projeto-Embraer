@@ -1,12 +1,14 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import { Aircraft, Calculo, Login, Menu } from "../pages"
+import { AircraftsTable, Calculo, Login, Menu } from "../pages"
+import { AircraftProfile } from "../pages"
 
 export const Caminhos = () => {
     return(
         <BrowserRouter>
             <Routes>
                 <Route path='/calc' element={<Calculo/>} />
-                <Route path='/aircraft' element={<Aircraft />} />
+                <Route path='/aircrafts-table' element={<AircraftsTable />} />
+                <Route path='/aircraft-profile/:aircraftId' element={<AircraftProfile />} />
                 <Route path='/' element={<Login />} />
                 <Route path='/' element={<Navigate to={'/menu'} />} />
                 <Route path='/menu' element={<Menu />} />

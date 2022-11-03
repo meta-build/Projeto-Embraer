@@ -1,23 +1,31 @@
 div.input {
     display: flex;
-    align-items: start;
+    align-items: center;
+    margin-bottom: 5px;
   }
   
-  .inputPilot {
-    height: 30px;
-    /* margin: 5px; */
-    padding: 20px 15px;
+div.md {
+  width: 50%;
+}
+
+div.lg {
+  width: 100%;
+}
+
+.inserir {
+  height: 5px;
+  /* margin: 5px; */
+  padding: 20px 15px;
   
-    font-size: 15px;
-    color: black;
-  
-    outline: none;
-    border: none;
-    border-bottom: 3px solid #0f1d59;
-    width: 100%;
+  font-size: 15px;
+  color: black;
+  border: none;
+  outline: none;
+  width: 100%;
+  border-bottom: 3px solid #0f1d59;
   }
   
-  label {
+  .label {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -26,18 +34,18 @@ div.input {
     user-select: none;
   }
   
-  input ~ label {
+  .inserir ~ .label {
+    color: black;
     position: absolute;
-    width: 70%;
-    top: 16px;
-    left: 15px;
+    top: 10px;
+    text-indent: 16px;
     transition: 0.4s;
+    width: fit-content;
   }
   
-  input:focus ~ label,
-  input:valid ~ label {
+  .inserir:focus ~ .label,
+  .inserir:valid ~ .label {
     transform: translateY(-24px);
     font-size: 0.8em;
     letter-spacing: 0.1em;
   }
-  
