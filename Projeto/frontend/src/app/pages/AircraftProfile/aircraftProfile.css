@@ -1,0 +1,21 @@
+.row {
+    display: flex;
+    width: 100%;
+    margin: 0px auto;
+}
+
+.col {
+    padding: 0;
+    width: 25%;
+}
+
+.head3{
+    font-size: 16px;
+}
+
+.rodape {
+    width: 80%;
+    margin: -25px auto;
+    display: flex;
+    flex-direction: row-reverse;
+}

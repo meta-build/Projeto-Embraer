@@ -10,7 +10,7 @@ export const Menu = () => {
   const history = useNavigate();
 
   const handleCadastro = () => {
-    history("/aircraft");
+    history("/aircrafts-table");
   };
 
     const handleCalculo = () => {
@@ -22,11 +22,11 @@ export const Menu = () => {
       <div className="menu">
         <div onClick={handleCadastro} className="menuButton">
           <FontAwesomeIcon className="icon" icon={faPlane} />
-          <button>Cadastro</button>
+          <button>Aircrafts</button>
         </div>
         <div onClick={handleCalculo} className="menuButton">
           <FontAwesomeIcon className="icon" icon={faCalculator} />
-          <button>Cálculo</button>
+          <button>Calculator</button>
         </div>
       </div>
     </>

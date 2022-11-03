@@ -1,0 +1,39 @@
+.campo {
+  margin-top: 5px;
+  position: relative;
+  height: 45px;
+}
+
+.sm {
+  width: 25%;
+}
+
+.md {
+  width: 2px;
+}
+
+.rotulo {
+  color: black;
+  text-indent: 8px;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: 30px;
+}
+
+.titulo {
+  font-size: 16px;
+  text-indent: 8px;
+  color: black;
+  height: 32px;
+  border-bottom: 3px solid #0f1d59;
+  margin-bottom: 0px;
+}
+
+.area {
+  left: 0px;
+  font-size: 0.8em;
+  width: 95%;
+  position: absolute;
+  bottom: 0;
+  left: 2%; 
+}

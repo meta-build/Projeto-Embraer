@@ -126,3 +126,53 @@ button {
 
   background-color: transparent;
 }
+
+.download, .edit {
+  display: flex;
+  align-itens: center;
+  background-color: #4CDF5B;
+  color: #143918;
+  width: fit-content;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.download:hover, .edit:hover {
+  background-color: #69FF78;
+}
+
+.upload {
+  display: flex;
+  align-itens: center;
+  background-color: #607EFF;
+  color: #0A143F;
+  width: fit-content;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.upload:hover {
+  background-color: #ADBDFF;
+}
+
+.delete {
+  display: flex;
+  align-itens: center;
+  background-color: #FF5353;
+  color: #7C0000;
+  width: fit-content;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.delete:hover {
+  background-color: #FF8181;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 24px;
+}

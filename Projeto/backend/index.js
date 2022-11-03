@@ -96,6 +96,18 @@ app.get("/getAircraft", (req,res)=>{
     });
 });
 
+app.get('/getAircraftById', (req, res) => {
+    const { id } = req.query;
+    console.log('pegando id...')
+    let SQL = 
+    "SELECT * FROM cadastro WHERE idcadastro = ?"
+    db.query(SQL, [id], (err, result) => {
+        if(err) res.send(err);
+        res.send(result);
+        console.log(result)
+    });
+})
+
 //editando
 app.put("/edit", (req, res) => {
     const { id } = req.body;

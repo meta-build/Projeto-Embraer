@@ -6,3 +6,6 @@ export * from './Header/header';
 export * from './InserirTexto/inserirTexto'
 export * from './Text/text'
 export * from './InserirString/inserirString';
+export * from './Painel/painel';
+export * from './Rotulo/rotulo';
+export * from './Lista/lista';
