@@ -6,8 +6,8 @@ const CalcularLD = require("./calculo/calculo.js");
 
 const db = mysql.createPool({
     host: 'localhost',
-    user: 'rodrigo',
-    password: 'fatec',
+    user: 'root',
+    password: 'root',
     database: 'cadastro_aeronave'
 });
 

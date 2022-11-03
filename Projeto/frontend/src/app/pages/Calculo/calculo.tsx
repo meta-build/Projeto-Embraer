@@ -7,6 +7,7 @@ import {
   InserirNumero,
   BotaoVoltar,
   Text,
+  SelecionarComRetorno,
 } from "../../shared/components";
 import "./calculo.css";
 import ResgatarResultado from "../../shared/services/Resgatar/resgateResultado";
@@ -33,7 +34,8 @@ export const Calculo = () => {
   const [iceBuildup, seticeBuildup] = useState<number>(0);
   const [landingFlap, setlandingFlap] = useState<number>(0);
 
-  const [aeronavesNome, setarenoavesNome] = useState();
+  const [aeronavesNome, setaeronavesNome] = useState();
+  const [aeronavesMotor, setaeronavesMotor] = useState();
 
   // history para volta ao menu
   const history = useNavigate();
@@ -97,13 +99,20 @@ export const Calculo = () => {
   };
 
   const getAeronaves = () => {
-      let listarAeronaves = new ListarAeronaves();
-      let retorno = listarAeronaves.resgatar();
+    let listarAeronaves = new ListarAeronaves();
+    let retorno = listarAeronaves.resgatar();
 
     retorno.then((elementos) => {
-      setarenoavesNome(
+      setaeronavesNome(
         elementos.map((aviao) => (
-          <option key={aviao.idcadastro} value={aviao.name}>{aviao.name}</option>
+          <option key={aviao.idcadastro} value={aviao.name}>
+            {aviao.name}
+          </option>
+        ))
+      );
+      setaeronavesMotor(
+        elementos.map((aviao) => (
+          <option key={aviao.idcadastro}>{aviao.motor}</option>
         ))
       );
     });
@@ -120,8 +129,7 @@ export const Calculo = () => {
     cadastrar.cadastrar(params);
   };
 
-
-  useEffect(getAeronaves,[])
+  useEffect(getAeronaves, []);
   return (
     <>
       <BotaoVoltar
@@ -138,25 +146,16 @@ export const Calculo = () => {
         <form onSubmit={submeterCalculo}>
           <div className="insercao">
 
-            <div className="select">
-              <select
-                required
-                // onChange={setaircraftModel}
-                className="inputSelectPilot"
-                name=""
-                id="aircraftModels"
-              >
-                <option></option>
-                {aeronavesNome}
-              </select>
-              <label htmlFor="aircraftModels">Aircraft Models</label>
-            </div>
+            <SelecionarComRetorno
+              set={aeronavesNome}
+              id="aircraftModels"
+              children="Aircraft Models"
+            />
 
-            <Selecionar
-              label="Motor"
+            <SelecionarComRetorno
+              set={aeronavesMotor}
               id="motor"
-              onChange={setmotor}
-              opcoes={motors}
+              children="Motor"
             />
 
             <Selecionar
@@ -184,7 +183,6 @@ export const Calculo = () => {
               label="Reverser"
               id="reverser"
               onChange={setreverser}
-              
               opcoes={reversers}
             />
 
@@ -230,7 +228,6 @@ export const Calculo = () => {
             <InserirNumero
               Children="Overspeed (kt)"
               id="overspeed"
-              
               min={0}
               max={60}
               intervalo={5}
@@ -242,7 +239,6 @@ export const Calculo = () => {
               min={0}
               max={10}
               intervalo={0.1}
-              
               id="slope"
               onChange={setslope}
             />
@@ -252,7 +248,6 @@ export const Calculo = () => {
               min={0}
               max={40}
               intervalo={5}
-              
               id="wind"
               onChange={setwind}
             />

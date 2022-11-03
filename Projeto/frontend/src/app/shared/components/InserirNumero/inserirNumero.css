@@ -1,4 +1,5 @@
 div.input {
+  align-items: center;
   position: relative;
   width: 100%;
   display: flex;
@@ -6,13 +7,13 @@ div.input {
 }
 
 .inputPilot {
-  height: 30px;
-  margin: 5px;
-  padding: 20px 15px;
-
+  background-color: white;
+  height: 43px;
+  margin: 5px 20px;
+  
   font-size: 15px;
   color: black;
-
+  
   outline: none;
   border: none;
   border-bottom: 3px solid #0f1d59;
@@ -28,11 +29,12 @@ label {
   user-select: none;
 }
 
+
 input ~ label {
   position: absolute;
   width: 70%;
   top: 16px;
-  left: 10px;
+  margin-left: 10px;
   transition: 0.4s;
 }
 
@@ -41,4 +43,4 @@ input:valid ~ label {
   transform: translateY(-24px);
   font-size: 0.8em;
   letter-spacing: 0.1em;
-}
+} 
