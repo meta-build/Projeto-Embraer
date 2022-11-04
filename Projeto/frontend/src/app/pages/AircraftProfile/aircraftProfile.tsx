@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import './aircraftProfile.css'
 
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,6 +9,7 @@ import { BotaoVoltar, FileButton, Lista, Painel, Rotulo, Text } from "../../shar
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import PesquisarAeronaveId from '../../shared/services/Resgatar/pesquisarAeronaveId';
+import BaixarTabela from '../../shared/services/Resgatar/baixarTabela';
 
 export const AircraftProfile = () => {
     const history = useNavigate();
@@ -15,6 +17,8 @@ export const AircraftProfile = () => {
     const { aircraftId } = useParams();
     
     const [aircraft, setAircraft] = useState({});
+    const [download, setDownload] = useState('');
+    const [count, setCount] = useState(0);
 
     const getAeronave = () => {
         let getAviao = new PesquisarAeronaveId();
@@ -26,7 +30,14 @@ export const AircraftProfile = () => {
         });
     }
 
-    const download = () => console.log('imprimindo tabela de', aircraft['name'])
+    
+    
+    const baixar = () => {
+        setDownload('');
+        let baixar = new BaixarTabela();
+        setDownload(baixar.getUrl());
+        setCount(old => old + 1)
+    }
 
     const handleVoltar = () => {
         history("/aircrafts-table");
@@ -73,9 +84,10 @@ export const AircraftProfile = () => {
 
             <Painel status='enable' titulo='Table for calculation'>
                 <h3 className='head3'>Download the {aircraft['name']}'s calculation table</h3>
-                <FileButton tipo='download' onClick={download} type='submit'>
+                <FileButton tipo='download' onClick={baixar} type='submit'>
                     Download calculation table
                 </FileButton>
+                {download && <iframe src={download + '?c=' + count} style={{display:'none'}}/>}
             </Painel>
 
             <div className='rodape'>

@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <header>
       <div className="navezin">
-        <img src='./logo.svg' alt='Embraer'/>
+        <img src='logo.svg' alt='Embraer'/>
         <a href='/login' className='logout-btn'>
           <FontAwesomeIcon icon={faRightFromBracket} className="logout-icon"/>
           Logout
