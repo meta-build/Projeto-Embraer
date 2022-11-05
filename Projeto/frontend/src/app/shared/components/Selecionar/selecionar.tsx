@@ -11,6 +11,7 @@ interface config2 {
   set: string;
   id: string;
   children: ReactNode;
+  onChange: Function;
 }
 
 export const Selecionar = ({
@@ -47,7 +48,8 @@ config) => {
 export const SelecionarComRetorno = ({
   set,
   id,
-  children
+  children,
+  onChange
 }: config2) => {
 
   return (
@@ -57,6 +59,7 @@ export const SelecionarComRetorno = ({
         className="inputSelectPilot"
         name=""
         id={id}
+        onChange={(e) => onChange(e.target.value)}
       >
         <option></option>
         {set}
