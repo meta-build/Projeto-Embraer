@@ -4,7 +4,6 @@ const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
 const CalcularLD = require("./calculo/reader.js");
-const multer = require('multer');
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -13,17 +12,6 @@ const db = mysql.createPool({
     database: 'cadastro_aeronave'
 });
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, 'files/');
-    },
-    filename: function(req, file, cb) {
-        cb(null, file.originalname);
-    }
-})
-
-const salvarArquivo = multer({storage})
-
 app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
@@ -31,6 +19,7 @@ app.use(fileUpload());
 let obj;
 let resultado;
 
+// receber parametros e calcular
 app.post('/calc', (req, res) => {
     const { aircraftModel } = req.body;
     const { wind } = req.body;
@@ -69,12 +58,9 @@ app.post('/calc', (req, res) => {
     resultado = CalcularLD(obj);
 });
 
+// enviar resultado
 app.get('/result', (req, res) => {
     res.send({ "result": resultado })
-});
-
-app.get('/params', (req, res) => {
-    res.send(obj)
 });
 
 //registrar aeronave 
@@ -128,25 +114,25 @@ app.post("/register", (req, res) => {
     });
 });
 
+// pesquisar aeronave
 app.get("/search", (req, res) => {
     const { name } = req.query;
     console.log('pesquisando')
     let SQL =
-      "SELECT * from cadastro WHERE name LIKE ? ";
+      "SELECT * from aeronave WHERE nome LIKE ? ";
     db.query(SQL, [`%${name}%`], (err, result) => {
       if (err) res.send(err);
       res.send(result);
     });
   });
 
-//pegando as informações
+//pegando as aeronaves
 app.get("/getAircraft", (req,res)=>{
-    let SQL = "SELECT * FROM cadastro";
+    let SQL = "SELECT * FROM aeronave";
 
     db.query(SQL,(err,result)=>{
         if (err) console.log(err);
         else res.send(result);
-
     });
 });
 
@@ -179,14 +165,15 @@ app.delete("/delete", (req, res) => {
         res.send(result);
       }
     });
-  });
+});
 
 // url backend para baixar tabela de cálculo (modelo)
 app.get('/download', (req, res) => {
-    const file = './files/tabela.txt';
+    const file = './files/Modelo XYZ.xls';
     res.download(file);
 });
 
+// enviar tabela p/ backend
 app.post('/upload', (req, res) => {
     const arquivo = req.files.upload;
     const nomeArquivo = req.files.upload.name;
@@ -196,7 +183,7 @@ app.post('/upload', (req, res) => {
             return res.send(err);
         }
         res.sendStatus(200);
-    })
+    });
 });
 
 app.listen(3001, () => {

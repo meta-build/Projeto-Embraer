@@ -7,10 +7,6 @@ table {
   border: 1px solid #bdbcbc;
 }
 
-.firstTh {
-  width: 78%;
-}
-
 .alinhamento {
   padding: 0;
   width: 10.5%;
@@ -60,4 +56,8 @@ tr:nth-child(even) {
 .aircraftLink:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.brand {
+  width: 150px;
 }

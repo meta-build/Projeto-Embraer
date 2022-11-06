@@ -13,35 +13,35 @@ import axios from 'axios';
 
 export const NewAircraft = () => {
     const history = useNavigate();
-    
-    const[name, setName] = useState('');
-    const[brand, setBrand] = useState('');
 
-    const[statusName, setStatusName] = useState<'normal' | 'erro'>('normal');
-    const[statusBrand, setStatusBrand] = useState<'normal' | 'erro'>('normal');
-    const[statusFlap, setStatusFlap] = useState<'normal' | 'erro'>('normal');
-    const[statusMotor, setStatusMotor] = useState<'normal' | 'erro'>('normal');
-    const[statusCert, setStatusCert] = useState<'normal' | 'erro'>('normal');
-    const[statusBreak, setStatusBreak] = useState<'normal' | 'erro'>('normal');
+    const [name, setName] = useState('');
+    const [brand, setBrand] = useState('');
+
+    const [statusName, setStatusName] = useState<'normal' | 'erro'>('normal');
+    const [statusBrand, setStatusBrand] = useState<'normal' | 'erro'>('normal');
+    const [statusFlap, setStatusFlap] = useState<'normal' | 'erro'>('normal');
+    const [statusMotor, setStatusMotor] = useState<'normal' | 'erro'>('normal');
+    const [statusCert, setStatusCert] = useState<'normal' | 'erro'>('normal');
+    const [statusBreak, setStatusBreak] = useState<'normal' | 'erro'>('normal');
 
     const [flaps, setFlaps] = useState([]);
     const [motors, setMotors] = useState([]);
     const [certis, setCerts] = useState([]);
     const [breakConfigs, setBreakConfigs] = useState([]);
 
-    const[tempFlap, setTempFlap] = useState('');
-    const[tempMotor, setTempMotor] = useState('');
-    const[tempCerti, setTempCerti] = useState('');
+    const [tempFlap, setTempFlap] = useState('');
+    const [tempMotor, setTempMotor] = useState('');
+    const [tempCerti, setTempCerti] = useState('');
     const [tempBreak, setTempBreak] = useState('');
 
-    const[elmntFlaps, setElmntFlaps] = useState();
-    const[elmntMotors, setElmntMotors] = useState();
-    const[elmntCertis, setElmntCertis] = useState();
+    const [elmntFlaps, setElmntFlaps] = useState();
+    const [elmntMotors, setElmntMotors] = useState();
+    const [elmntCertis, setElmntCertis] = useState();
     const [elmntBreaks, setElmntBreaks] = useState();
 
-    const[fstStep, setFstStep] = useState<'enable' | 'disable'>('enable');
+    const [fstStep, setFstStep] = useState<'enable' | 'disable'>('enable');
     const [scndStep, setScndStep] = useState<'enable' | 'disable'>('disable');
-    
+
     // para download
     const [download, setDownload] = useState('');
     const [count, setCount] = useState(0);
@@ -69,7 +69,7 @@ export const NewAircraft = () => {
         }
     }
 
-    const deletar = (item: string, lista: any[], elmntList: any[],callbackElmnt: Function) => {
+    const deletar = (item: string, lista: any[], elmntList: any[], callbackElmnt: Function) => {
         let array = lista;
         let indice = array.indexOf(item);
         array.splice(indice, 1);
@@ -78,7 +78,7 @@ export const NewAircraft = () => {
 
     const transformarElemento = (item: string, lista: any[], elmntList: any[], callbackElmnt: Function) => {
         let elemento = (
-            <ListaEditavel onDelete={c => deletar(c, lista, elmntList,callbackElmnt)}>
+            <ListaEditavel onDelete={c => deletar(c, lista, elmntList, callbackElmnt)}>
                 {item}
             </ListaEditavel>
         )
@@ -87,18 +87,18 @@ export const NewAircraft = () => {
 
     const updateElmnts = (list: any[], elmntList: any[], callbackSet: Function) => {
         let array = [];
-        list.forEach(e => array.push(transformarElemento(e, list, elmntList,callbackSet)))
+        list.forEach(e => array.push(transformarElemento(e, list, elmntList, callbackSet)))
         callbackSet(array);
     }
 
     const conferirCampos = () => {
         let continuar = true;
-        if (name === '') {setStatusName('erro'); continuar = false;} else {setStatusName('normal')}
-        if (brand === '') {setStatusBrand('erro'); continuar = false;} else {setStatusBrand('normal')}
-        if (flaps.length === 0) {setStatusFlap('erro'); continuar = false;} else {setStatusFlap('normal')}
-        if (motors.length === 0) {setStatusMotor('erro'); continuar = false;} else {setStatusMotor('normal')}
-        if (certis.length === 0) {setStatusCert('erro'); continuar = false;} else {setStatusCert('normal')}
-        if (breakConfigs.length === 0) {setStatusBreak('erro'); continuar = false;} else {setStatusBreak('normal')}
+        if (name === '') { setStatusName('erro'); continuar = false; } else { setStatusName('normal') }
+        if (brand === '') { setStatusBrand('erro'); continuar = false; } else { setStatusBrand('normal') }
+        if (flaps.length === 0) { setStatusFlap('erro'); continuar = false; } else { setStatusFlap('normal') }
+        if (motors.length === 0) { setStatusMotor('erro'); continuar = false; } else { setStatusMotor('normal') }
+        if (certis.length === 0) { setStatusCert('erro'); continuar = false; } else { setStatusCert('normal') }
+        if (breakConfigs.length === 0) { setStatusBreak('erro'); continuar = false; } else { setStatusBreak('normal') }
         return continuar;
     }
 
@@ -121,15 +121,12 @@ export const NewAircraft = () => {
     const handleArquivo = (arq: File) => {
         setUpload(arq);
         console.log(upload.name)
-    } 
+    }
 
     const enviar = (e) => {
         e.preventDefault();
         let formData = new FormData();
         formData.append("upload", upload);
-        // axios.post('http://localhost:3001/upload', formData, {
-        //     headers: {"Content-type": "multipart/form-data"}
-        // });
         axios.post('http://localhost:3001/register', {
             name: name,
             brand: brand,
@@ -139,6 +136,9 @@ export const NewAircraft = () => {
             breakConfigs: breakConfigs
         }).then(response => {
             console.log(response.data.id);
+        });
+        axios.post('http://localhost:3001/upload', formData, {
+            headers: { "Content-type": "multipart/form-data" }
         });
     }
 
@@ -164,15 +164,15 @@ export const NewAircraft = () => {
                     <span className='col'>
                         <div className='rowCol'>
                             <InserirString
-                            emMudanca={setTempFlap}
-                            id='flap' 
-                            tamanho='md2' 
-                            value={tempFlap}
-                            status={statusFlap}
+                                emMudanca={setTempFlap}
+                                id='flap'
+                                tamanho='md2'
+                                value={tempFlap}
+                                status={statusFlap}
                             >
                                 Landing Flaps
                             </InserirString>
-                            <AddButton onClick={() => addLista(flaps, elmntFlaps, tempFlap, setFlaps, setTempFlap, setElmntFlaps)}/>
+                            <AddButton onClick={() => addLista(flaps, elmntFlaps, tempFlap, setFlaps, setTempFlap, setElmntFlaps)} />
                         </div>
                         <ul className='lista'>
                             {elmntFlaps}
@@ -181,15 +181,15 @@ export const NewAircraft = () => {
                     <span className='col'>
                         <div className='rowCol'>
                             <InserirString
-                            emMudanca={setTempMotor}
-                            id='motor' 
-                            tamanho='md2' 
-                            value={tempMotor}
-                            status={statusMotor}
+                                emMudanca={setTempMotor}
+                                id='motor'
+                                tamanho='md2'
+                                value={tempMotor}
+                                status={statusMotor}
                             >
                                 Motors
                             </InserirString>
-                            <AddButton onClick={() => addLista(motors, elmntMotors, tempMotor, setMotors, setTempMotor, setElmntMotors)}/>
+                            <AddButton onClick={() => addLista(motors, elmntMotors, tempMotor, setMotors, setTempMotor, setElmntMotors)} />
                         </div>
                         <ul className='lista'>
                             {elmntMotors}
@@ -198,15 +198,15 @@ export const NewAircraft = () => {
                     <span className='col'>
                         <div className='rowCol'>
                             <InserirString
-                            emMudanca={setTempCerti}
-                            id='certi' 
-                            tamanho='md2' 
-                            value={tempCerti}
-                            status={statusCert}
+                                emMudanca={setTempCerti}
+                                id='certi'
+                                tamanho='md2'
+                                value={tempCerti}
+                                status={statusCert}
                             >
                                 Certifications
                             </InserirString>
-                            <AddButton onClick={() => addLista(certis, elmntCertis, tempCerti, setCerts, setTempCerti, setElmntCertis)}/>
+                            <AddButton onClick={() => addLista(certis, elmntCertis, tempCerti, setCerts, setTempCerti, setElmntCertis)} />
                         </div>
                         <ul className='lista'>
                             {elmntCertis}
@@ -215,20 +215,20 @@ export const NewAircraft = () => {
                     <span className='col'>
                         <div className='rowCol'>
                             <InserirString
-                            emMudanca={setTempBreak}
-                            id='flap' 
-                            tamanho='md2' 
-                            value={tempBreak}
-                            status={statusBreak} 
+                                emMudanca={setTempBreak}
+                                id='flap'
+                                tamanho='md2'
+                                value={tempBreak}
+                                status={statusBreak}
                             >
                                 Break configs
                             </InserirString>
-                            <AddButton onClick={() => addLista(breakConfigs, elmntBreaks, tempBreak, setBreakConfigs, setTempBreak, setElmntBreaks)}/>
+                            <AddButton onClick={() => addLista(breakConfigs, elmntBreaks, tempBreak, setBreakConfigs, setTempBreak, setElmntBreaks)} />
                         </div>
                         <ul className='lista'>
                             {elmntBreaks}
                         </ul>
-                    </span>         
+                    </span>
                 </div>
                 <p className='painelObs'>
                     Tip: Hover the mouse in an item and click on the trash to delet it.
@@ -249,7 +249,7 @@ export const NewAircraft = () => {
                 <FileButton tipo='download' onClick={() => baixar}>
                     Download calculation table model
                 </FileButton>
-                {download && <iframe className='divisor' src={download + '?c=' + count}/>}
+                {download && <iframe className='divisor' src={download + '?c=' + count} />}
 
                 <h3 className='head3'>Upload the filled table for calculation</h3>
                 <UploadButton receberArquivo={handleArquivo} name='upload'>
@@ -269,5 +269,5 @@ export const NewAircraft = () => {
                 </FileButton>
             </div>
         </>
-    )   
+    )
 }
