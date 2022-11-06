@@ -6,8 +6,8 @@ const CalcularLD = require("./calculo/reader.js");
 
 const db = mysql.createPool({
     host: 'localhost',
-    user: 'root',
-    password: 'root',
+    user: 'rodrigo',
+    password: 'fatec',
     database: 'cadastro_aeronave'
 });
 
@@ -130,3 +130,9 @@ app.delete("/delete", (req, res) => {
 app.listen(3001, () => {
     console.log('rodando servidor');
 });
+
+// url backend para baixar arquivo
+app.get('/download', (req, res) => {
+    const file = './files/tabela.txt';
+    res.download(file);
+})
