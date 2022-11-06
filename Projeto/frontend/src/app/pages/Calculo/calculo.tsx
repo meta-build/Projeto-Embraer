@@ -110,8 +110,7 @@ export const Calculo = () => {
           </option>
         ))
       );
-      
-      
+
       setaeronavesMotor(
         elementos.map((aviao) => (
           <option key={aviao.idcadastro}>{aviao.motor}</option>
@@ -147,7 +146,6 @@ export const Calculo = () => {
       <div className="calculadora">
         <form onSubmit={submeterCalculo}>
           <div className="insercao">
-
             <SelecionarComRetorno
               set={aeronavesNome}
               id="aircraftModel"
@@ -163,6 +161,14 @@ export const Calculo = () => {
             />
 
             <Selecionar
+              label="Certification"
+              id="certification"
+              onChange={setcertification}
+              opcoes={certifications}
+            />
+
+
+            <Selecionar
               label="Landing Flap"
               id="landingFlap"
               onChange={setlandingFlap}
@@ -170,45 +176,10 @@ export const Calculo = () => {
             />
 
             <Selecionar
-              label="Certification"
-              id="certification"
-              onChange={setcertification}
-              opcoes={certifications}
-            />
-
-            <Selecionar
               label="Ice Build Up"
               id="iceBuildup"
               onChange={seticeBuildup}
               opcoes={iceOptions}
-            />
-
-            <Selecionar
-              label="Reverser"
-              id="reverser"
-              onChange={setreverser}
-              opcoes={reversers}
-            />
-
-            <Selecionar
-              label="Airstrip Condition"
-              id="airstripCondition"
-              onChange={setairstripCondition}
-              opcoes={airstripConditions}
-            />
-
-            <Selecionar
-              label="Slope Angle"
-              id="slopeAngle"
-              onChange={setslopeDirection}
-              opcoes={slopeAngles}
-            />
-
-            <Selecionar
-              label="Wind Direction"
-              id="windDirection"
-              opcoes={winds}
-              onChange={setwindDirection}
             />
 
             <InserirNumero
@@ -239,12 +210,19 @@ export const Calculo = () => {
             />
 
             <InserirNumero
-              Children="Speed (kt)"
-              id="overspeed"
-              min={80}
-              max={300}
+              Children="Wind (kt)"
+              min={0}
+              max={40}
               intervalo={1}
-              onChange={setoverspeed}
+              id="wind"
+              onChange={setwind}
+            />
+
+            <Selecionar
+              label="Wind Direction"
+              id="windDirection"
+              opcoes={winds}
+              onChange={setwindDirection}
             />
 
             <InserirNumero
@@ -256,13 +234,34 @@ export const Calculo = () => {
               onChange={setslope}
             />
 
+            <Selecionar
+              label="Slope Angle"
+              id="slopeAngle"
+              onChange={setslopeDirection}
+              opcoes={slopeAngles}
+            />
+
+            <Selecionar
+              label="Reverser"
+              id="reverser"
+              onChange={setreverser}
+              opcoes={reversers}
+            />
+
             <InserirNumero
-              Children="Wind (kt)"
-              min={0}
-              max={40}
+              Children="Speed (kt)"
+              id="overspeed"
+              min={80}
+              max={300}
               intervalo={1}
-              id="wind"
-              onChange={setwind}
+              onChange={setoverspeed}
+            />
+
+            <Selecionar
+              label="Airstrip Condition"
+              id="airstripCondition"
+              onChange={setairstripCondition}
+              opcoes={airstripConditions}
             />
           </div>
           <div className="calcBotoes">
