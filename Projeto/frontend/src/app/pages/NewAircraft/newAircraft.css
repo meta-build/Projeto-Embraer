@@ -1,0 +1,41 @@
+.row {
+    display: flex;
+    width: 100%;
+    margin: 10px auto;
+}
+
+.col {
+    padding: 5px;
+    width: 25%;
+}
+
+.head3{
+    font-size: 16px;
+}
+
+.rodape {
+    width: 80%;
+    margin: -25px auto;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.rowCol {
+    display: flex;
+}
+
+.lista {
+    margin-top: 10px;
+}
+
+.panelObs {
+    color: #666666;
+}
+
+.rodape.disable {
+    display: none;
+}
+
+.divisor {
+    display: none;
+}

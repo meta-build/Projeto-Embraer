@@ -1,8 +1,10 @@
 const express = require("express");
+const fileUpload = require('express-fileupload')
 const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
 const CalcularLD = require("./calculo/calculo.js");
+const multer = require('multer');
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -11,8 +13,20 @@ const db = mysql.createPool({
     database: 'cadastro_aeronave'
 });
 
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, 'files/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+})
+
+const salvarArquivo = multer({storage})
+
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload());
 
 let obj;
 let resultado;
@@ -63,14 +77,54 @@ app.get('/params', (req, res) => {
     res.send(obj)
 });
 
-//registrando 
+//registrar aeronave 
 app.post("/register", (req, res) => {
     const { name } = req.body;
+    const { brand } = req.body;
 
-    let SQL = "INSERT INTO cadastro ( name ) VALUES ( ? )";
+    let SQL = "INSERT INTO aeronave ( nome, marca ) VALUES ( ?, ? )";
 
-    db.query(SQL, [name], (err, result) => {
-        console.log(err);
+    db.query(SQL, [name, brand], (err, result) => {
+        if(err){console.log(err);}
+        else{
+            db.query('SELECT id FROM aeronave WHERE nome = ? AND marca = ?', [name, brand], (err, result) => {
+                if(err){console.log(err)}
+                else{
+                    const idAeronave = result[0]['id']
+                    const { flaps } = req.body;
+                    const { motors } = req.body;
+                    const { certis } = req.body;
+                    const { breakConfigs } = req.body;
+
+                    let sqlFlap = 'INSERT INTO flap (nome, aeronave) VALUES ( ?, ? )'
+                    let sqlMotor = 'INSERT INTO motor (nome, aeronave) VALUES ( ?, ? )'
+                    let sqlCertificacao = 'INSERT INTO certificacao (nome, aeronave) VALUES ( ?, ? )'
+                    let sqlBreak = 'INSERT INTO breakConfig (nome, aeronave) VALUES ( ?, ? )'
+
+                    flaps.forEach(e => {
+                        db.query(sqlFlap, [e, idAeronave], (err, result) => {
+                            if(err){console.log(err)}
+                        })
+                    });
+                    motors.forEach(e => {
+                        db.query(sqlMotor, [e, idAeronave], (err, result) => {
+                            if(err){console.log(err)}
+                        })
+                    });
+                    certis.forEach(e => {
+                        db.query(sqlCertificacao, [e, idAeronave], (err, result) => {
+                            if(err){console.log(err)}
+                        })
+                    });
+                    breakConfigs.forEach(e => {
+                        db.query(sqlBreak, [e, idAeronave], (err, result) => {
+                            if(err){console.log(err)}
+                        })
+                    });
+                    res.send({id: idAeronave})
+                }
+            });
+        }
     });
 });
 
@@ -139,12 +193,24 @@ app.delete("/delete", (req, res) => {
     });
   });
 
-app.listen(3001, () => {
-    console.log('rodando servidor');
-});
-
-// url backend para baixar arquivo
+// url backend para baixar tabela de cálculo (modelo)
 app.get('/download', (req, res) => {
     const file = './files/tabela.txt';
     res.download(file);
-})
+});
+
+app.post('/upload', (req, res) => {
+    const arquivo = req.files.upload;
+    const nomeArquivo = req.files.upload.name;
+    let pasta = __dirname + '/files/' + nomeArquivo;
+    arquivo.mv(pasta, (err) => {
+        if(err){
+            return res.send(err);
+        }
+        res.sendStatus(200);
+    })
+});
+
+app.listen(3001, () => {
+    console.log('rodando servidor');
+});

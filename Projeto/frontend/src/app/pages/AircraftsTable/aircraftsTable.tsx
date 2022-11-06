@@ -25,7 +25,7 @@ export const AircraftsTable = () => {
   };
 
   const handleNovoAviao = () => {
-    history("/aircraft-profile");
+    history("/new-aircraft");
   };
 
   const [aeronaves, setarenoaves] = useState();

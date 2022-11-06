@@ -1,3 +1,16 @@
-.lista {
-    margin-top: 10px;
+.actionIcon {
+    margin-left: 15px;
+    display: none;
+}
+
+.listItem:hover .actionIcon {
+    display: inline;
+}
+
+.actionIcon:hover {
+    cursor: pointer;
+}
+
+.deleteIcon {
+    color: #FF0000;
 }

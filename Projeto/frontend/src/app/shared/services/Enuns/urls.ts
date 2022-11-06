@@ -7,4 +7,5 @@ export enum URL {
     PESQUISAR_AERONAVE = 'http://localhost:3001/search',
     PESQUISAR_AERONAVE_ID = 'http://localhost:3001/getAircraftById',
     DOWNLOAD_TABELA = 'http://localhost:3001/download',
+    UPLOAD_TABELA = 'http://localhost:3001/upload',
 }

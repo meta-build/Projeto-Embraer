@@ -17,6 +17,8 @@ export const AircraftProfile = () => {
     const { aircraftId } = useParams();
     
     const [aircraft, setAircraft] = useState({});
+    
+    // para download
     const [download, setDownload] = useState('');
     const [count, setCount] = useState(0);
 
@@ -30,8 +32,6 @@ export const AircraftProfile = () => {
         });
     }
 
-    
-    
     const baixar = () => {
         setDownload('');
         let baixar = new BaixarTabela();

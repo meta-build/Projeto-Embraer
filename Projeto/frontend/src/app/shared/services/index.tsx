@@ -5,3 +5,4 @@ export * from './Cadastrar/cadastrar_aeronave';
 export * from './Resgatar/listarAeronaves';
 export * from './Resgatar/pesquisarAeronaveId';
 export * from './Resgatar/baixarTabela';
+export * from './Cadastrar/enviarTabela';
