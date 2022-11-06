@@ -3,7 +3,7 @@ const fileUpload = require('express-fileupload')
 const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
-const CalcularLD = require("./calculo/calculo.js");
+const CalcularLD = require("./calculo/reader.js");
 const multer = require('multer');
 
 const db = mysql.createPool({
@@ -149,18 +149,6 @@ app.get("/getAircraft", (req,res)=>{
 
     });
 });
-
-app.get('/getAircraftById', (req, res) => {
-    const { id } = req.query;
-    console.log('pegando id...')
-    let SQL = 
-    "SELECT * FROM cadastro WHERE idcadastro = ?"
-    db.query(SQL, [id], (err, result) => {
-        if(err) res.send(err);
-        res.send(result);
-        console.log(result)
-    });
-})
 
 //editando
 app.put("/edit", (req, res) => {
