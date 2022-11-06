@@ -136,6 +136,63 @@ app.get("/getAircraft", (req,res)=>{
     });
 });
 
+// pegar aeronave por id
+app.get('/getAircraft-by-id', (req, res) => {
+    const { id } = req.query;
+    console.log('pegando id...')
+    let SQL = 
+    "SELECT * FROM aeronave WHERE id = ?"
+    db.query(SQL, [id], (err, result) => {
+        if(err) res.send(err);
+        else {
+            let sqlFlap = 'SELECT nome FROM flap WHERE aeronave = ?'
+            let sqlMotor = 'SELECT nome FROM motor WHERE aeronave = ?'
+            let sqlCertificacao = 'SELECT nome FROM certificacao WHERE aeronave = ?'
+            let sqlBreak = 'SELECT nome FROM breakconfig WHERE aeronave = ?'
+
+            let flaps = [];
+            let motors;
+            let certificacoes;
+            let breaks;
+
+            // flap
+            db.query(sqlFlap, [id], (err, result2) => {
+                if(err) res.send(err);
+                else {
+                    flaps = result2;
+                    db.query(sqlMotor, [id], (err, result5) => {
+                        if(err) res.send(err);
+                        else {
+                            motors = result5;
+                            db.query(sqlCertificacao, [id], (err, result3) => {
+                                if(err) res.send(err);
+                                else {
+                                    certificacoes = result3;
+                                    db.query(sqlBreak, [id], (err, result4) => {
+                                        if(err) res.send(err);
+                                        else {
+                                            breaks = result4;
+                                            let resposta = {
+                                                name: result[0]['nome'],
+                                                brand: result[0]['marca'],
+                                                flaps: flaps,
+                                                motors: motors,
+                                                certificacoes: certificacoes,
+                                                breaks: breaks
+                                            }
+                                            res.send(resposta);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
 //editando
 app.put("/edit", (req, res) => {
     const { id } = req.body;

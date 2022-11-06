@@ -61,13 +61,13 @@ export const AircraftsTable = () => {
       setarenoaves(
         avioes.map((aviao) => (
           <tr key={aviao.id}>
-            <td>
-              {aviao.marca}
-            </td>
-            <td>
-             {aviao.nome}
-            </td>
-          </tr>)
+          <td>
+            {aviao.marca}
+          </td>
+          <td>
+            <div onClick={() => handleAeronave(aviao.id)} className="aircraftLink" >{aviao.nome}</div>
+          </td>
+        </tr>)
         ))
     })
   }

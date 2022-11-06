@@ -5,7 +5,7 @@ export enum URL {
     LISTAR_AERONAVES = 'http://localhost:3001/getAircraft',
     EXCLUIR_AERONAVE = 'http://localhost:3001/delete',
     PESQUISAR_AERONAVE = 'http://localhost:3001/search',
-    PESQUISAR_AERONAVE_ID = 'http://localhost:3001/getAircraftById',
+    PESQUISAR_AERONAVE_ID = 'http://localhost:3001/getAircraft-by-id',
     DOWNLOAD_TABELA = 'http://localhost:3001/download',
     UPLOAD_TABELA = 'http://localhost:3001/upload',
 }
