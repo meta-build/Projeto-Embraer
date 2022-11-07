@@ -123,6 +123,7 @@ export const NewAircraft = () => {
         console.log(upload.name)
     }
 
+    
     const enviar = (e) => {
         e.preventDefault();
         let formData = new FormData();
@@ -246,7 +247,7 @@ export const NewAircraft = () => {
 
             <Painel status={scndStep} titulo='Table for calculation'>
                 <h3 className='head3'>Download the calculation table</h3>
-                <FileButton tipo='download' onClick={() => baixar}>
+                <FileButton tipo='download' onClick={baixar}>
                     Download calculation table model
                 </FileButton>
                 {download && <iframe className='divisor' src={download + '?c=' + count} />}

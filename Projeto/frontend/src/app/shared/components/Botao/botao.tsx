@@ -156,7 +156,7 @@ export const UploadButton = (props: configUploadButton) => {
     <label className={`btn upload`}>
           {<FontAwesomeIcon icon={faCircleArrowUp} className='icon'/>}
           {props.children}
-          <input type='file' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="upload" className="inputUpload" onChange={e => props.receberArquivo(e.target.files[0])}></input>
+          <input type='file' accept="application/vnd.ms-excel" name="upload" className="inputUpload" onChange={e => props.receberArquivo(e.target.files[0])}></input>
     </label>
   )
 }

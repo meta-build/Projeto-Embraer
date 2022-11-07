@@ -115,6 +115,8 @@ export const Calculo = () => {
   };
 
   const submeterCalculo = (e) => {
+    console.log(aircraftModel);
+    console.log(typeof(aircraftModel));
     e.preventDefault();
     // enviar parametros
     let resgatarResultado = new ResgatarResultado();
@@ -130,7 +132,7 @@ export const Calculo = () => {
         getAviao.setPesquisa(`${id}`);
         let retorno = getAviao.resgatar();
         retorno.then(aviao => {
-            setaircraftModel(aviao);
+            setaircraftModel(aviao['name']);
             setaeronavesMotor(aviao['motors'].map(e => (
               <option key={e.id} value={e.id}>
                 {e.nome}
