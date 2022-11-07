@@ -59,7 +59,7 @@ export const SelecionarComRetorno = ({
         className="inputSelectPilot"
         name=""
         id={id}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(`${e.target.value}`)}
       >
         <option></option>
         {set}
