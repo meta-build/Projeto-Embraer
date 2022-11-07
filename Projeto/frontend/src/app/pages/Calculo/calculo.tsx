@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import ListarAeronaves from "../../shared/services/Resgatar/listarAeronaves";
+import PesquisarAeronaveId from "../../shared/services/Resgatar/pesquisarAeronaveId";
 
 export const Calculo = () => {
   const [result, setresult] = useState<number>(0);
@@ -104,16 +105,10 @@ export const Calculo = () => {
 
     retorno.then((elementos) => {
       setaeronavesNome(
-        elementos.map((aviao, idcadastro) => (
-          <option key={idcadastro} value={aviao.name}>
-            {aviao.name}
-          </option>
-        ))
-      );
-
-      setaeronavesMotor(
         elementos.map((aviao) => (
-          <option key={aviao.idcadastro}>{aviao.motor}</option>
+          <option key={aviao.id} value={aviao.id}>
+            {aviao.nome}
+          </option>
         ))
       );
     });
@@ -129,6 +124,20 @@ export const Calculo = () => {
 
     cadastrar.cadastrar(params);
   };
+
+  const definirInfo = (id: number) => {
+    let getAviao = new PesquisarAeronaveId();
+        getAviao.setPesquisa(`${id}`);
+        let retorno = getAviao.resgatar();
+        retorno.then(aviao => {
+            setaircraftModel(aviao);
+            setaeronavesMotor(aviao['motors'].map(e => (
+              <option key={e.id} value={e.id}>
+                {e.nome}
+              </option>
+            )))
+        });
+  }
 
   useEffect(getAeronaves, []);
   return (
@@ -150,7 +159,7 @@ export const Calculo = () => {
               set={aeronavesNome}
               id="aircraftModel"
               children="Aircraft Models"
-              onChange={setaircraftModel}
+              onChange={definirInfo}
             />
 
             <SelecionarComRetorno
