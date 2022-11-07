@@ -135,7 +135,7 @@ export const NewAircraft = () => {
             certis: certis,
             breakConfigs: breakConfigs
         }).then(response => {
-            console.log(response.data.id);
+            history(`/aircraft-profile/${response.data.id}`)
         });
         axios.post('http://localhost:3001/upload', formData, {
             headers: { "Content-type": "multipart/form-data" }
@@ -258,7 +258,7 @@ export const NewAircraft = () => {
             </Painel>
 
             <div className={`rodape ${scndStep}`}>
-                <FileButton tipo='confirm' onClick={e => enviar(e)}>
+                <FileButton tipo='confirm' onClick={enviar}>
                     Create Aircraft Model
                 </FileButton>
                 <FileButton tipo='cancel' onClick={voltar}>
