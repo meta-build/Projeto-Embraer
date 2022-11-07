@@ -3,13 +3,13 @@ import Resgate from "./resgate";
 
 export default class PesquisarAeronave implements Resgate {
 
-    name: string;
+    nome: string;
     public setPesquisa(nome: string) {
-        this.name = nome;
+        this.nome = nome;
     }
 
     public async resgatar(){
-        let json = fetch(`${URL.PESQUISAR_AERONAVE}?name=${this.name}`).then(resp => resp.json())
+        let json = fetch(`${URL.PESQUISAR_AERONAVE}?name=${this.nome}`).then(resp => resp.json())
         return json
     }
 }

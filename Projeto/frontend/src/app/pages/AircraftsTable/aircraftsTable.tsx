@@ -25,7 +25,7 @@ export const AircraftsTable = () => {
   };
 
   const handleNovoAviao = () => {
-    history("/aircraft-profile");
+    history("/new-aircraft");
   };
 
   const [aeronaves, setarenoaves] = useState();
@@ -40,8 +40,13 @@ export const AircraftsTable = () => {
     retorno.then((elementos) => {
       setarenoaves(
         elementos.map((aviao) => (
-          <tr key={aviao.idcadastro}>
-            <div onClick={() => handleAeronave(aviao.idcadastro)} className="aircraftLink" >{aviao.name}</div>
+          <tr key={aviao.id}>
+            <td>
+              {aviao.marca}
+            </td>
+            <td>
+              <div onClick={() => handleAeronave(aviao.id)} className="aircraftLink" >{aviao.nome}</div>
+            </td>
           </tr>
         ))
       );
@@ -55,11 +60,14 @@ export const AircraftsTable = () => {
     retorno.then((avioes) => {
       setarenoaves(
         avioes.map((aviao) => (
-          <tr key={aviao.idcadastro}>
-            <td className="borda">
-             {aviao.name}
-            </td>
-          </tr>)
+          <tr key={aviao.id}>
+          <td>
+            {aviao.marca}
+          </td>
+          <td>
+            <div onClick={() => handleAeronave(aviao.id)} className="aircraftLink" >{aviao.nome}</div>
+          </td>
+        </tr>)
         ))
     })
   }
@@ -97,7 +105,8 @@ export const AircraftsTable = () => {
       <table>
         <thead>
           <tr>
-            <th className="firstTh">Aircraft Name</th>
+            <th className="brand">Brand</th>
+            <th>Aircraft Name</th>
           </tr>
         </thead>
         <tbody>{aeronaves}</tbody>

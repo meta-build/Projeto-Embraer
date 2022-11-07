@@ -4,7 +4,7 @@ import './aircraftProfile.css'
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
-import { BotaoVoltar, FileButton, Lista, Painel, Rotulo, Text } from "../../shared/components";
+import { BotaoVoltar, FileButton, Painel, Rotulo, Text } from "../../shared/components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +16,14 @@ export const AircraftProfile = () => {
 
     const { aircraftId } = useParams();
     
-    const [aircraft, setAircraft] = useState({});
+    const [aircraft, setAircraft] = useState<Object>({});
+
+    const [flaps, setflaps] = useState([]);
+    const [motors, setmotors] = useState([]);
+    const [certs, setcerts] = useState([]);
+    const [breaks, setbreaks] = useState([]);
+    
+    // para download
     const [download, setDownload] = useState('');
     const [count, setCount] = useState(0);
 
@@ -25,13 +32,14 @@ export const AircraftProfile = () => {
         getAviao.setPesquisa(aircraftId);
         let retorno = getAviao.resgatar();
         retorno.then(aviao => {
-            console.log(aviao[0])
-            setAircraft(aviao[0]);
+            setAircraft(aviao);
+            setflaps(aviao['flaps']);
+            setmotors(aviao['motors']);
+            setcerts(aviao['certificacoes']);
+            setbreaks(aviao['breaks']);
         });
     }
 
-    
-    
     const baixar = () => {
         setDownload('');
         let baixar = new BaixarTabela();
@@ -60,24 +68,32 @@ export const AircraftProfile = () => {
             <Painel status="enable" titulo='Basic information'>
                 <div className='row'>
                     <Rotulo tamanho='md' rotulo="Model's name">{aircraft['name']}</Rotulo>
-                    <Rotulo tamanho='md' rotulo='Brand'>[aircraft's brand]</Rotulo>
+                    <Rotulo tamanho='md' rotulo='Brand'>{aircraft['brand']}</Rotulo>
                 </div>
                 <div className='row'>
                     <span className='col'>
                         <Rotulo tamanho='lg' rotulo=''>Landing Flaps</Rotulo>
-                        <Lista listagem={['default flap']} />
+                        <ul className='lista'>
+                            {flaps.map(e => (<li>{e.nome}</li>))}
+                        </ul>
                     </span>
                     <span className='col'>
                         <Rotulo tamanho='lg' rotulo=''>Motors</Rotulo>
-                        <Lista listagem={['default motor']} />
+                        <ul className='lista'>
+                            {motors.map(e => (<li>{e.nome}</li>))}
+                        </ul>
                     </span>
                     <span className='col'>
                         <Rotulo tamanho='lg' rotulo=''>Certifications</Rotulo>
-                        <Lista listagem={['default certification']} />
+                        <ul className='lista'>
+                            {certs.map(e => (<li>{e.nome}</li>))}
+                        </ul>
                     </span>
                     <span className='col'>
                         <Rotulo tamanho='lg' rotulo=''>Break Configs</Rotulo>
-                        <Lista listagem={['manual break config']} />
+                        <ul className='lista'>
+                            {breaks.map(e => (<li>{e.nome}</li>))}
+                        </ul>
                     </span>
                 </div>
             </Painel>
@@ -91,9 +107,9 @@ export const AircraftProfile = () => {
             </Painel>
 
             <div className='rodape'>
-                <FileButton tipo='edit'>
+                {/* <FileButton tipo='edit'>
                     Edit Aircraft Model
-                </FileButton>
+                </FileButton> */}
                 <FileButton tipo='delete'>
                     Delete Aircraft Model
                 </FileButton>

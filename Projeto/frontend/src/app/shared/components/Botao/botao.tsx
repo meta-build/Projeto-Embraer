@@ -1,7 +1,7 @@
 import "./botao.css";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowDown, faCircleArrowUp, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faChevronLeft, faChevronRight, faCircleArrowDown, faCircleArrowUp, faCirclePlus, faPenToSquare, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface configBotao {
   tipo: "submit" | "reset";
@@ -21,9 +21,14 @@ interface configBotaoComIcon extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 interface configDownloadButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  tipo: 'download' | 'upload' | 'edit' | 'delete';
-  children: ReactNode;
+  tipo: 'download' | 'upload' | 'edit' | 'delete' | 'cancel' | 'confirm' | 'back' | 'next';
 }
+
+interface configUploadButton extends InputHTMLAttributes<HTMLInputElement> {
+  receberArquivo: Function;
+}
+
+interface configAddButton extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const Botao = (props: configBotao) => {
   let classe = () => {
@@ -105,22 +110,61 @@ export const FileButton = (props: configDownloadButton) => {
 
   let icon;
 
-  if (props.tipo === 'download') {
-    icon = (<FontAwesomeIcon icon={faCircleArrowDown} className='icon'/>);
-  } else if (props.tipo === 'upload') {
-    icon = (<FontAwesomeIcon icon={faCircleArrowUp} className='icon'/>);
-  } else if (props.tipo === 'edit') {
-    icon = (<FontAwesomeIcon icon={faPenToSquare} className='icon'/>)
-  } else {
-    icon = (<FontAwesomeIcon icon={faTrash} className='icon'/>)
+  switch(props.tipo){
+    case 'download':
+      icon = (<FontAwesomeIcon icon={faCircleArrowDown} className='icon'/>);
+      break;
+    case 'upload':
+      icon = (<FontAwesomeIcon icon={faCircleArrowUp} className='icon'/>);
+      break;
+    case 'edit':
+      icon = (<FontAwesomeIcon icon={faPenToSquare} className='icon'/>)
+      break;
+    case 'delete':
+      icon = (<FontAwesomeIcon icon={faTrash} className='icon'/>)
+      break;
+    case 'cancel':
+      icon = (<FontAwesomeIcon icon={faXmark} className='icon'/>)
+      break;
+    case 'confirm':
+      icon = (<FontAwesomeIcon icon={faCheck} className='icon'/>)
+      break;
+    case 'back':
+      icon = (<FontAwesomeIcon icon={faChevronLeft} className='icon'/>)
+      break;
+    case 'next':
+      icon = (<FontAwesomeIcon icon={faChevronRight} className='icon'/>)
   }
 
   return (
     <>
-      <button className={props.tipo} onClick={props.onClick}>
+      {props.tipo !== 'next' && (<button className={props.tipo} onClick={props.onClick}>
         {icon}
         {props.children}
-      </button>
+      </button>)}
+      {props.tipo === 'next' && (<button className={props.tipo} onClick={props.onClick}>
+        {props.children}
+        {icon}
+      </button>)}
     </>
+  )
+}
+
+export const UploadButton = (props: configUploadButton) => {
+
+  return (
+    <label className={`btn upload`}>
+          {<FontAwesomeIcon icon={faCircleArrowUp} className='icon'/>}
+          {props.children}
+          <input type='file' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="upload" className="inputUpload" onChange={e => props.receberArquivo(e.target.files[0])}></input>
+    </label>
+  )
+}
+
+export const AddButton = (props: configAddButton) => {
+  return (
+    <span className='addBtn' onClick={props.onClick}>
+      <FontAwesomeIcon icon={faCirclePlus} className='addicon'/>
+    </span>
   )
 }

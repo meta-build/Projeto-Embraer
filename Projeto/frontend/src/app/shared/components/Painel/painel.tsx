@@ -11,10 +11,10 @@ export const Painel = (props: configs) => {
     
     return(
         <div className="borda">
-            <div className='cabecalho'>
+            <div className={`cabecalho ${props.status}`}>
                 {props.titulo}
             </div>
-            <div className='conteudo'>
+            <div className={`conteudo ${props.status}`}>
                 {props.children}
             </div>
         </div>

@@ -2,11 +2,12 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 import "./inserirString.css";
 
 
-interface configString extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface configString extends ButtonHTMLAttributes<HTMLInputElement> {
   children: ReactNode;
   emMudanca: Function;
   id: string;
-  tamanho: 'md' | 'lg';
+  tamanho: 'md' | 'md2' | 'lg';
+  status?: 'normal' | 'erro'
 }
 
 export const InserirString = (props: configString) => {
@@ -16,11 +17,12 @@ export const InserirString = (props: configString) => {
       <input
         required
         onChange={(e) => props.emMudanca(e.target.value)}
-        className='inserir '
+        className={`inserir ${props.status}`}
         name={props.id}
         id={props.id}
+        value={props.value}
       />
-      <label htmlFor={props.id} className='label'>{props.children}</label>
+      <label htmlFor={props.id} className={`label ${props.status}`}>{props.children}</label>
     </div>
   )
 }

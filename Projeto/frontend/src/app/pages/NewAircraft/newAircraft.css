@@ -1,11 +1,11 @@
 .row {
     display: flex;
     width: 100%;
-    margin: 0px auto;
+    margin: 10px auto;
 }
 
 .col {
-    padding: 0;
+    padding: 5px;
     width: 25%;
 }
 
@@ -20,6 +20,22 @@
     flex-direction: row-reverse;
 }
 
+.rowCol {
+    display: flex;
+}
+
 .lista {
     margin-top: 10px;
+}
+
+.panelObs {
+    color: #666666;
+}
+
+.rodape.disable {
+    display: none;
+}
+
+.divisor {
+    display: none;
 }

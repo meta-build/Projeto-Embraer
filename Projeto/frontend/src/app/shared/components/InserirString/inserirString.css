@@ -8,6 +8,10 @@ div.md {
   width: 50%;
 }
 
+div.md2 {
+  width: 83%
+}
+
 div.lg {
   width: 100%;
 }
@@ -24,6 +28,10 @@ div.lg {
   width: 100%;
   border-bottom: 3px solid #0f1d59;
   }
+
+  .inserir.erro {
+    border-bottom: 3px solid red;
+  }
   
   .label {
     -webkit-touch-callout: none;
@@ -33,19 +41,23 @@ div.lg {
     -ms-user-select: none;
     user-select: none;
   }
-  
+
   .inserir ~ .label {
     color: black;
     position: absolute;
     top: 10px;
-    text-indent: 16px;
+    text-indent: 4px;
     transition: 0.4s;
     width: fit-content;
+  }
+
+  .label.erro {
+    color: red;
   }
   
   .inserir:focus ~ .label,
   .inserir:valid ~ .label {
-    transform: translateY(-24px);
+    transform: translateY(-20px);
     font-size: 0.8em;
     letter-spacing: 0.1em;
   }
