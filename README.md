@@ -101,6 +101,13 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 ![Burndown S3](https://user-images.githubusercontent.com/111146527/200193194-1c3c90ab-2c18-4561-9d7f-9f5babb36f19.png)
 
+### Funcionalidade
+
+#### Tela de cadastro
+
+#### Tela de perfil
+
+#### Pesquisa de aeronave
 
 <br>
 
