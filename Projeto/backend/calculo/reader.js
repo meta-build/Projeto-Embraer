@@ -6,7 +6,7 @@ let CalcularLD = (parametros) => {
     //var readline = require('readline-sync');
     var aircraftModel = parametros.aircraftModel;
     console.log(aircraftModel);
-    var workbook = XLSX.readFile('./'+aircraftModel+'.xls');
+    var workbook = XLSX.readFile('./files/'+aircraftModel+'.xls');
     var sheet_name_list = workbook.SheetNames;
     var xlData1 = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]); // flap 220 without ice
     var xlData2 = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]]); // flap 220 with ice
