@@ -103,11 +103,11 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 ### Funcionalidade
 
-#### Tela de cadastro
+#### Tela de cadastro + Perfil Aeronave
+![video aviao](https://user-images.githubusercontent.com/111146527/200221497-0e41ace0-270b-41c4-80ee-98307d724aee.gif)
 
-#### Tela de perfil
-
-#### Pesquisa de aeronave
+#### Integração cálculo + aeronaves
+![calculo](https://user-images.githubusercontent.com/111146527/200221488-d7f4b055-2479-4bc4-88b7-239d628086a0.gif)
 
 <br>
 
