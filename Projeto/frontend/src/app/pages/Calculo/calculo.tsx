@@ -37,6 +37,8 @@ export const Calculo = () => {
 
   const [aeronavesNome, setaeronavesNome] = useState();
   const [aeronavesMotor, setaeronavesMotor] = useState();
+  const [aeronavesCertification, setaeronavesCertification] = useState();
+  const [aeronavesFlaps, setaeronavesFlaps] = useState();
 
   // history para volta ao menu
   const history = useNavigate();
@@ -87,11 +89,11 @@ export const Calculo = () => {
     { nome: "Without Ice", valor: 0 },
     { nome: "With Ice", valor: 1 },
   ];
-  let flapOptions = [
-    { nome: "Flap 220", valor: 0 },
-    { nome: "Flap 450", valor: 1 },
-  ];
-  let certifications = [{ nome: "Default Certification", valor: 0 }];
+  // let flapOptions = [
+  //   { nome: "Flap 220", valor: 0 },
+  //   { nome: "Flap 450", valor: 1 },
+  // ];
+  // let certifications = [{ nome: "Default Certification", valor: 0 }];
 
   //voltar para o menu!!!!
 
@@ -99,10 +101,24 @@ export const Calculo = () => {
     history("/menu");
   };
 
+  const submeterCalculo = (e) => {
+    console.log(aircraftModel);
+    console.log(typeof aircraftModel);
+    e.preventDefault();
+    // enviar parametros
+    let resgatarResultado = new ResgatarResultado();
+    let cadastrar = new CadastradorParametros();
+    const retorno = resgatarResultado.resgatar();
+    retorno.then((resultado) => setresult(resultado["result"]));
+
+    cadastrar.cadastrar(params);
+  };
+
+  // PEGAR MODELOS CADASTRADOS NO BANCO
+
   const getAeronaves = () => {
     let listarAeronaves = new ListarAeronaves();
     let retorno = listarAeronaves.resgatar();
-
     retorno.then((elementos) => {
       setaeronavesNome(
         elementos.map((aviao) => (
@@ -114,32 +130,37 @@ export const Calculo = () => {
     });
   };
 
-  const submeterCalculo = (e) => {
-    console.log(aircraftModel);
-    console.log(typeof(aircraftModel));
-    e.preventDefault();
-    // enviar parametros
-    let resgatarResultado = new ResgatarResultado();
-    let cadastrar = new CadastradorParametros();
-    const retorno = resgatarResultado.resgatar();
-    retorno.then((resultado) => setresult(resultado["result"]));
-
-    cadastrar.cadastrar(params);
-  };
+  // DEFINIR INFORMAÇÕES A PARTIR DO MODELO PUXADO
 
   const definirInfo = (id: number) => {
     let getAviao = new PesquisarAeronaveId();
-        getAviao.setPesquisa(`${id}`);
-        let retorno = getAviao.resgatar();
-        retorno.then(aviao => {
-            setaircraftModel(aviao['name']);
-            setaeronavesMotor(aviao['motors'].map(e => (
-              <option key={e.id} value={e.id}>
-                {e.nome}
-              </option>
-            )))
-        });
-  }
+    getAviao.setPesquisa(`${id}`);
+    let retorno = getAviao.resgatar();
+    retorno.then((aviao) => {
+      setaircraftModel(aviao["name"]);
+      setaeronavesMotor(
+        aviao["motors"].map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.nome}
+          </option>
+        ))
+      );
+      setaeronavesCertification(
+        aviao["certificacoes"].map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.nome}
+          </option>
+        ))
+      );
+      setaeronavesFlaps(
+        aviao["flaps"].map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.nome}
+          </option>
+        ))
+      );
+    });
+  };
 
   useEffect(getAeronaves, []);
   return (
@@ -171,20 +192,26 @@ export const Calculo = () => {
               onChange={setmotor}
             />
 
-            <Selecionar
-              label="Certification"
+            <SelecionarComRetorno
+              set={aeronavesCertification}
               id="certification"
+              children="Certification"
               onChange={setcertification}
-              opcoes={certifications}
             />
 
+            <SelecionarComRetorno
+              set={aeronavesFlaps}
+              id="landingFlap"
+              children="Landing Flap"
+              onChange={setlandingFlap}
+            />
 
-            <Selecionar
+            {/* <Selecionar
               label="Landing Flap"
               id="landingFlap"
               onChange={setlandingFlap}
               opcoes={flapOptions}
-            />
+            /> */}
 
             <Selecionar
               label="Ice Build Up"
