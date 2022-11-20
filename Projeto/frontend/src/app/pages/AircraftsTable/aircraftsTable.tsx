@@ -102,7 +102,7 @@ export const AircraftsTable = () => {
         </div>
       </div>
 
-      <table>
+      <table className="tabela">
         <thead>
           <tr>
             <th className="brand">Brand</th>

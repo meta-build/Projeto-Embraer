@@ -226,6 +226,11 @@ app.delete("/delete", (req, res) => {
 
 // url backend para baixar tabela de cálculo (modelo)
 app.get('/download', (req, res) => {
+    const file = './files/table-model.xls';
+    res.download(file);
+});
+
+app.get('/download-table', (req, res) => {
     const file = './files/Modelo XYZ.xls';
     res.download(file);
 });

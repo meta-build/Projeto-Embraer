@@ -43,8 +43,8 @@ export const AircraftProfile = () => {
     const baixar = () => {
         setDownload('');
         let baixar = new BaixarTabela();
-        setDownload(baixar.getUrl());
-        setCount(old => old + 1)
+        setDownload(baixar.getUrlTabela());
+        setCount(old => old + 1)    
     }
 
     const handleVoltar = () => {

@@ -7,6 +7,10 @@ table {
   border: 1px solid #bdbcbc;
 }
 
+input{
+  background: none;
+}
+
 .alinhamento {
   padding: 0;
   width: 10.5%;
@@ -60,4 +64,8 @@ tr:nth-child(even) {
 
 .brand {
   width: 150px;
+}
+
+.tabela {
+  margin-bottom: 40px;
 }
