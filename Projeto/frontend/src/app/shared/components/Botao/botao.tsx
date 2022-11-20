@@ -28,7 +28,7 @@ interface configUploadButton extends InputHTMLAttributes<HTMLInputElement> {
   receberArquivo: Function;
 }
 
-interface configAddButton extends ButtonHTMLAttributes<HTMLButtonElement> {}
+interface configAddButton extends ButtonHTMLAttributes<HTMLButtonElement> { }
 
 export const Botao = (props: configBotao) => {
   let classe = () => {
@@ -61,14 +61,14 @@ export const BotaoComFuncao = ({ tipo, children, ...props }: configBotaoComFunca
 
   return (
     <>
-      <button type={props.type} onClick={props.onClick}  className={classe()}>
+      <button type={props.type} onClick={props.onClick} className={classe()}>
         {children}
       </button>
     </>
   );
 };
 
-export const BotaoVoltar = ({ tipo,children, ...props }: configBotaoVoltar) => {
+export const BotaoVoltar = ({ tipo, children, ...props }: configBotaoVoltar) => {
   let classe = () => {
     // eslint-disable-next-line eqeqeq
     if (tipo == "button") {
@@ -80,7 +80,7 @@ export const BotaoVoltar = ({ tipo,children, ...props }: configBotaoVoltar) => {
 
   return (
     <>
-      <button type={props.type} onClick={props.onClick}  className={classe()}>
+      <button type={props.type} onClick={props.onClick} className={classe()}>
         {children}
       </button>
     </>
@@ -99,7 +99,7 @@ export const BotaoAircraft = ({ tipo, children, ...props }: configBotaoComIcon) 
 
   return (
     <>
-      <button type={props.type} onClick={props.onClick}  className={classe()}>
+      <button type={props.type} onClick={props.onClick} className={classe()}>
         {children}
       </button>
     </>
@@ -110,30 +110,30 @@ export const FileButton = (props: configDownloadButton) => {
 
   let icon;
 
-  switch(props.tipo){
+  switch (props.tipo) {
     case 'download':
-      icon = (<FontAwesomeIcon icon={faCircleArrowDown} className='icon'/>);
+      icon = (<FontAwesomeIcon icon={faCircleArrowDown} className='icon' />);
       break;
     case 'upload':
-      icon = (<FontAwesomeIcon icon={faCircleArrowUp} className='icon'/>);
+      icon = (<FontAwesomeIcon icon={faCircleArrowUp} className='icon' />);
       break;
     case 'edit':
-      icon = (<FontAwesomeIcon icon={faPenToSquare} className='icon'/>)
+      icon = (<FontAwesomeIcon icon={faPenToSquare} className='icon' />)
       break;
     case 'delete':
-      icon = (<FontAwesomeIcon icon={faTrash} className='icon'/>)
+      icon = (<FontAwesomeIcon icon={faTrash} className='icon' />)
       break;
     case 'cancel':
-      icon = (<FontAwesomeIcon icon={faXmark} className='icon'/>)
+      icon = (<FontAwesomeIcon icon={faXmark} className='icon' />)
       break;
     case 'confirm':
-      icon = (<FontAwesomeIcon icon={faCheck} className='icon'/>)
+      icon = (<FontAwesomeIcon icon={faCheck} className='icon' />)
       break;
     case 'back':
-      icon = (<FontAwesomeIcon icon={faChevronLeft} className='icon'/>)
+      icon = (<FontAwesomeIcon icon={faChevronLeft} className='icon' />)
       break;
     case 'next':
-      icon = (<FontAwesomeIcon icon={faChevronRight} className='icon'/>)
+      icon = (<FontAwesomeIcon icon={faChevronRight} className='icon' />)
   }
 
   return (
@@ -150,13 +150,33 @@ export const FileButton = (props: configDownloadButton) => {
   )
 }
 
+interface configOptionDelBtn extends ButtonHTMLAttributes<HTMLButtonElement> { }
+
+export const ConfirmDeleteBtn = (props: configOptionDelBtn) => {
+  return (
+    <button className='cancel' onClick={props.onClick}>
+      <FontAwesomeIcon icon={faCheck} className='icon' />
+      {props.children}
+    </button>
+  )
+}
+
+export const CancelDeleteBtn = (props: configOptionDelBtn) => {
+  return (
+    <button className='confirm' onClick={props.onClick}>
+      <FontAwesomeIcon icon={faXmark} className='icon' />
+      {props.children}
+    </button>
+  )
+}
+
 export const UploadButton = (props: configUploadButton) => {
 
   return (
     <label className={`btn upload`}>
-          {<FontAwesomeIcon icon={faCircleArrowUp} className='icon'/>}
-          {props.children}
-          <input type='file' accept="application/vnd.ms-excel" name="upload" className="inputUpload" onChange={e => props.receberArquivo(e.target.files[0])}></input>
+      {<FontAwesomeIcon icon={faCircleArrowUp} className='icon' />}
+      {props.children}
+      <input type='file' accept="application/vnd.ms-excel" name="upload" className="inputUpload" onChange={e => props.receberArquivo(e.target.files[0])}></input>
     </label>
   )
 }
@@ -164,7 +184,7 @@ export const UploadButton = (props: configUploadButton) => {
 export const AddButton = (props: configAddButton) => {
   return (
     <span className='addBtn' onClick={props.onClick}>
-      <FontAwesomeIcon icon={faCirclePlus} className='addicon'/>
+      <FontAwesomeIcon icon={faCirclePlus} className='addicon' />
     </span>
   )
 }

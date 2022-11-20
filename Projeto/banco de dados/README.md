@@ -15,7 +15,7 @@ create table motor(
  id int auto_increment primary key,
  nome varchar(100),
  aeronave int,
- foreign key (aeronave) references aeronave(id)
+ foreign key (aeronave) references aeronave(id) on delete cascade
  );
 ```
 
@@ -25,7 +25,7 @@ create table motor(
  id int auto_increment primary key,
  nome varchar(100),
  aeronave int,
- foreign key (aeronave) references aeronave(id)
+ foreign key (aeronave) references aeronave(id) on delete cascade
  );
 ```
 
@@ -35,7 +35,7 @@ create table flap (
  id int auto_increment primary key,
  nome varchar(100),
  aeronave int,
- foreign key (aeronave) references aeronave(id)
+ foreign key (aeronave) references aeronave(id) on delete cascade
  );
 ```
 
@@ -45,6 +45,6 @@ create table flap (
  id int auto_increment primary key,
  nome varchar(100),
  aeronave int,
- foreign key (aeronave) references aeronave(id)
+ foreign key (aeronave) references aeronave(id) on delete cascade
  );
 ```
