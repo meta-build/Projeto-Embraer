@@ -11,4 +11,8 @@ export default class BaixarTabela implements Resgate {
         return URL.DOWNLOAD_TABELA
     }
 
+    public getUrlTabela (){
+        return URL.DOWNLOAD_TABELA_PREENCHIDA
+    }
+
 }
