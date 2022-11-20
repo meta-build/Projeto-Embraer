@@ -210,10 +210,11 @@ app.put("/edit", (req, res) => {
 });
 
 //usar o usestate e puxar a função de deletar
-app.delete("/delete", (req, res) => {
-    const { id } = req.body;
+app.get("/delete", (req, res) => {
+    console.log('deletando aeronave...')
+    const { id } = req.query;
 
-    let SQL = "DELETE FROM cadastro WHERE idcadastro = ?";
+    let SQL = "DELETE FROM aeronave WHERE id = ?";
 
     db.query(SQL, [id], (err, result) => {
       if (err) {

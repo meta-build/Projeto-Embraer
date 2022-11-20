@@ -4,28 +4,36 @@ import './aircraftProfile.css'
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
-import { BotaoVoltar, FileButton, Painel, Rotulo, Text } from "../../shared/components";
+import ReactModal from 'react-modal';
+
+import { BotaoVoltar, CancelDeleteBtn, ConfirmDeleteBtn, FileButton, Painel, Rotulo, Text } from "../../shared/components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import PesquisarAeronaveId from '../../shared/services/Resgatar/pesquisarAeronaveId';
 import BaixarTabela from '../../shared/services/Resgatar/baixarTabela';
+import ExcluirAeronave from '../../shared/services/Excluir/excluir_aeronave';
+
 
 export const AircraftProfile = () => {
     const history = useNavigate();
 
     const { aircraftId } = useParams();
-    
+
     const [aircraft, setAircraft] = useState<Object>({});
 
     const [flaps, setflaps] = useState([]);
     const [motors, setmotors] = useState([]);
     const [certs, setcerts] = useState([]);
     const [breaks, setbreaks] = useState([]);
-    
+
     // para download
     const [download, setDownload] = useState('');
     const [count, setCount] = useState(0);
+
+    // modal
+    const [modalVis, setModalVis] = useState(false);
+    const [modalConfirm, setModalConfirm] = useState(false);
 
     const getAeronave = () => {
         let getAviao = new PesquisarAeronaveId();
@@ -44,12 +52,39 @@ export const AircraftProfile = () => {
         setDownload('');
         let baixar = new BaixarTabela();
         setDownload(baixar.getUrlTabela());
-        setCount(old => old + 1)    
+        setCount(old => old + 1)
     }
 
     const handleVoltar = () => {
         history("/aircrafts-table");
     };
+
+    const handleEditar = () => {
+        console.log('ir para tela de edição');
+    }
+
+    const handleModalVis = () => {
+        if (modalVis) {
+            setModalVis(false);
+        } else {
+            setModalVis(true);
+        }
+    }
+
+    const handleConfirmModal = () => {
+        if (modalConfirm) {
+            setModalConfirm(false);
+        } else {
+            setModalConfirm(true);
+        }
+    }
+
+    const deletarAeronave = () => {
+        let deletar = new ExcluirAeronave(aircraftId);
+        deletar.deletar().then(i => {
+            handleConfirmModal()
+        })
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(getAeronave, [])
@@ -103,17 +138,44 @@ export const AircraftProfile = () => {
                 <FileButton tipo='download' onClick={baixar} type='submit'>
                     Download calculation table
                 </FileButton>
-                {download && <iframe src={download + '?c=' + count} style={{display:'none'}}/>}
+                {download && <iframe src={download + '?c=' + count} style={{ display: 'none' }} />}
             </Painel>
 
             <div className='rodape'>
-                {/* <FileButton tipo='edit'>
+                <FileButton tipo='edit' onClick={e => handleEditar()}>
                     Edit Aircraft Model
-                </FileButton> */}
-                <FileButton tipo='delete'>
+                </FileButton>
+                <FileButton tipo='delete' onClick={e => handleModalVis()}>
                     Delete Aircraft Model
                 </FileButton>
             </div>
+            <ReactModal
+                isOpen={modalVis}
+                onRequestClose={handleModalVis}
+                contentLabel='exemplo'
+                overlayClassName='modalOverlay'
+                className='modalContent'
+            >
+                <h2>Delete {aircraft['name']} aircraft model from the system?</h2>
+                <div className='confirmPainel'>
+                    <ConfirmDeleteBtn onClick={e => deletarAeronave()}>Confirm</ConfirmDeleteBtn>
+                    <CancelDeleteBtn onClick={e => handleModalVis()}>Cancel</CancelDeleteBtn>
+                </div>
+            </ReactModal>
+            <ReactModal
+                isOpen={modalConfirm}
+                onRequestClose={handleConfirmModal}
+                contentLabel='teste'
+                overlayClassName='modalOverlay'
+                className='modalContent'
+            >
+                <h2>Aicraft {aircraft['name']} deleted</h2>
+                <div className='confirmPainel'>
+                    <FileButton tipo='confirm'  onClick={handleVoltar}>
+                        Back to Aircraft models page
+                    </FileButton>
+                </div>
+            </ReactModal>
         </>
-    )   
+    )
 }

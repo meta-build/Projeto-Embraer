@@ -23,3 +23,42 @@
 .lista {
     margin-top: 10px;
 }
+
+.modalOverlay {
+    background-color: rgba(139, 139, 139, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    align-itens: center;
+    justify-content: center;
+}
+
+.modalContent {
+    width: 90%;
+    max-width: 700px;
+    height: fit-content;
+    background-color: white;
+    
+    margin: 250px auto;
+    
+    padding: 40px 10px 40px 10px;
+    
+    border-radius: 15px;
+}
+
+.modalContent h2 {
+    text-align: center;
+}
+
+.confirmPainel {
+    width: 100%;
+    margin-top: 60px;
+
+    display: flex;
+    align-itens: center;
+    justify-content: center;
+}
