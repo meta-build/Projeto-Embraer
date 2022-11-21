@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { useEffect, useState } from "react";
 import CadastradorParametros from "../../shared/services/Cadastrar/cadastradorParametros";
 import {
@@ -33,10 +34,20 @@ export const Calculo = () => {
   const [reverser, setreverser] = useState<number>(0);
   const [airstripCondition, setairstripCondition] = useState<number>(0);
   const [iceBuildup, seticeBuildup] = useState<number>(0);
+
   const [landingFlap, setlandingFlap] = useState<number>(0);
+  const [Measurement,setMeasurement] = useState<number>(0);
 
   const [aeronavesNome, setaeronavesNome] = useState();
   const [aeronavesMotor, setaeronavesMotor] = useState();
+  const [aeronavesCertification, setaeronavesCertification] = useState();
+  const [aeronavesFlaps, setaeronavesFlaps] = useState();
+  const [aeronavesBreak, setaeronavesBreak] = useState();
+
+  const [breaks, setBreak] = useState();
+
+  const [labelPeso, setlabelPeso] = useState('');
+  const [labelResultado, setlabelResultado] = useState('');
 
   // history para volta ao menu
   const history = useNavigate();
@@ -87,11 +98,34 @@ export const Calculo = () => {
     { nome: "Without Ice", valor: 0 },
     { nome: "With Ice", valor: 1 },
   ];
+
   let flapOptions = [
     { nome: "Flap 220", valor: 0 },
     { nome: "Flap 450", valor: 1 },
   ];
-  let certifications = [{ nome: "Default Certification", valor: 0 }];
+
+  let medidas = [
+    { nome: "Imperial", valor: 0 },
+    { nome: "Internacional", valor: 1 },
+  ];
+
+  const trocarLabel = (event) => {
+    if(event == 0){
+      setMeasurement(0)
+      setlabelResultado(' (fts):')
+      setlabelPeso(' (lb)')
+    }else if (event == 1){
+      setMeasurement(1)
+      setlabelResultado(' (mts):')
+      setlabelPeso(' (kg)')
+    } else{
+      setMeasurement(1)
+      setlabelResultado('')
+      setlabelPeso('')
+    }
+  }
+
+  
 
   //voltar para o menu!!!!
 
@@ -99,10 +133,42 @@ export const Calculo = () => {
     history("/menu");
   };
 
+  const converterPeso = () =>{
+    if(Measurement == 0){
+      let convertido = weight/2.205
+      setweight(convertido)
+    }
+  }
+
+  const converterResultado = (resultado):number =>{
+    if(Measurement == 0){
+      return resultado*3.281
+    }
+    return resultado
+  }
+
+  const submeterCalculo = (e) => {
+    console.log(aircraftModel);
+    console.log(typeof aircraftModel);
+    e.preventDefault();
+    converterPeso()
+    // enviar parametros
+    let resgatarResultado = new ResgatarResultado();
+    let cadastrar = new CadastradorParametros();
+    const retorno = resgatarResultado.resgatar();
+    retorno.then((resultado) => {
+      let valor = converterResultado( resultado["result"])
+      setresult(valor)
+    });
+
+    cadastrar.cadastrar(params);
+  };
+
+  // PEGAR MODELOS CADASTRADOS NO BANCO
+
   const getAeronaves = () => {
     let listarAeronaves = new ListarAeronaves();
     let retorno = listarAeronaves.resgatar();
-
     retorno.then((elementos) => {
       setaeronavesNome(
         elementos.map((aviao) => (
@@ -114,32 +180,44 @@ export const Calculo = () => {
     });
   };
 
-  const submeterCalculo = (e) => {
-    console.log(aircraftModel);
-    console.log(typeof(aircraftModel));
-    e.preventDefault();
-    // enviar parametros
-    let resgatarResultado = new ResgatarResultado();
-    let cadastrar = new CadastradorParametros();
-    const retorno = resgatarResultado.resgatar();
-    retorno.then((resultado) => setresult(resultado["result"]));
-
-    cadastrar.cadastrar(params);
-  };
+  // DEFINIR INFORMAÇÕES A PARTIR DO MODELO PUXADO
 
   const definirInfo = (id: number) => {
     let getAviao = new PesquisarAeronaveId();
-        getAviao.setPesquisa(`${id}`);
-        let retorno = getAviao.resgatar();
-        retorno.then(aviao => {
-            setaircraftModel(aviao['name']);
-            setaeronavesMotor(aviao['motors'].map(e => (
-              <option key={e.id} value={e.id}>
-                {e.nome}
-              </option>
-            )))
-        });
-  }
+    getAviao.setPesquisa(`${id}`);
+    let retorno = getAviao.resgatar();
+    retorno.then((aviao) => {
+      setaircraftModel(aviao["name"]);
+      setaeronavesMotor(
+        aviao["motors"].map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.nome}
+          </option>
+        ))
+      );
+      setaeronavesCertification(
+        aviao["certificacoes"].map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.nome}
+          </option>
+        ))
+      );
+      setaeronavesFlaps(
+        aviao["flaps"].map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.nome}
+          </option>
+        ))
+      );
+      setaeronavesBreak(
+        aviao["breaks"].map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.nome}
+          </option>
+        ))
+      );
+    });
+  };
 
   useEffect(getAeronaves, []);
   return (
@@ -157,6 +235,14 @@ export const Calculo = () => {
       <div className="calculadora">
         <form onSubmit={submeterCalculo}>
           <div className="insercao">
+
+            <Selecionar
+              label="Measurement"
+              id="medida"
+              onChange={trocarLabel}
+              opcoes={medidas}
+            />
+
             <SelecionarComRetorno
               set={aeronavesNome}
               id="aircraftModel"
@@ -171,17 +257,30 @@ export const Calculo = () => {
               onChange={setmotor}
             />
 
-            <Selecionar
-              label="Certification"
+            <SelecionarComRetorno
+              set={aeronavesCertification}
               id="certification"
+              children="Certification"
               onChange={setcertification}
-              opcoes={certifications}
             />
 
+            {/* <SelecionarComRetorno
+              set={aeronavesFlaps}
+              id="landingFlap"
+              children="Landing Flap"
+              onChange={setlandingFlap}
+            /> */}
+
+            <SelecionarComRetorno
+              set={aeronavesBreak}
+              id="break"
+              children="Break"
+              onChange={setBreak}
+            />
 
             <Selecionar
-              label="Landing Flap"
-              id="landingFlap"
+              label="Flap"
+              id="flap"
               onChange={setlandingFlap}
               opcoes={flapOptions}
             />
@@ -194,7 +293,7 @@ export const Calculo = () => {
             />
 
             <InserirNumero
-              Children="Airplane Weight (Kg)"
+              Children={"Airplane Weight" + labelPeso}
               min={10000}
               max={100000}
               intervalo={1}
@@ -280,7 +379,7 @@ export const Calculo = () => {
             <Botao tipo="reset" texto="Reset" />
           </div>
         </form>
-        <Resultado result={result} />
+        <Resultado label={labelResultado} result={result} />
       </div>
     </>
   );
