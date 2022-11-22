@@ -2,7 +2,7 @@
 import './newAircraft.css'
 
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { AddButton, BotaoVoltar, FileButton, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
 
@@ -15,10 +15,14 @@ import ExcluirAeronave from '../../shared/services/Excluir/excluir_aeronave';
 
 export const EditAircraft = () => {
     const history = useNavigate();
+    
+    const alreadyCreated = useRef(false);
+
+    const [aircraft, setAircraft] = useState<Object>({});
+    
 
     const { aircraftId } = useParams();
 
-    const [aircraft, setAircraft] = useState<Object>({});
 
     const [name, setName] = useState('');
     const [brand, setBrand] = useState('');
@@ -57,37 +61,42 @@ export const EditAircraft = () => {
 
     const [upload, setUpload] = useState<File>();
 
+    const[notUploaded, setNotUploaded] = useState(false);
+
     const getAeronave = () => {
-        let getAviao = new PesquisarAeronaveId();
-        getAviao.setPesquisa(aircraftId);
-        let retorno = getAviao.resgatar();
-        retorno.then(aviao => {
-            // info aeronave
-            setAircraft(aviao);
-
-            setName(aviao['name']);
-            setBrand(aviao['brand'])
-
-            setFlaps(aviao['flaps']);
-            aviao['flaps'].forEach(flap => {
-                addLista(flaps, elmntFlaps, flap['nome'], setFlaps, setTempFlap, setElmntFlaps)
+        if (!alreadyCreated.current) {
+            alreadyCreated.current = true;
+            let getAviao = new PesquisarAeronaveId();
+            getAviao.setPesquisa(aircraftId);
+            let retorno = getAviao.resgatar();
+            retorno.then(aviao => {
+                // info aeronave
+                setAircraft(aviao);
+    
+                setName(aviao['name']);
+                setBrand(aviao['brand'])
+    
+                setFlaps(aviao['flaps']);
+                aviao['flaps'].forEach(flap => {
+                    addLista(flaps, elmntFlaps, flap['nome'], setFlaps, setTempFlap, setElmntFlaps)
+                });
+    
+                setMotors(aviao['motors']);
+                aviao['motors'].forEach(motor => {
+                    addLista(motors, elmntMotors, motor['nome'], setMotors, setTempMotor, setElmntMotors)
+                });
+    
+                setCerts(aviao['certificacoes']);
+                aviao['certificacoes'].forEach(cert => {
+                    addLista(certis, elmntCertis, cert['nome'], setCerts, setTempCerti, setElmntCertis)
+                });
+    
+                setBreakConfigs(aviao['breaks']);
+                aviao['breaks'].forEach(freio => {
+                    addLista(breakConfigs, elmntBreaks, freio['nome'], setBreakConfigs, setTempBreak, setElmntBreaks)
+                });
             });
-
-            setMotors(aviao['motors']);
-            aviao['motors'].forEach(motor => {
-                addLista(motors, elmntMotors, motor['nome'], setMotors, setTempMotor, setElmntMotors)
-            });
-
-            setCerts(aviao['certificacoes']);
-            aviao['certificacoes'].forEach(cert => {
-                addLista(certis, elmntCertis, cert['nome'], setCerts, setTempCerti, setElmntCertis)
-            });
-
-            setBreakConfigs(aviao['breaks']);
-            aviao['breaks'].forEach(freio => {
-                addLista(breakConfigs, elmntBreaks, freio['nome'], setBreakConfigs, setTempBreak, setElmntBreaks)
-            });
-        });
+        }
     }
 
     const handleVoltar = () => {
@@ -168,32 +177,35 @@ export const EditAircraft = () => {
 
     const handleArquivo = (arq: File) => {
         setUpload(arq);
-        console.log(upload.name)
     }
 
 
     const enviar = (e) => {
         e.preventDefault();
+        if (upload !== undefined) {
+            let deletar = new ExcluirAeronave(aircraftId);
+            deletar.deletar();
+    
+            axios.post('http://localhost:3001/register', {
+                name: name,
+                brand: brand,
+                motors: motors,
+                flaps: flaps,
+                certis: certis,
+                breakConfigs: breakConfigs
+            }).then(response => {
+                history(`/aircraft-profile/${response.data.id}`)
+            });
+    
+            let formData = new FormData();
+            formData.append("upload", upload);
+            axios.post('http://localhost:3001/upload', formData, {
+                headers: { "Content-type": "multipart/form-data" }
+            });
+        } else {
+            setNotUploaded(true);
+        }
 
-        let deletar = new ExcluirAeronave(aircraftId);
-        deletar.deletar();
-
-        axios.post('http://localhost:3001/register', {
-            name: name,
-            brand: brand,
-            motors: motors,
-            flaps: flaps,
-            certis: certis,
-            breakConfigs: breakConfigs
-        }).then(response => {
-            history(`/aircraft-profile/${response.data.id}`)
-        });
-
-        let formData = new FormData();
-        formData.append("upload", upload);
-        axios.post('http://localhost:3001/upload', formData, {
-            headers: { "Content-type": "multipart/form-data" }
-        });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -316,6 +328,7 @@ export const EditAircraft = () => {
                 <UploadButton receberArquivo={handleArquivo} name='upload'>
                     {upload ? upload.name : 'Upload the table for calculation'}
                 </UploadButton>
+                {notUploaded ? (<p className='error'>File not found</p>) : (<p></p>)}
             </Painel>
 
             <div className={`rodape ${scndStep}`}>

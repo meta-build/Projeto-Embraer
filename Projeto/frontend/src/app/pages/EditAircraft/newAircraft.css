@@ -39,3 +39,9 @@
 .divisor {
     display: none;
 }
+
+.error {
+    font-weight: bold;
+    color: red;
+    margin-left: 10px;
+}
