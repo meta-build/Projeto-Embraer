@@ -4,6 +4,7 @@ const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
 const CalcularLD = require("./calculo/reader.js");
+const fs = require('fs');
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -220,6 +221,8 @@ app.get("/delete", (req, res) => {
       if (err) {
         console.log(err);
       } else {
+        const file = `./files/${id}.xls`;
+        try{fs.unlinkSync(file);}catch(err) {console.log(err)}
         res.send(result);
       }
     });
