@@ -5,7 +5,13 @@
 create table aeronave (
  id int auto_increment primary key,
  nome varchar (100),
- marca varchar(50)
+ marca varchar(50),
+ minWeight int,
+ maxWeight int,
+ minTemp int,
+ maxTemp int,
+ minSpeed int,
+ maxSpeed int
 );
 ```
 
