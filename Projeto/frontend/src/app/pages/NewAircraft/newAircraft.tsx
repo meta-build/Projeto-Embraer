@@ -4,7 +4,7 @@ import './newAircraft.css'
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
-import { AddButton, BotaoVoltar, FileButton, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
+import { AddButton, BotaoVoltar, FileButton, InserirNumber, InserirNumero, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +23,24 @@ export const NewAircraft = () => {
     const [statusMotor, setStatusMotor] = useState<'normal' | 'erro'>('normal');
     const [statusCert, setStatusCert] = useState<'normal' | 'erro'>('normal');
     const [statusBreak, setStatusBreak] = useState<'normal' | 'erro'>('normal');
+
+    const [minWeight, setMinWeight] = useState(NaN);
+    const [maxWeight, setMaxWeight] = useState(NaN);
+    
+    const [minTemp, setMinTemp] = useState(NaN);
+    const [maxTemp, setMaxTemp] = useState(NaN);
+
+    const [minSpeed, setMinSpeed] = useState(NaN);
+    const [maxSpeed, setMaxSpeed] = useState(NaN);
+
+    const [minWeightStatus, setMinWeightStatus] = useState<'normal' | 'erro'>('normal');
+    const [maxWeightStatus, setMaxWeightStatus] = useState<'normal' | 'erro'>('normal');
+    
+    const [minTempStatus, setMinTempStatus] = useState<'normal' | 'erro'>('normal');
+    const [maxTempStatus, setMaxTempStatus] = useState<'normal' | 'erro'>('normal');
+
+    const [minSpeedStatus, setMinSpeedStatus] = useState<'normal' | 'erro'>('normal');
+    const [maxSpeedStatus, setMaxSpeedStatus] = useState<'normal' | 'erro'>('normal');
 
     const [flaps, setFlaps] = useState([]);
     const [motors, setMotors] = useState([]);
@@ -48,7 +66,7 @@ export const NewAircraft = () => {
 
     const [upload, setUpload] = useState<File>();
 
-    const[notUploaded, setNotUploaded] = useState(false);
+    const [notUploaded, setNotUploaded] = useState(false);
 
     const handleVoltar = () => {
         history("/aircrafts-table");
@@ -97,6 +115,16 @@ export const NewAircraft = () => {
         let continuar = true;
         if (name === '') { setStatusName('erro'); continuar = false; } else { setStatusName('normal') }
         if (brand === '') { setStatusBrand('erro'); continuar = false; } else { setStatusBrand('normal') }
+        
+        if(!minWeight) {setMinWeightStatus('erro'); continuar = false;} else {setMinWeightStatus('normal')}
+        if(!maxWeight) {setMaxWeightStatus('erro'); continuar = false;} else {setMaxWeightStatus('normal')}
+
+        if(!minTemp) {setMinTempStatus('erro'); continuar = false;} else {setMinTempStatus('normal')}
+        if(!maxTemp) {setMaxTempStatus('erro'); continuar = false;} else {setMaxTempStatus('normal')}
+
+        if(!minSpeed) {setMinSpeedStatus('erro'); continuar = false;} else {setMinSpeedStatus('normal')}
+        if(!maxSpeed) {setMaxSpeedStatus('erro'); continuar = false;} else {setMaxSpeedStatus('normal')}
+
         if (flaps.length === 0) { setStatusFlap('erro'); continuar = false; } else { setStatusFlap('normal') }
         if (motors.length === 0) { setStatusMotor('erro'); continuar = false; } else { setStatusMotor('normal') }
         if (certis.length === 0) { setStatusCert('erro'); continuar = false; } else { setStatusCert('normal') }
@@ -132,12 +160,18 @@ export const NewAircraft = () => {
             let formData = new FormData();
             formData.append("upload", upload);
             axios.post('http://localhost:3001/register', {
-                name: name,
-                brand: brand,
-                motors: motors,
-                flaps: flaps,
-                certis: certis,
-                breakConfigs: breakConfigs
+                name,
+                brand,
+                motors,
+                flaps,
+                certis,
+                breakConfigs,
+                minWeight,
+                maxWeight,
+                minTemp,
+                maxTemp,
+                minSpeed,
+                maxSpeed
             }).then(response => {
                 axios.post(`http://localhost:3001/upload?id=${response.data.id}`, formData, {
                     headers: { "Content-type": "multipart/form-data" }
@@ -166,6 +200,38 @@ export const NewAircraft = () => {
                 <div className='row'>
                     <InserirString status={statusName} emMudanca={setName} id='name' tamanho='md'>Name</InserirString>
                     <InserirString status={statusBrand} emMudanca={setBrand} id='brand' tamanho='md'>Brand</InserirString>
+                </div>
+                <div className='row'>
+                    <span className='col'>
+                        <InserirNumber status={minWeightStatus} emMudanca={setMinWeight} id='minWeidght' tamanho='lg'>
+                            Min. Weight (kg)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber status={maxWeightStatus} emMudanca={setMaxWeight} id='maxWeight' tamanho='lg'>
+                            Max. Weight (kg)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber status={minTempStatus} emMudanca={setMinTemp} id='minTemp' tamanho='lg'>
+                            Min. Temperature (°C)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber status={maxTempStatus} emMudanca={setMaxTemp} id='maxTemp' tamanho='lg'>
+                            Max. Temperature (°C)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber status={minSpeedStatus} emMudanca={setMinSpeed} id='minSpeed' tamanho='lg'>
+                            Min. Overspeed (kt)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber status={maxSpeedStatus} emMudanca={setMaxSpeed} id='maxSpeed' tamanho='lg'>
+                            Max. Overspeed (kt)
+                        </InserirNumber>
+                    </span>
                 </div>
                 <div className='row'>
                     <span className='col'>
@@ -223,7 +289,7 @@ export const NewAircraft = () => {
                         <div className='rowCol'>
                             <InserirString
                                 emMudanca={setTempBreak}
-                                id='flap'
+                                id='breaks'
                                 tamanho='md2'
                                 value={tempBreak}
                                 status={statusBreak}

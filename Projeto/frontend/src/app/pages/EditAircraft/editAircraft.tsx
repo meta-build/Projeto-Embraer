@@ -4,7 +4,7 @@ import './newAircraft.css'
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from 'react';
 
-import { AddButton, BotaoVoltar, FileButton, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
+import { AddButton, BotaoVoltar, FileButton, InserirNumber, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -15,11 +15,11 @@ import ExcluirAeronave from '../../shared/services/Excluir/excluir_aeronave';
 
 export const EditAircraft = () => {
     const history = useNavigate();
-    
+
     const alreadyCreated = useRef(false);
 
     const [aircraft, setAircraft] = useState<Object>({});
-    
+
 
     const { aircraftId } = useParams();
 
@@ -52,6 +52,24 @@ export const EditAircraft = () => {
     const [fstStep, setFstStep] = useState<'enable' | 'disable'>('enable');
     const [scndStep, setScndStep] = useState<'enable' | 'disable'>('disable');
 
+    const [minWeight, setMinWeight] = useState(NaN);
+    const [maxWeight, setMaxWeight] = useState(NaN);
+
+    const [minTemp, setMinTemp] = useState(NaN);
+    const [maxTemp, setMaxTemp] = useState(NaN);
+
+    const [minSpeed, setMinSpeed] = useState(NaN);
+    const [maxSpeed, setMaxSpeed] = useState(NaN);
+
+    const [minWeightStatus, setMinWeightStatus] = useState<'normal' | 'erro'>('normal');
+    const [maxWeightStatus, setMaxWeightStatus] = useState<'normal' | 'erro'>('normal');
+
+    const [minTempStatus, setMinTempStatus] = useState<'normal' | 'erro'>('normal');
+    const [maxTempStatus, setMaxTempStatus] = useState<'normal' | 'erro'>('normal');
+
+    const [minSpeedStatus, setMinSpeedStatus] = useState<'normal' | 'erro'>('normal');
+    const [maxSpeedStatus, setMaxSpeedStatus] = useState<'normal' | 'erro'>('normal');
+
     // para download
     const [download, setDownload] = useState('');
     const [count, setCount] = useState(0);
@@ -61,7 +79,7 @@ export const EditAircraft = () => {
 
     const [upload, setUpload] = useState<File>();
 
-    const[notUploaded, setNotUploaded] = useState(false);
+    const [notUploaded, setNotUploaded] = useState(false);
 
     const getAeronave = () => {
         if (!alreadyCreated.current) {
@@ -72,29 +90,36 @@ export const EditAircraft = () => {
             retorno.then(aviao => {
                 // info aeronave
                 setAircraft(aviao);
-    
+
                 setName(aviao['name']);
                 setBrand(aviao['brand'])
-    
+
                 setFlaps(aviao['flaps']);
                 aviao['flaps'].forEach(flap => {
                     addLista(flaps, elmntFlaps, flap['nome'], setFlaps, setTempFlap, setElmntFlaps)
                 });
-    
+
                 setMotors(aviao['motors']);
                 aviao['motors'].forEach(motor => {
                     addLista(motors, elmntMotors, motor['nome'], setMotors, setTempMotor, setElmntMotors)
                 });
-    
+
                 setCerts(aviao['certificacoes']);
                 aviao['certificacoes'].forEach(cert => {
                     addLista(certis, elmntCertis, cert['nome'], setCerts, setTempCerti, setElmntCertis)
                 });
-    
+
                 setBreakConfigs(aviao['breaks']);
                 aviao['breaks'].forEach(freio => {
                     addLista(breakConfigs, elmntBreaks, freio['nome'], setBreakConfigs, setTempBreak, setElmntBreaks)
                 });
+
+                setMinWeight(aviao['minWeight']);
+                setMaxWeight(aviao['maxWeight']);
+                setMinTemp(aviao['minTemp']);
+                setMaxTemp(aviao['maxTemp']);
+                setMinSpeed(aviao['minSpeed']);
+                setMaxSpeed(aviao['maxSpeed']);
             });
         }
     }
@@ -185,16 +210,22 @@ export const EditAircraft = () => {
         if (upload !== undefined) {
             let deletar = new ExcluirAeronave(aircraftId);
             deletar.deletar();
-    
+
             let formData = new FormData();
             formData.append("upload", upload);
             axios.post('http://localhost:3001/register', {
-                name: name,
-                brand: brand,
-                motors: motors,
-                flaps: flaps,
-                certis: certis,
-                breakConfigs: breakConfigs
+                name,
+                brand,
+                motors,
+                flaps,
+                certis,
+                breakConfigs,
+                minWeight,
+                maxWeight,
+                minTemp,
+                maxTemp,
+                minSpeed,
+                maxSpeed
             }).then(response => {
                 axios.post(`http://localhost:3001/upload?id=${response.data.id}`, formData, {
                     headers: { "Content-type": "multipart/form-data" }
@@ -225,6 +256,38 @@ export const EditAircraft = () => {
                 <div className='row'>
                     <InserirString value={name} status={statusName} emMudanca={setName} id='name' tamanho='md'>Name</InserirString>
                     <InserirString value={brand} status={statusBrand} emMudanca={setBrand} id='brand' tamanho='md'>Brand</InserirString>
+                </div>
+                <div className='row'>
+                    <span className='col'>
+                        <InserirNumber value={minWeight} status={minWeightStatus} emMudanca={setMinWeight} id='minWeidght' tamanho='lg'>
+                            Min. Weight (kg)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber value={maxWeight} status={maxWeightStatus} emMudanca={setMaxWeight} id='maxWeight' tamanho='lg'>
+                            Max. Weight (kg)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber value={minTemp} status={minTempStatus} emMudanca={setMinTemp} id='minTemp' tamanho='lg'>
+                            Min. Temperature (°C)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber value={maxTemp} status={maxTempStatus} emMudanca={setMaxTemp} id='maxTemp' tamanho='lg'>
+                            Max. Temperature (°C)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber value={minSpeed} status={minSpeedStatus} emMudanca={setMinSpeed} id='minSpeed' tamanho='lg'>
+                            Min. Overspeed (kt)
+                        </InserirNumber>
+                    </span>
+                    <span className='col'>
+                        <InserirNumber value={maxSpeed} status={maxSpeedStatus} emMudanca={setMaxSpeed} id='maxSpeed' tamanho='lg'>
+                            Max. Overspeed (kt)
+                        </InserirNumber>
+                    </span>
                 </div>
                 <div className='row'>
                     <span className='col'>

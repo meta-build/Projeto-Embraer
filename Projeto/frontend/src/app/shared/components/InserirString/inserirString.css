@@ -61,3 +61,7 @@ div.lg {
     font-size: 0.8em;
     letter-spacing: 0.1em;
   }
+
+  .number {
+    margin-left: -4px;
+  }
