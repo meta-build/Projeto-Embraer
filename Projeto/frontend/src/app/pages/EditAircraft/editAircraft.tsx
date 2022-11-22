@@ -186,6 +186,8 @@ export const EditAircraft = () => {
             let deletar = new ExcluirAeronave(aircraftId);
             deletar.deletar();
     
+            let formData = new FormData();
+            formData.append("upload", upload);
             axios.post('http://localhost:3001/register', {
                 name: name,
                 brand: brand,
@@ -194,13 +196,10 @@ export const EditAircraft = () => {
                 certis: certis,
                 breakConfigs: breakConfigs
             }).then(response => {
+                axios.post(`http://localhost:3001/upload?id=${response.data.id}`, formData, {
+                    headers: { "Content-type": "multipart/form-data" }
+                });
                 history(`/aircraft-profile/${response.data.id}`)
-            });
-    
-            let formData = new FormData();
-            formData.append("upload", upload);
-            axios.post('http://localhost:3001/upload', formData, {
-                headers: { "Content-type": "multipart/form-data" }
             });
         } else {
             setNotUploaded(true);
