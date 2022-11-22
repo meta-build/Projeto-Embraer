@@ -69,9 +69,18 @@ app.post("/register", (req, res) => {
     const { name } = req.body;
     const { brand } = req.body;
 
-    let SQL = "INSERT INTO aeronave ( nome, marca ) VALUES ( ?, ? )";
+    const { minWeight } = req.body;
+    const { maxWeight } = req.body;
 
-    db.query(SQL, [name, brand], (err, result) => {
+    const { minTemp } = req.body;
+    const { maxTemp } = req.body;
+
+    const { minSpeed } = req.body;
+    const { maxSpeed } = req.body;
+
+    let SQL = "INSERT INTO aeronave ( nome, marca, minWeight, maxWeight, minTemp, maxTemp, minSpeed, maxSpeed ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
+
+    db.query(SQL, [name, brand, minWeight, maxWeight, minTemp, maxTemp, minSpeed, maxSpeed], (err, result) => {
         if(err){console.log(err);}
         else{
             db.query('SELECT id FROM aeronave WHERE nome = ? AND marca = ?', [name, brand], (err, result) => {
@@ -176,6 +185,12 @@ app.get('/getAircraft-by-id', (req, res) => {
                                             let resposta = {
                                                 name: result[0]['nome'],
                                                 brand: result[0]['marca'],
+                                                minWeight: result[0]['minWeight'],
+                                                maxWeight: result[0]['maxWeight'],
+                                                minTemp: result[0]['minTemp'],
+                                                maxTemp: result[0]['maxTemp'],
+                                                minSpeed: result[0]['minSpeed'],
+                                                maxSpeed: result[0]['maxSpeed'],
                                                 flaps: flaps,
                                                 motors: motors,
                                                 certificacoes: certificacoes,

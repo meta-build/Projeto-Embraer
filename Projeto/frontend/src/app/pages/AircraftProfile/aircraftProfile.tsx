@@ -25,6 +25,12 @@ export const AircraftProfile = () => {
     const [motors, setmotors] = useState([]);
     const [certs, setcerts] = useState([]);
     const [breaks, setbreaks] = useState([]);
+    const [minWeight, setMinWeight] = useState(NaN);
+    const [maxWeight, setMaxWeight] = useState(NaN);
+    const [minTemp, setMinTemp] = useState(NaN);
+    const [maxTemp, setMaxTemp] = useState(NaN);
+    const [minSpeed, setMinSpeed] = useState(NaN);
+    const [maxSpeed, setMaxSpeed] = useState(NaN);
 
     // para download
     const [download, setDownload] = useState('');
@@ -44,6 +50,12 @@ export const AircraftProfile = () => {
             setmotors(aviao['motors']);
             setcerts(aviao['certificacoes']);
             setbreaks(aviao['breaks']);
+            setMinWeight(aviao['minWeight']);
+            setMaxWeight(aviao['maxWeight']);
+            setMinTemp(aviao['minTemp']);
+            setMaxTemp(aviao['maxTemp']);
+            setMinSpeed(aviao['minSpeed']);
+            setMaxSpeed(aviao['maxSpeed']);
         });
     }
 
@@ -102,6 +114,26 @@ export const AircraftProfile = () => {
                 <div className='row'>
                     <Rotulo tamanho='md' rotulo="Model's name">{aircraft['name']}</Rotulo>
                     <Rotulo tamanho='md' rotulo='Brand'>{aircraft['brand']}</Rotulo>
+                </div>
+                <div className='row'>
+                    <span className='col'>
+                        <Rotulo tamanho='lg' rotulo="Min. Weight">{minWeight}</Rotulo>
+                    </span>
+                    <span className='col'>
+                        <Rotulo tamanho='lg' rotulo="Max. Weight">{maxWeight}</Rotulo>
+                    </span>
+                    <span className='col'>
+                        <Rotulo tamanho='lg' rotulo="Min. Temperature">{minTemp}</Rotulo>
+                    </span>
+                    <span className='col'>
+                        <Rotulo tamanho='lg' rotulo="Max. Temperature">{maxTemp}</Rotulo>
+                    </span>
+                    <span className='col'>
+                        <Rotulo tamanho='lg' rotulo="Min. Overspeed">{minSpeed}</Rotulo>
+                    </span>
+                    <span className='col'>
+                        <Rotulo tamanho='lg' rotulo="Max. Overpeed">{maxSpeed}</Rotulo>
+                    </span>
                 </div>
                 <div className='row'>
                     <span className='col'>
