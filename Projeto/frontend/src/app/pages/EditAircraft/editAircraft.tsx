@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import './newAircraft.css'
 
-import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 import { AddButton, BotaoVoltar, FileButton, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
 
@@ -10,9 +10,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import BaixarTabela from '../../shared/services/Resgatar/baixarTabela';
 import axios from 'axios';
+import PesquisarAeronaveId from '../../shared/services/Resgatar/pesquisarAeronaveId';
+import ExcluirAeronave from '../../shared/services/Excluir/excluir_aeronave';
 
-export const NewAircraft = () => {
+export const EditAircraft = () => {
     const history = useNavigate();
+
+    const { aircraftId } = useParams();
+
+    const [aircraft, setAircraft] = useState<Object>({});
 
     const [name, setName] = useState('');
     const [brand, setBrand] = useState('');
@@ -46,13 +52,55 @@ export const NewAircraft = () => {
     const [download, setDownload] = useState('');
     const [count, setCount] = useState(0);
 
+    const [downloadFilled, setDownloadFilled] = useState('');
+    const [filledCount, setFilledCount] = useState(0);
+
     const [upload, setUpload] = useState<File>();
+
+    const getAeronave = () => {
+        let getAviao = new PesquisarAeronaveId();
+        getAviao.setPesquisa(aircraftId);
+        let retorno = getAviao.resgatar();
+        retorno.then(aviao => {
+            // info aeronave
+            setAircraft(aviao);
+
+            setName(aviao['name']);
+            setBrand(aviao['brand'])
+
+            setFlaps(aviao['flaps']);
+            aviao['flaps'].forEach(flap => {
+                addLista(flaps, elmntFlaps, flap['nome'], setFlaps, setTempFlap, setElmntFlaps)
+            });
+
+            setMotors(aviao['motors']);
+            aviao['motors'].forEach(motor => {
+                addLista(motors, elmntMotors, motor['nome'], setMotors, setTempMotor, setElmntMotors)
+            });
+
+            setCerts(aviao['certificacoes']);
+            aviao['certificacoes'].forEach(cert => {
+                addLista(certis, elmntCertis, cert['nome'], setCerts, setTempCerti, setElmntCertis)
+            });
+
+            setBreakConfigs(aviao['breaks']);
+            aviao['breaks'].forEach(freio => {
+                addLista(breakConfigs, elmntBreaks, freio['nome'], setBreakConfigs, setTempBreak, setElmntBreaks)
+            });
+        });
+    }
 
     const handleVoltar = () => {
         history("/aircrafts-table");
     };
 
-    const baixar = () => {
+    const baixarTabelaPreenchida = () => {
+        setDownloadFilled('');
+        setDownloadFilled(`http://localhost:3001/filled-table?id=${aircraftId}`);
+        setFilledCount(old => old + 1)
+    }
+
+    const baixarTabelaNova = () => {
         setDownload('');
         let baixar = new BaixarTabela();
         setDownload(baixar.getUrl());
@@ -123,10 +171,13 @@ export const NewAircraft = () => {
         console.log(upload.name)
     }
 
+
     const enviar = (e) => {
         e.preventDefault();
-        let formData = new FormData();
-        formData.append("upload", upload);
+
+        let deletar = new ExcluirAeronave(aircraftId);
+        deletar.deletar();
+
         axios.post('http://localhost:3001/register', {
             name: name,
             brand: brand,
@@ -135,15 +186,18 @@ export const NewAircraft = () => {
             certis: certis,
             breakConfigs: breakConfigs
         }).then(response => {
-            axios.post(`http://localhost:3001/upload?id=${response.data.id}`, formData, {
-                headers: { "Content-type": "multipart/form-data" }
-            });
             history(`/aircraft-profile/${response.data.id}`)
         });
 
+        let formData = new FormData();
+        formData.append("upload", upload);
+        axios.post('http://localhost:3001/upload', formData, {
+            headers: { "Content-type": "multipart/form-data" }
+        });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(getAeronave, []);
     return (
         <>
             <BotaoVoltar
@@ -158,8 +212,8 @@ export const NewAircraft = () => {
 
             <Painel status={fstStep} titulo='Basic information'>
                 <div className='row'>
-                    <InserirString status={statusName} emMudanca={setName} id='name' tamanho='md'>Name</InserirString>
-                    <InserirString status={statusBrand} emMudanca={setBrand} id='brand' tamanho='md'>Brand</InserirString>
+                    <InserirString value={name} status={statusName} emMudanca={setName} id='name' tamanho='md'>Name</InserirString>
+                    <InserirString value={brand} status={statusBrand} emMudanca={setBrand} id='brand' tamanho='md'>Brand</InserirString>
                 </div>
                 <div className='row'>
                     <span className='col'>
@@ -246,8 +300,14 @@ export const NewAircraft = () => {
             </div>
 
             <Painel status={scndStep} titulo='Table for calculation'>
+                <h3 className='head3'>Download the last filled table</h3>
+                <FileButton tipo='download' onClick={baixarTabelaPreenchida}>
+                    Download last filled table
+                </FileButton>
+                {downloadFilled && <iframe className='divisor' src={downloadFilled + '?c=' + filledCount} />}
+
                 <h3 className='head3'>Download the calculation table</h3>
-                <FileButton tipo='download' onClick={baixar}>
+                <FileButton tipo='download' onClick={baixarTabelaNova}>
                     Download calculation table model
                 </FileButton>
                 {download && <iframe className='divisor' src={download + '?c=' + count} />}

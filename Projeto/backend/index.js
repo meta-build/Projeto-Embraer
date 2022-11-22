@@ -7,8 +7,8 @@ const CalcularLD = require("./calculo/reader.js");
 
 const db = mysql.createPool({
     host: 'localhost',
-    user: 'root',
-    password: 'root',
+    user: 'rodrigo',
+    password: 'fatec',
     database: 'cadastro_aeronave'
 });
 
@@ -236,11 +236,20 @@ app.get('/download-table', (req, res) => {
     res.download(file);
 });
 
+app.get('/filled-table', (req, res) => {
+    const { id } = req.query;
+    // por algum motivo é retornado ID?c=1. Linha 242 é para tratar isso e pegar somente o ID
+    let idAeronave = id.split('?')[0]
+    const file = `./files/${idAeronave}.xls`;
+    res.download(file)
+});
+
 // enviar tabela p/ backend
 app.post('/upload', (req, res) => {
     const arquivo = req.files.upload;
+    const { id } = req.query;
     const nomeArquivo = req.files.upload.name;
-    let pasta = __dirname + '/files/' + nomeArquivo;
+    let pasta = __dirname + '/files/' + id + '.xls';
     arquivo.mv(pasta, (err) => {
         if(err){
             return res.send(err);

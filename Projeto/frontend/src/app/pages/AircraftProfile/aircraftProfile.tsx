@@ -11,7 +11,6 @@ import { BotaoVoltar, CancelDeleteBtn, ConfirmDeleteBtn, FileButton, Painel, Rot
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import PesquisarAeronaveId from '../../shared/services/Resgatar/pesquisarAeronaveId';
-import BaixarTabela from '../../shared/services/Resgatar/baixarTabela';
 import ExcluirAeronave from '../../shared/services/Excluir/excluir_aeronave';
 
 
@@ -50,9 +49,8 @@ export const AircraftProfile = () => {
 
     const baixar = () => {
         setDownload('');
-        let baixar = new BaixarTabela();
-        setDownload(baixar.getUrlTabela());
-        setCount(old => old + 1)
+        setDownload(`http://localhost:3001/filled-table?id=${aircraftId}`);
+        setCount(old => old + 1);
     }
 
     const handleVoltar = () => {
@@ -60,7 +58,7 @@ export const AircraftProfile = () => {
     };
 
     const handleEditar = () => {
-        console.log('ir para tela de edição');
+        history(`/edit-aircraft/${aircraftId}`);
     }
 
     const handleModalVis = () => {
@@ -82,8 +80,8 @@ export const AircraftProfile = () => {
     const deletarAeronave = () => {
         let deletar = new ExcluirAeronave(aircraftId);
         deletar.deletar().then(i => {
-            handleConfirmModal()
-        })
+            handleConfirmModal();
+        });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
