@@ -48,6 +48,8 @@ export const NewAircraft = () => {
 
     const [upload, setUpload] = useState<File>();
 
+    const[notUploaded, setNotUploaded] = useState(false);
+
     const handleVoltar = () => {
         history("/aircrafts-table");
     };
@@ -125,22 +127,26 @@ export const NewAircraft = () => {
 
     const enviar = (e) => {
         e.preventDefault();
-        let formData = new FormData();
-        formData.append("upload", upload);
-        axios.post('http://localhost:3001/register', {
-            name: name,
-            brand: brand,
-            motors: motors,
-            flaps: flaps,
-            certis: certis,
-            breakConfigs: breakConfigs
-        }).then(response => {
-            axios.post(`http://localhost:3001/upload?id=${response.data.id}`, formData, {
-                headers: { "Content-type": "multipart/form-data" }
-            });
-            history(`/aircraft-profile/${response.data.id}`)
-        });
 
+        if (upload !== undefined) {
+            let formData = new FormData();
+            formData.append("upload", upload);
+            axios.post('http://localhost:3001/register', {
+                name: name,
+                brand: brand,
+                motors: motors,
+                flaps: flaps,
+                certis: certis,
+                breakConfigs: breakConfigs
+            }).then(response => {
+                axios.post(`http://localhost:3001/upload?id=${response.data.id}`, formData, {
+                    headers: { "Content-type": "multipart/form-data" }
+                });
+                history(`/aircraft-profile/${response.data.id}`)
+            });
+        } else {
+            setNotUploaded(true);
+        }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -256,6 +262,7 @@ export const NewAircraft = () => {
                 <UploadButton receberArquivo={handleArquivo} name='upload'>
                     {upload ? upload.name : 'Upload the table for calculation'}
                 </UploadButton>
+                {notUploaded ? (<p className='error'>File not found</p>) : (<p></p>)}
             </Painel>
 
             <div className={`rodape ${scndStep}`}>
