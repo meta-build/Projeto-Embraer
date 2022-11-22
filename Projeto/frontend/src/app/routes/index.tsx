@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { AircraftsTable, Calculo, Login, Menu, AircraftProfile, NewAircraft } from "../pages"
+import { EditAircraft } from "../pages/EditAircraft/editAircraft"
 
 export const Caminhos = () => {
     return(
@@ -8,7 +9,8 @@ export const Caminhos = () => {
                 <Route path='/calc' element={<Calculo/>} />
                 <Route path='/aircrafts-table' element={<AircraftsTable />} />
                 <Route path='/aircraft-profile/:aircraftId' element={<AircraftProfile />} />
-                <Route path='new-aircraft' element={<NewAircraft />} />
+                <Route path='/edit-aircraft/:aircraftId' element={<EditAircraft />} />
+                <Route path='/new-aircraft' element={<NewAircraft />} />
                 <Route path='/' element={<Login />} />
                 <Route path='/' element={<Navigate to={'/menu'} />} />
                 <Route path='/menu' element={<Menu />} />
