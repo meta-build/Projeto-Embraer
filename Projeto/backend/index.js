@@ -8,8 +8,8 @@ const fs = require('fs');
 
 const db = mysql.createPool({
     host: 'localhost',
-    user: 'Rafael',
-    password: 'Root@123',
+    user: 'rodrigo',
+    password: 'fatec',
     database: 'cadastro_aeronave'
 });
 

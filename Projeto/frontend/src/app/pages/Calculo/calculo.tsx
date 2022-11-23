@@ -147,16 +147,16 @@ export const Calculo = () => {
   };
 
   const lbToKg = (weight: number) => {
-    return weight / 2.205
+    return Math.floor(weight / 2.205)
   }
 
   const kgToLb = (weight: number) => {
-    return weight * 2.205
+    return Math.floor(weight * 2.205)
   }
 
   const converterResultado = (resultado): number => {
     if (Measurement == 0) {
-      return parseFloat((resultado * 3.281).toFixed(2))
+      return resultado * 3.281
     }
     return resultado
   }
