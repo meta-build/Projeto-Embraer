@@ -6,6 +6,7 @@ interface config {
   id: string;
   onChange: Function;
   opcoes: Array<Object>;
+  noNullOption?: Boolean;
 }
 interface config2 {
   set: string;
@@ -19,6 +20,7 @@ export const Selecionar = ({
   id,
   onChange,
   opcoes,
+  noNullOption
 }: // tamanho,
 config) => {
   let opcoesTag = [];
@@ -37,7 +39,7 @@ config) => {
         name={id}
         id={id}
       >
-        <option></option>
+        {!noNullOption && <option></option>}
         {opcoesTag}
       </select>
       <label htmlFor={id}>{label}</label>
