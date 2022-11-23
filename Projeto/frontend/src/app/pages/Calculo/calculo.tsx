@@ -36,7 +36,7 @@ export const Calculo = () => {
   const [iceBuildup, seticeBuildup] = useState<number>(0);
 
   const [landingFlap, setlandingFlap] = useState<number>(0);
-  const [Measurement,setMeasurement] = useState<number>(0);
+  const [Measurement, setMeasurement] = useState<number>(0);
 
   const [aeronavesNome, setaeronavesNome] = useState();
   const [aeronavesMotor, setaeronavesMotor] = useState();
@@ -46,6 +46,13 @@ export const Calculo = () => {
   const [aeronavesId, setaeronavesId] = useState<number>(NaN);
 
   const [breaks, setBreak] = useState();
+
+  const [minWeight, setMinWeight] = useState(NaN);
+  const [maxWeight, setMaxWeight] = useState(NaN);
+  const [minTemp, setMinTemp] = useState(NaN);
+  const [maxTemp, setMaxTemp] = useState(NaN);
+  const [minSpeed, setMinSpeed] = useState(NaN);
+  const [maxSpeed, setMaxSpeed] = useState(NaN);
 
   const [labelPeso, setlabelPeso] = useState('');
   const [labelResultado, setlabelResultado] = useState('');
@@ -112,22 +119,26 @@ export const Calculo = () => {
   ];
 
   const trocarLabel = (event) => {
-    if(event == 0){
+    if (event == 0) {
       setMeasurement(0)
       setlabelResultado(' (fts):')
       setlabelPeso(' (lb)')
-    }else if (event == 1){
+      setweight(kgToLb(weight));
+      setMinWeight(kgToLb(minWeight));
+      setMaxWeight(kgToLb(maxWeight));
+    } else if (event == 1) {
       setMeasurement(1)
       setlabelResultado(' (mts):')
-      setlabelPeso(' (kg)')
-    } else{
+      setlabelPeso(' (kg)');
+      setweight(lbToKg(weight));
+      setMinWeight(lbToKg(minWeight));
+      setMaxWeight(lbToKg(maxWeight));
+    } else {
       setMeasurement(1)
       setlabelResultado('')
       setlabelPeso('')
     }
   }
-
-  
 
   //voltar para o menu!!!!
 
@@ -135,31 +146,32 @@ export const Calculo = () => {
     history("/menu");
   };
 
-  const converterPeso = () =>{
-    if(Measurement == 0){
-      let convertido = weight/2.205
-      setweight(convertido)
-    }
+  const lbToKg = (weight: number) => {
+    return Math.floor(weight / 2.205)
   }
 
-  const converterResultado = (resultado):number =>{
-    if(Measurement == 0){
-      return resultado*3.281
+  const kgToLb = (weight: number) => {
+    return Math.floor(weight * 2.205)
+  }
+
+  const converterResultado = (resultado): number => {
+    if (Measurement == 0) {
+      return resultado * 3.281
     }
     return resultado
   }
 
   const submeterCalculo = (e) => {
-    console.log(aircraftModel);
-    console.log(typeof aircraftModel);
     e.preventDefault();
-    converterPeso()
+    if (Measurement == 0) {
+      setweight(lbToKg(weight))
+    }
     // enviar parametros
     let resgatarResultado = new ResgatarResultado();
     let cadastrar = new CadastradorParametros();
     const retorno = resgatarResultado.resgatar();
     retorno.then((resultado) => {
-      let valor = converterResultado( resultado["result"])
+      let valor = converterResultado(resultado["result"])
       setresult(valor)
     });
 
@@ -219,6 +231,12 @@ export const Calculo = () => {
           </option>
         ))
       );
+      setMinWeight(aviao["minWeight"]);
+      setMaxWeight(aviao['maxWeight']);
+      setMinTemp(aviao['minTemp']);
+      setMaxTemp(aviao['maxTemp']);
+      setMinSpeed(aviao['minSpeed']);
+      setMaxSpeed(aviao['maxSpeed']);
     });
   };
 
@@ -267,13 +285,6 @@ export const Calculo = () => {
               onChange={setcertification}
             />
 
-            {/* <SelecionarComRetorno
-              set={aeronavesFlaps}
-              id="landingFlap"
-              children="Landing Flap"
-              onChange={setlandingFlap}
-            /> */}
-
             <SelecionarComRetorno
               set={aeronavesBreak}
               id="break"
@@ -297,10 +308,11 @@ export const Calculo = () => {
 
             <InserirNumero
               Children={"Airplane Weight" + labelPeso}
-              min={10000}
-              max={100000}
+              min={minWeight}
+              max={maxWeight}
               intervalo={1}
               id="weight"
+              value={weight}
               onChange={setweight}
             />
 
@@ -316,8 +328,8 @@ export const Calculo = () => {
             <InserirNumero
               Children="Temperature (celsius)"
               id="temp"
-              min={-100}
-              max={100}
+              min={minTemp}
+              max={maxTemp}
               intervalo={1}
               onChange={settemp}
             />
@@ -364,8 +376,8 @@ export const Calculo = () => {
             <InserirNumero
               Children="Speed (kt)"
               id="overspeed"
-              min={80}
-              max={300}
+              min={minSpeed}
+              max={maxSpeed}
               intervalo={1}
               onChange={setoverspeed}
             />
