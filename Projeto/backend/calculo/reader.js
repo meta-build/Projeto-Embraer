@@ -4,7 +4,7 @@
 let CalcularLD = (parametros) => {
     var XLSX = require('xlsx')
     //var readline = require('readline-sync');
-    var aircraftModel = parametros.aircraftModel;
+    var aircraftModel = parametros.aeronavesId;
     console.log(aircraftModel);
     var workbook = XLSX.readFile('./files/'+aircraftModel+'.xls');
     var sheet_name_list = workbook.SheetNames;
