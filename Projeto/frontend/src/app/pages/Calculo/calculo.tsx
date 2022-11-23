@@ -43,6 +43,7 @@ export const Calculo = () => {
   const [aeronavesCertification, setaeronavesCertification] = useState();
   const [aeronavesFlaps, setaeronavesFlaps] = useState();
   const [aeronavesBreak, setaeronavesBreak] = useState();
+  const [aeronavesId, setaeronavesId] = useState<number>(NaN);
 
   const [breaks, setBreak] = useState();
 
@@ -53,6 +54,7 @@ export const Calculo = () => {
   const history = useNavigate();
 
   var params = {
+    aeronavesId: aeronavesId,
     aircraftModel: aircraftModel,
     wind: wind,
     windDirection: windDirection,
@@ -188,6 +190,7 @@ export const Calculo = () => {
     let retorno = getAviao.resgatar();
     retorno.then((aviao) => {
       setaircraftModel(aviao["name"]);
+      setaeronavesId(id)
       setaeronavesMotor(
         aviao["motors"].map((e) => (
           <option key={e.id} value={e.id}>
@@ -245,7 +248,7 @@ export const Calculo = () => {
 
             <SelecionarComRetorno
               set={aeronavesNome}
-              id="aircraftModel"
+              id="aeronavesId"
               children="Aircraft Models"
               onChange={definirInfo}
             />
