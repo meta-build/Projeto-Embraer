@@ -8,8 +8,8 @@ const fs = require('fs');
 
 const db = mysql.createPool({
     host: 'localhost',
-    user: 'rodrigo',
-    password: 'fatec',
+    user: 'Rafael',
+    password: 'Root@123',
     database: 'cadastro_aeronave'
 });
 
@@ -22,7 +22,7 @@ let resultado;
 
 // receber parametros e calcular
 app.post('/calc', (req, res) => {
-    const { aircraftModel } = req.body;
+    const { aeronavesId } = req.body;
     const { wind } = req.body;
     const { windDirection } = req.body;
     const { motor } = req.body;
@@ -39,7 +39,7 @@ app.post('/calc', (req, res) => {
     const { slopeDirection } = req.body;
 
     obj = {
-        "aircraftModel": aircraftModel,
+        "aeronavesId": aeronavesId,
         "wind": wind,
         "windDirection": windDirection,
         "motor": motor,
@@ -183,6 +183,7 @@ app.get('/getAircraft-by-id', (req, res) => {
                                         else {
                                             breaks = result4;
                                             let resposta = {
+                                                id: result[0]['id'],
                                                 name: result[0]['nome'],
                                                 brand: result[0]['marca'],
                                                 minWeight: result[0]['minWeight'],
