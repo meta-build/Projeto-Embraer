@@ -1,18 +1,19 @@
-import {ReactNode } from "react";
+import { ReactNode } from "react";
 import "./inserirNumero.css";
 
 interface config {
   // label: string;
-  Children: ReactNode;
-  onChange: Function;
-  id: string;
-  min: number;
-  max: number;
-  intervalo: number;
+  Children: ReactNode,
+  onChange: Function,
+  id: string,
+  min: number,
+  max: number,
+  intervalo: number,
+  value?: number
   // tamanho: "sm" | "md" | "gg";
 }
 
-export const InserirNumero = ({Children,onChange,id,min,max,intervalo}: config) => {
+export const InserirNumero = ({Children,onChange,id,min,max,intervalo, value}: config) => {
   return (
     <>
       <div className="input">
@@ -26,6 +27,7 @@ export const InserirNumero = ({Children,onChange,id,min,max,intervalo}: config) 
           min={min}
           max={max}
           step={intervalo}
+          value={value}
         />
         <label htmlFor={id}>{Children}</label>
       </div>
