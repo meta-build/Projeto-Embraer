@@ -8,7 +8,6 @@ import { AddButton, BotaoVoltar, FileButton, InserirNumber, InserirString, Lista
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import BaixarTabela from '../../shared/services/Resgatar/baixarTabela';
 import axios from 'axios';
 import PesquisarAeronaveId from '../../shared/services/Resgatar/pesquisarAeronaveId';
 import ExcluirAeronave from '../../shared/services/Excluir/excluir_aeronave';
@@ -17,9 +16,6 @@ export const EditAircraft = () => {
     const history = useNavigate();
 
     const alreadyCreated = useRef(false);
-
-    const [aircraft, setAircraft] = useState<Object>({});
-
 
     const { aircraftId } = useParams();
 
@@ -61,6 +57,8 @@ export const EditAircraft = () => {
     const [minSpeed, setMinSpeed] = useState(NaN);
     const [maxSpeed, setMaxSpeed] = useState(NaN);
 
+    const [listaCombinacao, setListaCombinacao] = useState([]);
+
     const [minWeightStatus, setMinWeightStatus] = useState<'normal' | 'erro'>('normal');
     const [maxWeightStatus, setMaxWeightStatus] = useState<'normal' | 'erro'>('normal');
 
@@ -89,8 +87,6 @@ export const EditAircraft = () => {
             let retorno = getAviao.resgatar();
             retorno.then(aviao => {
                 // info aeronave
-                setAircraft(aviao);
-
                 setName(aviao['name']);
                 setBrand(aviao['brand'])
 
@@ -128,17 +124,34 @@ export const EditAircraft = () => {
         history("/aircrafts-table");
     };
 
+    const gerarCombinacao = () => {
+        let gelo = ['withIce', 'withoutIce']
+        let lista = [];
+        flaps.forEach(flap => {
+            gelo.forEach(gelo => {
+                motors.forEach(motor => {
+                    certis.forEach(cert => {
+                        breakConfigs.forEach(breakConfig => {
+                            lista.push(`${flap}-${gelo}-${motor}-${cert}-${breakConfig}`)
+                        });
+                    });
+                });
+            });
+        });
+        console.log(lista);
+        setListaCombinacao(lista);
+    }
+
     const baixarTabelaPreenchida = () => {
         setDownloadFilled('');
         setDownloadFilled(`http://localhost:3001/filled-table?id=${aircraftId}`);
-        setFilledCount(old => old + 1)
+        setFilledCount(old => old + 1);
     }
 
     const baixarTabelaNova = () => {
         setDownload('');
-        let baixar = new BaixarTabela();
-        setDownload(baixar.getUrl());
-        setCount(old => old + 1)
+        setDownload(`http://localhost:3001/download?lista=${listaCombinacao}`);
+        setCount(old => old + 1);
     }
 
     const addLista = (lista: any[], elmntList: any[], item: string, callbackList: Function, callbackITem: Function, callbackElmnt: Function) => {
@@ -177,15 +190,26 @@ export const EditAircraft = () => {
         let continuar = true;
         if (name === '') { setStatusName('erro'); continuar = false; } else { setStatusName('normal') }
         if (brand === '') { setStatusBrand('erro'); continuar = false; } else { setStatusBrand('normal') }
+
         if (flaps.length === 0) { setStatusFlap('erro'); continuar = false; } else { setStatusFlap('normal') }
         if (motors.length === 0) { setStatusMotor('erro'); continuar = false; } else { setStatusMotor('normal') }
         if (certis.length === 0) { setStatusCert('erro'); continuar = false; } else { setStatusCert('normal') }
         if (breakConfigs.length === 0) { setStatusBreak('erro'); continuar = false; } else { setStatusBreak('normal') }
+
+        if(!minWeight) {setMinWeightStatus('erro'); continuar = false;} else {setMinWeightStatus('normal')}
+        if(!maxWeight) {setMaxWeightStatus('erro'); continuar = false;} else {setMaxWeightStatus('normal')}
+
+        if(!minTemp) {setMinTempStatus('erro'); continuar = false;} else {setMinTempStatus('normal')}
+        if(!maxTemp) {setMaxTempStatus('erro'); continuar = false;} else {setMaxTempStatus('normal')}
+
+        if(!minSpeed) {setMinSpeedStatus('erro'); continuar = false;} else {setMinSpeedStatus('normal')}
+        if(!maxSpeed) {setMaxSpeedStatus('erro'); continuar = false;} else {setMaxSpeedStatus('normal')}
         return continuar;
     }
 
     const goToScndStep = () => {
         if (conferirCampos()) {
+            gerarCombinacao();
             setFstStep('disable');
             setScndStep('enable');
         }
@@ -250,7 +274,7 @@ export const EditAircraft = () => {
                 <FontAwesomeIcon icon={faArrowLeft} />
             </BotaoVoltar>
 
-            <Text tipo="aircraftTitle">New Aircraft</Text>
+            <Text tipo="aircraftTitle">Editing {name}</Text>
 
             <Painel status={fstStep} titulo='Basic information'>
                 <div className='row'>
@@ -369,7 +393,7 @@ export const EditAircraft = () => {
                     Go to next step
                 </FileButton>
                 <FileButton tipo='cancel' onClick={voltar}>
-                    Cancel aircraft model creation
+                    Cancel aircraft model edition
                 </FileButton>
             </div>
 
@@ -395,10 +419,10 @@ export const EditAircraft = () => {
 
             <div className={`rodape ${scndStep}`}>
                 <FileButton tipo='confirm' onClick={enviar}>
-                    Create Aircraft Model
+                    Edit {name}
                 </FileButton>
                 <FileButton tipo='cancel' onClick={voltar}>
-                    Cancel aircraft model creation
+                    Cancel aircraft model edition
                 </FileButton>
                 <FileButton tipo='back' onClick={backStep}>
                     Back to previous step

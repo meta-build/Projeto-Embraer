@@ -123,14 +123,14 @@ export const Calculo = () => {
       setMeasurement(0)
       setlabelResultado(' (fts):')
       setlabelPeso(' (lb)')
-      setweight(kgToLb(weight));
+      setweight(Math.ceil(kgToLb(weight)));
       setMinWeight(kgToLb(minWeight));
       setMaxWeight(kgToLb(maxWeight));
     } else if (event == 1) {
       setMeasurement(1)
       setlabelResultado(' (mts):')
       setlabelPeso(' (kg)');
-      setweight(lbToKg(weight));
+      setweight(Math.ceil(lbToKg(weight)));
       setMinWeight(lbToKg(minWeight));
       setMaxWeight(lbToKg(maxWeight));
     } else {
@@ -147,11 +147,11 @@ export const Calculo = () => {
   };
 
   const lbToKg = (weight: number) => {
-    return Math.floor(weight / 2.205)
+    return weight / 2.205
   }
 
   const kgToLb = (weight: number) => {
-    return Math.floor(weight * 2.205)
+    return weight * 2.205
   }
 
   const converterResultado = (resultado): number => {
@@ -164,7 +164,7 @@ export const Calculo = () => {
   const submeterCalculo = (e) => {
     e.preventDefault();
     if (Measurement == 0) {
-      setweight(lbToKg(weight))
+      setweight(Math.ceil(lbToKg(weight)))
     }
     // enviar parametros
     let resgatarResultado = new ResgatarResultado();
@@ -262,6 +262,7 @@ export const Calculo = () => {
               id="medida"
               onChange={trocarLabel}
               opcoes={medidas}
+              noNullOption={true}
             />
 
             <SelecionarComRetorno

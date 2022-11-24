@@ -4,7 +4,9 @@ const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
 const CalcularLD = require("./calculo/reader.js");
+const CriarTabelaModelo = require('./calculo/criarTabelaModelo.js');
 const fs = require('fs');
+const xlsx = require('xlsx');
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -81,11 +83,11 @@ app.post("/register", (req, res) => {
     let SQL = "INSERT INTO aeronave ( nome, marca, minWeight, maxWeight, minTemp, maxTemp, minSpeed, maxSpeed ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
 
     db.query(SQL, [name, brand, minWeight, maxWeight, minTemp, maxTemp, minSpeed, maxSpeed], (err, result) => {
-        if(err){console.log(err);}
-        else{
+        if (err) { console.log(err); }
+        else {
             db.query('SELECT id FROM aeronave WHERE nome = ? AND marca = ?', [name, brand], (err, result) => {
-                if(err){console.log(err)}
-                else{
+                if (err) { console.log(err) }
+                else {
                     const idAeronave = result[0]['id']
                     const { flaps } = req.body;
                     const { motors } = req.body;
@@ -99,25 +101,25 @@ app.post("/register", (req, res) => {
 
                     flaps.forEach(e => {
                         db.query(sqlFlap, [e, idAeronave], (err, result) => {
-                            if(err){console.log(err)}
+                            if (err) { console.log(err) }
                         })
                     });
                     motors.forEach(e => {
                         db.query(sqlMotor, [e, idAeronave], (err, result) => {
-                            if(err){console.log(err)}
+                            if (err) { console.log(err) }
                         })
                     });
                     certis.forEach(e => {
                         db.query(sqlCertificacao, [e, idAeronave], (err, result) => {
-                            if(err){console.log(err)}
+                            if (err) { console.log(err) }
                         })
                     });
                     breakConfigs.forEach(e => {
                         db.query(sqlBreak, [e, idAeronave], (err, result) => {
-                            if(err){console.log(err)}
+                            if (err) { console.log(err) }
                         })
                     });
-                    res.send({id: idAeronave})
+                    res.send({ id: idAeronave })
                 }
             });
         }
@@ -129,18 +131,18 @@ app.get("/search", (req, res) => {
     const { name } = req.query;
     console.log('pesquisando')
     let SQL =
-      "SELECT * from aeronave WHERE nome LIKE ? ";
+        "SELECT * from aeronave WHERE nome LIKE ? ";
     db.query(SQL, [`%${name}%`], (err, result) => {
-      if (err) res.send(err);
-      res.send(result);
+        if (err) res.send(err);
+        res.send(result);
     });
-  });
+});
 
 //pegando as aeronaves
-app.get("/getAircraft", (req,res)=>{
+app.get("/getAircraft", (req, res) => {
     let SQL = "SELECT * FROM aeronave";
 
-    db.query(SQL,(err,result)=>{
+    db.query(SQL, (err, result) => {
         if (err) console.log(err);
         else res.send(result);
     });
@@ -150,10 +152,10 @@ app.get("/getAircraft", (req,res)=>{
 app.get('/getAircraft-by-id', (req, res) => {
     const { id } = req.query;
     console.log('pegando id...')
-    let SQL = 
-    "SELECT * FROM aeronave WHERE id = ?"
+    let SQL =
+        "SELECT * FROM aeronave WHERE id = ?"
     db.query(SQL, [id], (err, result) => {
-        if(err) res.send(err);
+        if (err) res.send(err);
         else {
             let sqlFlap = 'SELECT nome FROM flap WHERE aeronave = ?'
             let sqlMotor = 'SELECT nome FROM motor WHERE aeronave = ?'
@@ -167,19 +169,19 @@ app.get('/getAircraft-by-id', (req, res) => {
 
             // flap
             db.query(sqlFlap, [id], (err, result2) => {
-                if(err) res.send(err);
+                if (err) res.send(err);
                 else {
                     flaps = result2;
                     db.query(sqlMotor, [id], (err, result5) => {
-                        if(err) res.send(err);
+                        if (err) res.send(err);
                         else {
                             motors = result5;
                             db.query(sqlCertificacao, [id], (err, result3) => {
-                                if(err) res.send(err);
+                                if (err) res.send(err);
                                 else {
                                     certificacoes = result3;
                                     db.query(sqlBreak, [id], (err, result4) => {
-                                        if(err) res.send(err);
+                                        if (err) res.send(err);
                                         else {
                                             breaks = result4;
                                             let resposta = {
@@ -217,7 +219,7 @@ app.put("/edit", (req, res) => {
 
     let SQL = "UPDATE cadastro SET name = ? WHERE idcadastro = ?"; //
 
-    db.query(SQL, [name, id], (err, res)=> {
+    db.query(SQL, [name, id], (err, res) => {
         if (err) {
             console.log(err);
         } else {
@@ -234,20 +236,26 @@ app.get("/delete", (req, res) => {
     let SQL = "DELETE FROM aeronave WHERE id = ?";
 
     db.query(SQL, [id], (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        const file = `./files/${id}.xls`;
-        try{fs.unlinkSync(file);}catch(err) {console.log(err)}
-        res.send(result);
-      }
+        if (err) {
+            console.log(err);
+        } else {
+            const file = `./files/${id}.xls`;
+            try { fs.unlinkSync(file); } catch (err) { console.log(err) }
+            res.send(result);
+        }
     });
 });
 
 // url backend para baixar tabela de cálculo (modelo)
 app.get('/download', (req, res) => {
-    const file = './files/table-model.xls';
-    res.download(file);
+    console.log('download...')
+    const { lista } = req.query;
+    let listagem = lista.split('?')[0].split(',');
+
+    CriarTabelaModelo(listagem, xlsx.readFile('./calculo/tabela.xls'));
+
+    res.download('files/model-created.xls');
+    // try { fs.unlinkSync(`${file}`); } catch (err) { console.log(err) }
 });
 
 app.get('/download-table', (req, res) => {
@@ -257,7 +265,7 @@ app.get('/download-table', (req, res) => {
 
 app.get('/filled-table', (req, res) => {
     const { id } = req.query;
-    // por algum motivo é retornado ID?c=1. Linha 242 é para tratar isso e pegar somente o ID
+    // por algum motivo é retornado ID?c=1. Linha seguinte é para tratar isso e pegar somente o ID
     let idAeronave = id.split('?')[0]
     const file = `./files/${idAeronave}.xls`;
     res.download(file)
@@ -270,7 +278,7 @@ app.post('/upload', (req, res) => {
     const nomeArquivo = req.files.upload.name;
     let pasta = __dirname + '/files/' + id + '.xls';
     arquivo.mv(pasta, (err) => {
-        if(err){
+        if (err) {
             return res.send(err);
         }
         res.sendStatus(200);
