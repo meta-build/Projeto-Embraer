@@ -4,11 +4,10 @@ import './newAircraft.css'
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
-import { AddButton, BotaoVoltar, FileButton, InserirNumber, InserirNumero, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
+import { AddButton, BotaoVoltar, FileButton, InserirNumber, InserirString, ListaEditavel, Painel, Text, UploadButton } from "../../shared/components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import BaixarTabela from '../../shared/services/Resgatar/baixarTabela';
 import axios from 'axios';
 
 export const NewAircraft = () => {
@@ -47,6 +46,8 @@ export const NewAircraft = () => {
     const [certis, setCerts] = useState([]);
     const [breakConfigs, setBreakConfigs] = useState([]);
 
+    const [listaCombinacao, setListaCombinacao] = useState([]);
+
     const [tempFlap, setTempFlap] = useState('');
     const [tempMotor, setTempMotor] = useState('');
     const [tempCerti, setTempCerti] = useState('');
@@ -72,10 +73,27 @@ export const NewAircraft = () => {
         history("/aircrafts-table");
     };
 
+    const gerarCombinacao = () => {
+        let gelo = ['withIce', 'withoutIce']
+        let lista = [];
+        flaps.forEach(flap => {
+            gelo.forEach(gelo => {
+                motors.forEach(motor => {
+                    certis.forEach(cert => {
+                        breakConfigs.forEach(breakConfig => {
+                            lista.push(`${flap}-${gelo}-${motor}-${cert}-${breakConfig}`)
+                        });
+                    });
+                });
+            });
+        });
+        console.log(lista);
+        setListaCombinacao(lista);
+    }
+
     const baixar = () => {
         setDownload('');
-        let baixar = new BaixarTabela();
-        setDownload(baixar.getUrl());
+        setDownload(`http://localhost:3001/download?lista=${listaCombinacao}`);
         setCount(old => old + 1)
     }
 
@@ -134,6 +152,7 @@ export const NewAircraft = () => {
 
     const goToScndStep = () => {
         if (conferirCampos()) {
+            gerarCombinacao();
             setFstStep('disable');
             setScndStep('enable');
         }
