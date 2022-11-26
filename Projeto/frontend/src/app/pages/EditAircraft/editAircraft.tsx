@@ -192,6 +192,7 @@ export const EditAircraft = () => {
     const conferirCampos = () => {
         let continuar = true;
         setCampoVazio(false);
+        setIncompativel(false);
         if (name === '') { setStatusName('erro'); continuar = false; setCampoVazio(true) } else { setStatusName('normal') }
         if (brand === '') { setStatusBrand('erro'); continuar = false; setCampoVazio(true) } else { setStatusBrand('normal') }
 
