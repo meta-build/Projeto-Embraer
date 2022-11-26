@@ -1,6 +1,5 @@
 /* eslint-disable eqeqeq */
 import { useEffect, useState } from "react";
-import CadastradorParametros from "../../shared/services/Cadastrar/cadastradorParametros";
 import {
   Botao,
   Resultado,
@@ -11,12 +10,12 @@ import {
   SelecionarComRetorno,
 } from "../../shared/components";
 import "./calculo.css";
-import ResgatarResultado from "../../shared/services/Resgatar/resgateResultado";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import ListarAeronaves from "../../shared/services/Resgatar/listarAeronaves";
 import PesquisarAeronaveId from "../../shared/services/Resgatar/pesquisarAeronaveId";
+import axios from "axios";
 
 export const Calculo = () => {
   const [result, setresult] = useState<number>(0);
@@ -161,21 +160,34 @@ export const Calculo = () => {
     return resultado
   }
 
-  const submeterCalculo = (e) => {
+  async function submeterCalculo (e) {
     e.preventDefault();
     if (Measurement == 0) {
       setweight(Math.ceil(lbToKg(weight)))
     }
-    // enviar parametros
-    let resgatarResultado = new ResgatarResultado();
-    let cadastrar = new CadastradorParametros();
-    const retorno = resgatarResultado.resgatar();
-    retorno.then((resultado) => {
-      let valor = converterResultado(resultado["result"])
-      setresult(valor)
-    });
-
-    cadastrar.cadastrar(params);
+   let params = {
+    "aeronavesId": aeronavesId,
+    "wind": wind,
+    "windDirection": windDirection,
+    "motor": motor,
+    "temp": temp,
+    "slope": slope,
+    "slopeDirection": slopeDirection,
+    "weight": weight,
+    "certification": certification,
+    "airportAltitude": airportAltitude,
+    "overspeed": overspeed,
+    "reverser": reverser,
+    "airstripCondition": airstripCondition,
+    "iceBuildup": iceBuildup,
+    "landingFlap": landingFlap
+}
+    axios.post(
+     'http://localhost:3001/calc',
+     params,
+     {headers:{"Content-Type" : "application/json"}})
+     .then(resultado => {
+      setresult(converterResultado(resultado.data["result"]))})
   };
 
   // PEGAR MODELOS CADASTRADOS NO BANCO

@@ -19,9 +19,6 @@ app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
 
-let obj;
-let resultado;
-
 // receber parametros e calcular
 app.post('/calc', (req, res) => {
     const { aeronavesId } = req.body;
@@ -40,30 +37,26 @@ app.post('/calc', (req, res) => {
     const { landingFlap } = req.body;
     const { slopeDirection } = req.body;
 
-    obj = {
-        "aeronavesId": aeronavesId,
-        "wind": wind,
-        "windDirection": windDirection,
-        "motor": motor,
-        "temp": temp,
-        "slope": slope,
-        "slopeDirection": slopeDirection,
-        "weight": weight,
-        "certification": certification,
-        "airportAltitude": airportAltitude,
-        "overspeed": overspeed,
-        "reverser": reverser,
-        "airstripCondition": airstripCondition,
-        "iceBuildup": iceBuildup,
-        "landingFlap": landingFlap,
+    let obj = {
+        aeronavesId,
+        wind,
+        windDirection,
+        motor,
+        temp,
+        slope,
+        slopeDirection,
+        weight,
+        certification,
+        airportAltitude,
+        overspeed,
+        reverser,
+        airstripCondition,
+        iceBuildup,
+        landingFlap,
     }
-
-    resultado = CalcularLD(obj);
-});
-
-// enviar resultado
-app.get('/result', (req, res) => {
-    res.send({ "result": resultado })
+    console.log(obj)
+    let result = {result: CalcularLD(obj)}
+    res.send(JSON.stringify({result}));
 });
 
 //registrar aeronave 
