@@ -68,6 +68,9 @@ export const EditAircraft = () => {
     const [minSpeedStatus, setMinSpeedStatus] = useState<'normal' | 'erro'>('normal');
     const [maxSpeedStatus, setMaxSpeedStatus] = useState<'normal' | 'erro'>('normal');
 
+    const [campoVazio, setCampoVazio] = useState(false);
+    const [incompativel, setIncompativel] = useState(false);
+
     // para download
     const [download, setDownload] = useState('');
     const [count, setCount] = useState(0);
@@ -188,22 +191,28 @@ export const EditAircraft = () => {
 
     const conferirCampos = () => {
         let continuar = true;
-        if (name === '') { setStatusName('erro'); continuar = false; } else { setStatusName('normal') }
-        if (brand === '') { setStatusBrand('erro'); continuar = false; } else { setStatusBrand('normal') }
+        setCampoVazio(false);
+        setIncompativel(false);
+        if (name === '') { setStatusName('erro'); continuar = false; setCampoVazio(true) } else { setStatusName('normal') }
+        if (brand === '') { setStatusBrand('erro'); continuar = false; setCampoVazio(true) } else { setStatusBrand('normal') }
 
-        if (flaps.length === 0) { setStatusFlap('erro'); continuar = false; } else { setStatusFlap('normal') }
-        if (motors.length === 0) { setStatusMotor('erro'); continuar = false; } else { setStatusMotor('normal') }
-        if (certis.length === 0) { setStatusCert('erro'); continuar = false; } else { setStatusCert('normal') }
-        if (breakConfigs.length === 0) { setStatusBreak('erro'); continuar = false; } else { setStatusBreak('normal') }
+        if (flaps.length === 0) { setStatusFlap('erro'); continuar = false; setCampoVazio(true) } else { setStatusFlap('normal') }
+        if (motors.length === 0) { setStatusMotor('erro'); continuar = false; setCampoVazio(true) } else { setStatusMotor('normal') }
+        if (certis.length === 0) { setStatusCert('erro'); continuar = false; setCampoVazio(true) } else { setStatusCert('normal') }
+        if (breakConfigs.length === 0) { setStatusBreak('erro'); continuar = false; setCampoVazio(true) } else { setStatusBreak('normal') }
 
-        if(!minWeight) {setMinWeightStatus('erro'); continuar = false;} else {setMinWeightStatus('normal')}
-        if(!maxWeight) {setMaxWeightStatus('erro'); continuar = false;} else {setMaxWeightStatus('normal')}
+        if (!minWeight) {setMinWeightStatus('erro'); continuar = false; setCampoVazio(true) } else { setMinWeightStatus('normal'); }
+        if (!maxWeight) { setMaxWeightStatus('erro'); continuar = false; setCampoVazio(true) } else { setMaxWeightStatus('normal') }
+        if (minWeight && maxWeight) {if (minWeight >= maxWeight) { setMinWeightStatus('erro'); setMaxWeightStatus('erro'); setIncompativel(true); continuar = false; } else { setMinWeightStatus('normal'); setMaxWeightStatus('normal'); }}
 
-        if(!minTemp) {setMinTempStatus('erro'); continuar = false;} else {setMinTempStatus('normal')}
-        if(!maxTemp) {setMaxTempStatus('erro'); continuar = false;} else {setMaxTempStatus('normal')}
+        if (!minTemp) { setMinTempStatus('erro'); continuar = false; setCampoVazio(true) } else { setMinTempStatus('normal') }
+        if (!maxTemp) { setMaxTempStatus('erro'); continuar = false; setCampoVazio(true) } else { setMaxTempStatus('normal') }
+        if (minTemp && maxTemp) {if (minTemp >= maxTemp) { setMinTempStatus('erro'); setMaxTempStatus('erro'); setIncompativel(true); continuar = false; } else { setMinTempStatus('normal'); setMaxTempStatus('normal'); }}
 
-        if(!minSpeed) {setMinSpeedStatus('erro'); continuar = false;} else {setMinSpeedStatus('normal')}
-        if(!maxSpeed) {setMaxSpeedStatus('erro'); continuar = false;} else {setMaxSpeedStatus('normal')}
+        if (!minSpeed) { setMinSpeedStatus('erro'); continuar = false; setCampoVazio(true) } else { setMinSpeedStatus('normal') }
+        if (!maxSpeed) { setMaxSpeedStatus('erro'); continuar = false; setCampoVazio(true) } else { setMaxSpeedStatus('normal') }
+        if (minSpeed && maxSpeed) {if (minSpeed >= maxSpeed) { setMinSpeedStatus('erro'); setMaxSpeedStatus('erro'); setIncompativel(true); continuar = false; } else { setMinSpeedStatus('normal'); setMaxSpeedStatus('normal'); }}
+
         return continuar;
     }
 
@@ -386,6 +395,8 @@ export const EditAircraft = () => {
                 <p className='painelObs'>
                     Tip: Hover the mouse in an item and click on the trash to delet it.
                 </p>
+                {campoVazio && <p className='error'>Please fill all the fields.</p>}
+                {incompativel && <p className='error'>Min. field can't be equal or greather than Max. field.</p>}
             </Painel>
 
             <div className={`rodape ${fstStep}`}>
