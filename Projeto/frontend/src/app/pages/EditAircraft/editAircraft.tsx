@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import PesquisarAeronaveId from '../../shared/services/Resgatar/pesquisarAeronaveId';
-import ExcluirAeronave from '../../shared/services/Excluir/excluir_aeronave';
 
 export const EditAircraft = () => {
     const history = useNavigate();
@@ -79,8 +78,9 @@ export const EditAircraft = () => {
     const [filledCount, setFilledCount] = useState(0);
 
     const [upload, setUpload] = useState<File>();
-
     const [notUploaded, setNotUploaded] = useState(false);
+    const [verificando, setVerficando] = useState(false);
+    const [invalido, setInvalido] = useState(false);
 
     const getAeronave = () => {
         if (!alreadyCreated.current) {
@@ -201,17 +201,17 @@ export const EditAircraft = () => {
         if (certis.length === 0) { setStatusCert('erro'); continuar = false; setCampoVazio(true) } else { setStatusCert('normal') }
         if (breakConfigs.length === 0) { setStatusBreak('erro'); continuar = false; setCampoVazio(true) } else { setStatusBreak('normal') }
 
-        if (!minWeight) {setMinWeightStatus('erro'); continuar = false; setCampoVazio(true) } else { setMinWeightStatus('normal'); }
+        if (!minWeight) { setMinWeightStatus('erro'); continuar = false; setCampoVazio(true) } else { setMinWeightStatus('normal'); }
         if (!maxWeight) { setMaxWeightStatus('erro'); continuar = false; setCampoVazio(true) } else { setMaxWeightStatus('normal') }
-        if (minWeight && maxWeight) {if (minWeight >= maxWeight) { setMinWeightStatus('erro'); setMaxWeightStatus('erro'); setIncompativel(true); continuar = false; } else { setMinWeightStatus('normal'); setMaxWeightStatus('normal'); }}
+        if (minWeight && maxWeight) { if (minWeight >= maxWeight) { setMinWeightStatus('erro'); setMaxWeightStatus('erro'); setIncompativel(true); continuar = false; } else { setMinWeightStatus('normal'); setMaxWeightStatus('normal'); } }
 
         if (!minTemp) { setMinTempStatus('erro'); continuar = false; setCampoVazio(true) } else { setMinTempStatus('normal') }
         if (!maxTemp) { setMaxTempStatus('erro'); continuar = false; setCampoVazio(true) } else { setMaxTempStatus('normal') }
-        if (minTemp && maxTemp) {if (minTemp >= maxTemp) { setMinTempStatus('erro'); setMaxTempStatus('erro'); setIncompativel(true); continuar = false; } else { setMinTempStatus('normal'); setMaxTempStatus('normal'); }}
+        if (minTemp && maxTemp) { if (minTemp >= maxTemp) { setMinTempStatus('erro'); setMaxTempStatus('erro'); setIncompativel(true); continuar = false; } else { setMinTempStatus('normal'); setMaxTempStatus('normal'); } }
 
         if (!minSpeed) { setMinSpeedStatus('erro'); continuar = false; setCampoVazio(true) } else { setMinSpeedStatus('normal') }
         if (!maxSpeed) { setMaxSpeedStatus('erro'); continuar = false; setCampoVazio(true) } else { setMaxSpeedStatus('normal') }
-        if (minSpeed && maxSpeed) {if (minSpeed >= maxSpeed) { setMinSpeedStatus('erro'); setMaxSpeedStatus('erro'); setIncompativel(true); continuar = false; } else { setMinSpeedStatus('normal'); setMaxSpeedStatus('normal'); }}
+        if (minSpeed && maxSpeed) { if (minSpeed >= maxSpeed) { setMinSpeedStatus('erro'); setMaxSpeedStatus('erro'); setIncompativel(true); continuar = false; } else { setMinSpeedStatus('normal'); setMaxSpeedStatus('normal'); } }
 
         return continuar;
     }
@@ -235,15 +235,27 @@ export const EditAircraft = () => {
 
     const handleArquivo = (arq: File) => {
         setUpload(arq);
+        let formData = new FormData();
+        formData.append('upload', arq);
+        setVerficando(true);
+        axios.post('http://localhost:3001/verify-table', formData, {
+            headers: { "Content-type": "multipart/form-data" }
+        }).then(response => {
+            setVerficando(false);
+            console.log(response.data.verify);
+            setInvalido(!response.data.verify);
+        });
     }
-
 
     const enviar = (e) => {
         e.preventDefault();
-        if (upload !== undefined) {
-            let deletar = new ExcluirAeronave(aircraftId);
-            deletar.deletar();
 
+        let arquivoExiste = upload !== undefined;
+        if (!arquivoExiste) {
+            setNotUploaded(true);
+        }
+        // arquivo enviado? && arquivo correto?
+        if (arquivoExiste && !invalido) {
             let formData = new FormData();
             formData.append("upload", upload);
             axios.post('http://localhost:3001/register', {
@@ -265,10 +277,7 @@ export const EditAircraft = () => {
                 });
                 history(`/aircraft-profile/${response.data.id}`)
             });
-        } else {
-            setNotUploaded(true);
         }
-
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -425,7 +434,9 @@ export const EditAircraft = () => {
                 <UploadButton receberArquivo={handleArquivo} name='upload'>
                     {upload ? upload.name : 'Upload the table for calculation'}
                 </UploadButton>
-                {notUploaded ? (<p className='error'>File not found</p>) : (<p></p>)}
+                {notUploaded && <p className='error'>File not found</p>}
+                {verificando && <p>Verifying table...</p>}
+                {invalido && <p className='error'>Invalid table</p>}
             </Painel>
 
             <div className={`rodape ${scndStep}`}>
