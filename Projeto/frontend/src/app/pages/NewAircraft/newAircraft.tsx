@@ -69,6 +69,8 @@ export const NewAircraft = () => {
     const [count, setCount] = useState(0);
 
     const [upload, setUpload] = useState<File>();
+    const [verificando, setVerficando] = useState(false);
+    const [invalido, setInvalido] = useState(false);
 
     const [notUploaded, setNotUploaded] = useState(false);
 
@@ -178,13 +180,27 @@ export const NewAircraft = () => {
 
     const handleArquivo = (arq: File) => {
         setUpload(arq);
-        console.log(upload.name)
+        let formData = new FormData();
+        formData.append('upload', arq);
+        setVerficando(true);
+        axios.post('http://localhost:3001/verify-table', formData, {
+            headers: { "Content-type": "multipart/form-data" }
+        }).then(response => {
+            setVerficando(false);
+            console.log(response.data.verify);
+            setInvalido(!response.data.verify);
+        });
     }
 
     const enviar = (e) => {
         e.preventDefault();
 
-        if (upload !== undefined) {
+        let arquivoExiste = upload !== undefined;
+        if (!arquivoExiste) {
+            setNotUploaded(true);
+        }
+        // arquivo enviado? && arquivo correto?
+        if (arquivoExiste && !invalido) {
             let formData = new FormData();
             formData.append("upload", upload);
             axios.post('http://localhost:3001/register', {
@@ -206,8 +222,6 @@ export const NewAircraft = () => {
                 });
                 history(`/aircraft-profile/${response.data.id}`)
             });
-        } else {
-            setNotUploaded(true);
         }
     }
 
@@ -358,7 +372,9 @@ export const NewAircraft = () => {
                 <UploadButton receberArquivo={handleArquivo} name='upload'>
                     {upload ? upload.name : 'Upload the table for calculation'}
                 </UploadButton>
-                {notUploaded ? (<p className='error'>File not found</p>) : (<p></p>)}
+                {notUploaded && <p className='error'>File not found</p>}
+                {verificando && <p>Verifying table...</p>}
+                {invalido && <p className='error'>Invalid table</p>}
             </Painel>
 
             <div className={`rodape ${scndStep}`}>

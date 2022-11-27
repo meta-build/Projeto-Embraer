@@ -278,6 +278,21 @@ app.post('/upload', (req, res) => {
     });
 });
 
+app.post('/verify-table', (req, res) => {
+    const arquivo = req.files.upload;
+    let pasta = __dirname + '/files/' + 'uploaded-file' + '.xls';
+    arquivo.mv(pasta, (err) => {
+        if (err) {
+            return res.send(err);
+        }
+        // chamar função de verificar tabela retornando true p/ tabela correta e false p/ tabela incorreta
+        res.send(JSON.stringify({
+            verify: true //resultado da função aqui (colocar no lugar de true)
+        }));
+        try { fs.unlinkSync(pasta); } catch (err) { console.log(err) }
+    });
+});
+
 app.listen(3001, () => {
     console.log('rodando servidor');
 });
