@@ -1,0 +1,67 @@
+.cadastroComponent {
+  grid-gap: 10px;
+  border: 1px solid gray;
+
+  border-radius: 10px;
+  width: 80%;
+  margin: 5% auto;
+}
+
+.pCadastro{
+    color: #0f1d59 ;
+    width: 200px;
+    margin: 10px 0 0 38px;
+    font-weight: 500;
+}
+
+.form-field-user {
+  display: flex;
+
+  width: 90%;
+  margin: 2px auto;
+
+  height: 30px;
+  padding: 20px 15px;
+
+  font-size: 15px;
+  color: #0f1d59;
+
+  outline: none;
+  border: none;
+  border-bottom: 3px solid #0f1d59;
+}
+
+.checkadm {
+  padding: 10px;
+  margin: 0 2px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.checkadm label {
+  margin: 0 10px;
+}
+
+input.check {
+    width : 15px;
+    height : 15px;
+}
+
+.buttonContainer{
+    text-align: center;
+}
+
+.button-user {
+  text-align: center;
+  padding: 10px;
+  width: 30%;
+  background-color: #0f1d59;
+}
+
+.form-error-user{
+    color: red;
+    
+    width: 200px;
+    margin: 10px 0 0 38px;
+    font-weight: 500;
+}
