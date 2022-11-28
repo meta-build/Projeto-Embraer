@@ -122,8 +122,35 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 ![Captura de tela 2022-11-28 003554](https://user-images.githubusercontent.com/111146527/204188701-18592c8b-f219-4325-aad6-18e5a264806f.png)
 
-### Cálculo 
+### Novo menu 
+![novo menu](https://user-images.githubusercontent.com/111146527/204194660-221e1dc0-d955-407b-901e-b00a462a7fcb.gif)
 
+### Edição aeronave + campo de mínimo e máximo para peso, temperatura e velocidade 
+![edicao aeronave](https://user-images.githubusercontent.com/111146527/204194668-fbcc9ac4-4f82-45b5-8640-6b1a2622bed9.gif)
+
+### Validação de campos na criação ou edição de aeronave
+![validacao campos](https://user-images.githubusercontent.com/111146527/204194688-b3d9e3c8-97aa-4074-a9ea-4be08052815d.gif)
+
+### Validação de arquivo de tabela enviado
+![validacao arquivo](https://user-images.githubusercontent.com/111146527/204194699-6421c721-fdc5-4731-bc33-a96d52bbc4ec.gif)
+
+### Exclusão aeronave
+![exclusao aeronave](https://user-images.githubusercontent.com/111146527/204194709-bcf86738-3ec7-4e97-9175-610065b8b84f.gif)
+
+### Extração de informações da aeronave (limite, flaps, motores, entre outras informações) na tela de cálculo
+![dados aeronave](https://user-images.githubusercontent.com/111146527/204194723-e3f64b34-4eff-40bc-8019-b90118273598.gif)
+
+### Conversão de medida na tela de cálculo
+![conversao valores](https://user-images.githubusercontent.com/111146527/204194741-69e0ea63-7f11-4e49-9fc9-c7d329f5718f.gif)
+
+### Cadastro usuário + Tela de usuários
+![cadastro usuario](https://user-images.githubusercontent.com/111146527/204194756-1b437cc3-17ca-4f60-8081-b68fbe5fe1a1.gif)
+
+### Editar usuário
+![edicao usuario](https://user-images.githubusercontent.com/111146527/204194780-f363049e-90ba-46b4-8180-52c6e86a3b88.gif)
+
+### Excluir usuário
+![exclusao usuario](https://user-images.githubusercontent.com/111146527/204194797-666423f8-a960-4778-aa1a-b0b466f0dd9e.gif)
 
 <!-- -----------------------------------------------------------------TECNOLOGIAS------------------------------------------------------------------------- -->
 ## :computer: Tecnologias utilizadas
