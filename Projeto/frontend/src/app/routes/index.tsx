@@ -15,7 +15,7 @@ export const Caminhos = () => {
                 <Route path='/edit-aircraft/:aircraftId' element={<EditAircraft />} />
                 <Route path='/new-aircraft' element={<NewAircraft />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/' element={<Navigate to={'/menu'} />} />
+                <Route path='/' element={<Navigate to={'/login'} />} />
                 <Route path='/menu' element={<Menu />} />
                 <Route path='*' element={<Navigate to={'/'} />} />
                 <Route path='/cadastroUsuario' element={<CadastroUsuario />} />
