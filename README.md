@@ -111,6 +111,20 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 <br>
 
+<h2>4ª Sprint</h2>
+<p>Entrega: 07/11/2022 à 27/11/2022</p>
+
+### Backlog da Sprint
+
+![4 sprint](https://user-images.githubusercontent.com/111146527/204188353-b3b9c535-a825-4e9b-a73f-f393f7753439.png)
+
+### Burndown da Sprint
+
+![Captura de tela 2022-11-28 003554](https://user-images.githubusercontent.com/111146527/204188701-18592c8b-f219-4325-aad6-18e5a264806f.png)
+
+### Cálculo 
+
+
 <!-- -----------------------------------------------------------------TECNOLOGIAS------------------------------------------------------------------------- -->
 ## :computer: Tecnologias utilizadas
 <!-- 
