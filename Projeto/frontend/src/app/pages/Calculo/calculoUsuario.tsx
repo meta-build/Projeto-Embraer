@@ -5,19 +5,19 @@ import {
   Resultado,
   Selecionar,
   InserirNumero,
-  BotaoVoltar,
+  // BotaoVoltar,
   Text,
   SelecionarComRetorno,
 } from "../../shared/components";
 import "./calculo.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import ListarAeronaves from "../../shared/services/Resgatar/listarAeronaves";
 import PesquisarAeronaveId from "../../shared/services/Resgatar/pesquisarAeronaveId";
 import axios from "axios";
 
-export const Calculo = () => {
+export const CalculoUsuario = () => {
   const [result, setresult] = useState<number>(0);
   const [aircraftModel, setaircraftModel] = useState<number>(0);
   const [wind, setwind] = useState<number>(0);
@@ -57,7 +57,7 @@ export const Calculo = () => {
   const [labelResultado, setlabelResultado] = useState('');
 
   // history para volta ao menu
-  const history = useNavigate();
+  // const history = useNavigate();
 
   var params = {
     aeronavesId: aeronavesId,
@@ -139,11 +139,6 @@ export const Calculo = () => {
     }
   }
 
-  //voltar para o menu!!!!
-
-  const handleVoltar = () => {
-    history("/menu");
-  };
 
   const lbToKg = (weight: number) => {
     return weight / 2.205
@@ -255,15 +250,7 @@ export const Calculo = () => {
   useEffect(getAeronaves, []);
   return (
     <>
-      <BotaoVoltar
-        tipo="button"
-        className="aircraftBackButton"
-        onClick={handleVoltar}
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />
-      </BotaoVoltar>
-
-      <Text tipo="aircraftTitle">Landing Distance Calculator</Text>
+      <Text tipo="aircraftTitleUser">Landing Distance Calculator</Text>
 
       <div className="calculadora">
         <form onSubmit={submeterCalculo}>

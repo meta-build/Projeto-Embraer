@@ -12,14 +12,16 @@ export const Login = () => {
       password: values.password,
     }).then((response) => {
       if (response.data.ok) {
+        localStorage.setItem('id',response.data.id)
         if (response.data.isAdm){
+          console.log(response.data.isAdm);
           window.location = "/menu";
           return;
         }
-        window.location = "/calc";
+        window.location = "/calcUsuario";
         return;
       }
-      //   alert(response.data.msg);
+        // alert(response.data.msg);
       Swal.fire({
         icon: "error",
         title: response.data.exists
@@ -52,7 +54,7 @@ export const Login = () => {
           <Form className="login-form">
             <div className="login-form-group">
               <p>E-mail</p>
-              <Field id="email" name="email" className="form-field" /> <br />
+              <Field id="email" name="email" className="form-field"  placeholder="user@user.com" /> <br />
               <ErrorMessage
                 component="span"
                 name="email"
@@ -67,7 +69,8 @@ export const Login = () => {
                 type="password"
                 name="password"
                 className="form-field"
-              />{" "}
+                placeholder="********"
+              />
               <br />
               <ErrorMessage
                 component="span"

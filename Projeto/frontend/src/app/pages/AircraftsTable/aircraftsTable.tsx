@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 // components
 import { BotaoVoltar, InserirString, Text } from "../../shared/components";
 
-
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -31,8 +30,8 @@ export const AircraftsTable = () => {
   const [aeronaves, setarenoaves] = useState();
 
   const handleAeronave = (id: number) => {
-    history(`/aircraft-profile/${id}`)
-  }
+    history(`/aircraft-profile/${id}`);
+  };
 
   const getAeronaves = () => {
     let listarAeronaves = new ListarAeronaves();
@@ -41,11 +40,14 @@ export const AircraftsTable = () => {
       setarenoaves(
         elementos.map((aviao) => (
           <tr key={aviao.id}>
+            <td>{aviao.marca}</td>
             <td>
-              {aviao.marca}
-            </td>
-            <td>
-              <div onClick={() => handleAeronave(aviao.id)} className="aircraftLink" >{aviao.nome}</div>
+              <div
+                onClick={() => handleAeronave(aviao.id)}
+                className="aircraftLink"
+              >
+                {aviao.nome}
+              </div>
             </td>
           </tr>
         ))
@@ -61,19 +63,23 @@ export const AircraftsTable = () => {
       setarenoaves(
         avioes.map((aviao) => (
           <tr key={aviao.id}>
-          <td>
-            {aviao.marca}
-          </td>
-          <td>
-            <div onClick={() => handleAeronave(aviao.id)} className="aircraftLink" >{aviao.nome}</div>
-          </td>
-        </tr>)
+            <td>{aviao.marca}</td>
+            <td>
+              <div
+                onClick={() => handleAeronave(aviao.id)}
+                className="aircraftLink"
+              >
+                {aviao.nome}
+              </div>
+            </td>
+          </tr>
         ))
-    })
-  }
+      );
+    });
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(getAeronaves, [])
+  useEffect(getAeronaves, []);
   return (
     <div className="aircraftComponent">
       <BotaoVoltar
@@ -88,16 +94,12 @@ export const AircraftsTable = () => {
 
       <div className="inputComponent">
         <div className="searchArea">
-          <InserirString
-            emMudanca={searchAeronaves}
-            id='search'
-            tamanho="lg"
-          >
-            <FontAwesomeIcon icon={faSearch} className='searchIcon' />
+          <InserirString emMudanca={searchAeronaves} id="search" tamanho="lg">
+            <FontAwesomeIcon icon={faSearch} className="searchIcon" />
             Search an Aircraft model
           </InserirString>
         </div>
-        <div className='newAircraftModel' onClick={handleNovoAviao}>
+        <div className="newAircraftModel" onClick={handleNovoAviao}>
           New Aircraft model
         </div>
       </div>

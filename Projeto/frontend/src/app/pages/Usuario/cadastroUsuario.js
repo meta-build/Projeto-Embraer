@@ -18,6 +18,26 @@ export const CadastroUsuario = () => {
   };
 
   const handleRegister = (values) => {
+    if (!values.nomeUsuario || !values.email) {
+      Swal.fire("Error!", "Cannot contain empty fields.", "error");
+      return;
+    }
+    if (!values.email.includes("@") || !values.email.includes(".com")) {
+      Swal.fire({
+        icon: "error",
+        title: "Wrong E-mail",
+        text: "E-mail must contains '@' and '.com'",
+      });
+      return;
+    }
+    if (values.password < 8) {
+      Swal.fire({
+        icon: "error",
+        title: "Wrong password",
+        text: "Password must contains more than 8 characters",
+      });
+      return;
+    }
     Axios.post("http://localhost:3001/registro", {
       nomeUsuario: values.nomeUsuario,
       isAdm: isChecked,
@@ -39,8 +59,6 @@ export const CadastroUsuario = () => {
   };
 
   const validationsRegister = yup.object().shape({
-    nomeUsuario: yup.string().required("Name is required"),
-    email: yup.string().email("Invalid e-mail").required("E-mail is required"),
     password: yup
       .string()
       .min(8, "Password must contain at least 8 characters")
@@ -88,7 +106,11 @@ export const CadastroUsuario = () => {
 
             <div className="register-form-group">
               <p className="pCadastro">E-mail</p>
-              <Field name="email" className="form-field-user" />
+              <Field
+                name="email"
+                className="form-field-user"
+                placeholder="user@user.com"
+              />
 
               <ErrorMessage
                 component="span"
@@ -103,6 +125,7 @@ export const CadastroUsuario = () => {
                 type="password"
                 name="password"
                 className="form-field-user"
+                placeholder="********"
               />
 
               <ErrorMessage
@@ -118,6 +141,7 @@ export const CadastroUsuario = () => {
                 type="password"
                 name="confirmation"
                 className="form-field-user"
+                placeholder="********"
               />
 
               <ErrorMessage
