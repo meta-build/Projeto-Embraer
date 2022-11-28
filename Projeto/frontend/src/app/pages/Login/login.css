@@ -5,12 +5,63 @@
   padding: 40px;
   border-radius: 30px;
   align-items: center;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center; */
   color: #0f1d59;
 }
-/* 
-label {
+
+.form-group{
+  position: relative;
+}
+
+.form-field {
+  background-color: transparent;
+  height: 30px;
+  padding: 20px 5px;
+
+  font-size: 15px;
+  color: #D9D9D9;
+
+  outline: none;
+  border: none;
+  border-bottom: 3px solid #D9D9D9;
   width: 100%;
-} */
+}
+
+.form-error{
+  color: azure;
+}
+
+.label{
+  color: #D9D9D9;
+}
+
+.inputAircraft {
+  width: 78%;
+  padding: 2px;
+
+  border-style: double;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  border-color: #0f1d59;
+}
+
+.inputComponent {
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 70px;
+}
+
+p{
+  color: #D9D9D9;
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.button{
+  background-color: #D9D9D9;
+  width: 100%;
+  padding: 8px;
+  margin: 40px 0 0 0;
+  border-radius: 4px;
+  color: #0f1d59;
+}

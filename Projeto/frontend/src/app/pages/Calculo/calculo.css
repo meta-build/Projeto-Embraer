@@ -12,3 +12,8 @@
   border-radius: 10px;
   width: 100%;
 }
+
+#titleUser{
+  margin-top: 30px;
+  background-color: aqua;
+}

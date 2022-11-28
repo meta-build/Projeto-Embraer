@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalculator,
   faPlane,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import "./menu.css";
 
@@ -13,9 +14,17 @@ export const Menu = () => {
     history("/aircrafts-table");
   };
 
-    const handleCalculo = () => {
-      history("/calc");
-    };
+  const handleCalculo = () => {
+    history("/calc");
+  };
+
+  const handleCadastroUsuario = () => {
+    history("/cadastroUsuario");
+  };
+
+  const handleUsuario = () => {
+    history("/usertable");
+  };
 
   return (
     <>
@@ -27,6 +36,14 @@ export const Menu = () => {
         <div onClick={handleCalculo} className="menuButton">
           <FontAwesomeIcon className="icon" icon={faCalculator} />
           <button>Calculator</button>
+        </div>
+        <div onClick={handleCadastroUsuario} className="menuButton">
+          <FontAwesomeIcon className="icon" icon={faUser} />
+          <button>User Registration</button>
+        </div>
+        <div onClick={handleUsuario} className="menuButton">
+          <FontAwesomeIcon className="icon" icon={faUser} />
+          <button>Users</button>
         </div>
       </div>
     </>

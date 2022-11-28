@@ -12,6 +12,8 @@ export const Text = ({tipo, children, ...props}: config) => {
         // eslint-disable-next-line eqeqeq
         if (tipo == "aircraftTitle") {
           return "aircraftTitle";
+        } else if (tipo == "aircraftTitleUser"){
+          return "aircraftTitleUser"
         } else {
           return "botao vermelho";
         }

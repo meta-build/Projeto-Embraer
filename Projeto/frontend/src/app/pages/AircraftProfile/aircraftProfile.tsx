@@ -43,6 +43,8 @@ export const AircraftProfile = () => {
     const getAeronave = () => {
         let getAviao = new PesquisarAeronaveId();
         getAviao.setPesquisa(aircraftId);
+        console.log(aircraftId);
+        
         let retorno = getAviao.resgatar();
         retorno.then(aviao => {
             setAircraft(aviao);
