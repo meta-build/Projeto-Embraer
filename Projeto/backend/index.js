@@ -12,8 +12,8 @@ const bcrypt = require("bcrypt");
 
 const db = mysql.createPool({
   host: "localhost",
-  user: "root",
-  password: "root",
+  user: "Rafael",
+  password: "Root@123",
   database: "cadastro_aeronave",
 });
 
@@ -303,25 +303,50 @@ app.post("/upload", (req, res) => {
   });
 });
 
-app.post("/verify-table", (req, res) => {
-  const arquivo = req.files.upload;
-  let pasta = __dirname + "/files/" + "uploaded-file" + ".xls";
-  arquivo.mv(pasta, (err) => {
-    if (err) {
-      return res.send(err);
-    }
-    // chamar função de verificar tabela retornando true p/ tabela correta e false p/ tabela incorreta
-    res.send(
-      JSON.stringify({
-        verify: true, //resultado da função aqui (colocar no lugar de true)
-      })
-    );
-    try {
-      fs.unlinkSync(pasta);
-    } catch (err) {
-      console.log(err);
-    }
-  });
+app.post('/verify-table', (req, res) => {
+    const arquivo = req.files.upload;
+    let pasta = __dirname + '/files/' + 'uploaded-file' + '.xls';
+    arquivo.mv(pasta, (err) => {
+        if (err) {
+            return res.send(err);
+        }
+        let test_xls = xlsx.readFile(pasta);
+        let table_flap = test_xls.SheetNames;
+        console.log(table_flap);
+        var i=0;
+        var validate = "";
+
+        for (let sh of table_flap){
+            //console.log(sh);
+
+            let ver = test_xls.Sheets[sh];
+
+            //console.log(ver);
+            console.log(ver.B4);
+            if  (!ver.B4 ||
+                 !ver.M9 ||
+                 !ver.N2 ||
+                 !ver.O2 ||
+                 !ver.P2 ||
+                 !ver.Q2){
+                
+                    validate = false;
+                    break;
+                 }
+                else {
+                    validate = true;
+            }
+            
+  
+        }
+        console.log(validate);
+
+        // chamar função de verificar tabela retornando true p/ tabela correta e false p/ tabela incorreta
+        res.send(JSON.stringify({
+            verify: validate //resultado da função aqui (colocar no lugar de true)
+        }));
+        try { fs.unlinkSync(pasta); } catch (err) { console.log(err) }
+    });
 });
 
 app.listen(3001, () => {
