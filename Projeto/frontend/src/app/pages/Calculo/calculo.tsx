@@ -187,7 +187,7 @@ export const Calculo = () => {
      params,
      {headers:{"Content-Type" : "application/json"}})
      .then(resultado => {
-      setresult(converterResultado(resultado.data["result"]['result']))})
+      setresult(converterResultado(resultado.data["result"]["result"]['result']))})
   };
 
   // PEGAR MODELOS CADASTRADOS NO BANCO
