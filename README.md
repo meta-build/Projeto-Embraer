@@ -1,10 +1,11 @@
-<!-- 
-link icones titulo:
-
-https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
- -->
+> <!-- 
+> link icones titulo:
+>
+> https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
+>  -->
 
 <!-- banner -->
+
 <a href="https://github.com/meta-build">
  <img src="https://user-images.githubusercontent.com/111146527/184427724-57d0a08f-7d48-45d6-a5ea-32016851ab84.png" width="100%" alt="MetaBuilders">
 </a>
@@ -21,9 +22,11 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 </span>
 
 <!-- cabeçalho -->
+
 <h4>Aprendizagem por projeto Integrado <h1>Embraer Operational Landing Distance</h1></h4>
 
 <!-- ------------------------------------------------------------------RESUMO-------------------------------------------------------------------------- -->
+
 <p>
     Embraer OLD(Operational Landing Distance) é uma aplicação web com a finalidade de cálculo de pouso destinado à empresa de aviações.
 </p>
@@ -31,7 +34,9 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 <br>
 
 <!-- ------------------------------------------------------------------OBJETIVO-------------------------------------------------------------------------- -->
-## :dart: Objetivo
+
+## 🎯 Objetivo
+
 <p>
     Os pilotos precisam fazer uma análise do comprimento de pista requerida para o pouso de acordo com alguns parâmetros. Em função dos parâmetros passados, o piloto será capaz de calcular a distância necessária para pousar a aeronave. Se a pista do aeroporto de destino não for grande o suficiente para realização do pouso com segurança, o piloto deve buscar alguma alternativa.  
 </p>
@@ -39,13 +44,15 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 <br>
 
 <!-- ------------------------------------------------------------------BACKLOG-------------------------------------------------------------------------- -->
-## :repeat: Backlog
+
+## 🔁 Backlog
 
 <img src= "https://user-images.githubusercontent.com/111146527/189669523-2929a463-5ea7-4962-991f-96caed5b3e1a.png">
 
-
 <!-- ------------------------------------------------------------------SPRINTS-------------------------------------------------------------------------- -->
-## :gear: Sprints
+
+## ⚙️ Sprints
+
 <h2>1ª Sprint</h2>
 <p>Entrega: 29/08/2022 à 18/09/2022</p>
 
@@ -57,9 +64,9 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 ![Burndown S1](https://user-images.githubusercontent.com/111146527/190936234-f4935a9c-34ba-4534-9e26-c88f2234a562.png)
 
-### Cálculo 
-![sprint1](https://user-images.githubusercontent.com/111146527/193828523-8f67f104-898e-4559-a682-cd4c3960e971.gif)
+### Cálculo
 
+![sprint1](https://user-images.githubusercontent.com/111146527/193828523-8f67f104-898e-4559-a682-cd4c3960e971.gif)
 
 <h2>2ª Sprint</h2>
 <p>Entrega: 19/09/2022 à 09/10/2022</p>
@@ -96,7 +103,6 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 ![Backlog S3](https://user-images.githubusercontent.com/111146527/200193259-aa365ed5-dda4-4bfe-aafd-463f9e9df69b.png)
 
-
 ### Burndown da Sprint
 
 ![Burndown S3](https://user-images.githubusercontent.com/111146527/200193194-1c3c90ab-2c18-4561-9d7f-9f5babb36f19.png)
@@ -104,9 +110,11 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 ### Funcionalidade
 
 #### Tela de cadastro + Perfil Aeronave
+
 ![video aviao](https://user-images.githubusercontent.com/111146527/200221497-0e41ace0-270b-41c4-80ee-98307d724aee.gif)
 
 #### Integração cálculo + aeronaves
+
 ![calculo](https://user-images.githubusercontent.com/111146527/200221488-d7f4b055-2479-4bc4-88b7-239d628086a0.gif)
 
 <br>
@@ -122,64 +130,81 @@ https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 
 ![Captura de tela 2022-11-28 003554](https://user-images.githubusercontent.com/111146527/204188701-18592c8b-f219-4325-aad6-18e5a264806f.png)
 
-### Novo menu 
+### Novo menu
+
 ![novo menu](https://user-images.githubusercontent.com/111146527/204194660-221e1dc0-d955-407b-901e-b00a462a7fcb.gif)
 
-### Edição aeronave + campo de mínimo e máximo para peso, temperatura e velocidade 
+### Edição aeronave + campo de mínimo e máximo para peso, temperatura e velocidade
+
 ![edicao aeronave](https://user-images.githubusercontent.com/111146527/204194668-fbcc9ac4-4f82-45b5-8640-6b1a2622bed9.gif)
 
 ### Validação de campos na criação ou edição de aeronave
+
 ![validacao campos](https://user-images.githubusercontent.com/111146527/204194688-b3d9e3c8-97aa-4074-a9ea-4be08052815d.gif)
 
 ### Validação de arquivo de tabela enviado
+
 ![validacao arquivo](https://user-images.githubusercontent.com/111146527/204194699-6421c721-fdc5-4731-bc33-a96d52bbc4ec.gif)
 
 ### Exclusão aeronave
+
 ![exclusao aeronave](https://user-images.githubusercontent.com/111146527/204194709-bcf86738-3ec7-4e97-9175-610065b8b84f.gif)
 
 ### Extração de informações da aeronave (limite, flaps, motores, entre outras informações) na tela de cálculo
+
 ![dados aeronave](https://user-images.githubusercontent.com/111146527/204194723-e3f64b34-4eff-40bc-8019-b90118273598.gif)
 
 ### Conversão de medida na tela de cálculo
+
 ![conversao valores](https://user-images.githubusercontent.com/111146527/204194741-69e0ea63-7f11-4e49-9fc9-c7d329f5718f.gif)
 
 ### Cadastro usuário + Tela de usuários
+
 ![cadastro usuario](https://user-images.githubusercontent.com/111146527/204194756-1b437cc3-17ca-4f60-8081-b68fbe5fe1a1.gif)
 
 ### Editar usuário
+
 ![edicao usuario](https://user-images.githubusercontent.com/111146527/204194780-f363049e-90ba-46b4-8180-52c6e86a3b88.gif)
 
 ### Excluir usuário
+
 ![exclusao usuario](https://user-images.githubusercontent.com/111146527/204194797-666423f8-a960-4778-aa1a-b0b466f0dd9e.gif)
 
 <!-- -----------------------------------------------------------------TECNOLOGIAS------------------------------------------------------------------------- -->
-## :computer: Tecnologias utilizadas
+
+## 💻 Tecnologias utilizadas
+
 <!-- 
 badges: https://dev.to/envoy_/150-badges-for-github-pnk
 
 modelo: 
 <img src="cole-link-aqui" style="border-radius: 8px">
 -->
+
 ### Front-end
-<span> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> </span>
-<span> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"> </span>
-<span><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"></span>
-<span><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"></span>
-<span><img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white"></span>
 
-### Back-end 
+`<span>` `<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">` 
+`<span>` `<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">` 
+`<span><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">`
+`<span><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">`
+`<span><img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white">`
 
-<span><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"></span>
-<span><img src = "https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"></span>
-<span><img src = "https://img.shields.io/badge/Express.js-404D59?style=for-the-badge"></span> 
+### Back-end
+
+`<span><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">`
+`<span><img src = "https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white">`
+`<span><img src = "https://img.shields.io/badge/Express.js-404D59?style=for-the-badge">`
 
 ### Design
 
-<span><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"></span>
+`<span><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">`
 
 <!-- ------------------------------------------------------------------EQUIPE-------------------------------------------------------------------------- -->
-## :busts_in_silhouette: Equipe
+
+## 👥 Equipe
+
 <!-- scrum master -->
+
 <div>
 <!--link github aqui -->
  <a href="https://github.com/Rotiv03">
@@ -190,6 +215,7 @@ modelo:
 <br>
 
 <!-- product owner -->
+
 <div>
 <!--link github aqui -->
  <a href="https://github.com/WallaceMarinho">
@@ -200,6 +226,7 @@ modelo:
 <br>
 
 <!-- dev -->
+
 <span>
 <!--link github aqui -->
  <a href="https://github.com/fabiaalv3s">
@@ -237,6 +264,6 @@ modelo:
 </span>
 <!-- ------------------------------------------------------------------LICENÇA MIT------------------------------------------------------------------------- -->
 
+## 📄 Licença MIT
 
-## :page_facing_up: Licença MIT
-Este projeto está sob a licença MIT. <a href="https://github.com/meta-build/Projeto-Embraer/blob/main/LICENSE"> Clique aqui</a> para mais detalhes.
+Este projeto está sob a licença MIT. `<a href="https://github.com/meta-build/Projeto-Embraer/blob/main/LICENSE">` Clique aqui`</a>` para mais detalhes.
