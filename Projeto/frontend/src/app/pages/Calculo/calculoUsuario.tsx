@@ -182,7 +182,7 @@ export const CalculoUsuario = () => {
      params,
      {headers:{"Content-Type" : "application/json"}})
      .then(resultado => {
-      setresult(converterResultado(resultado.data["result"]))})
+      setresult(converterResultado(resultado.data["result"]['result']))})
   };
 
   // PEGAR MODELOS CADASTRADOS NO BANCO
@@ -391,7 +391,7 @@ export const CalculoUsuario = () => {
           </div>
           <div className="calcBotoes">
             <Botao tipo="submit" texto="Calculate" />
-            <Botao tipo="reset" texto="Reset" />
+            <Botao tipo="reset" texto="Reset" noClique={() => setresult(0)}/>
           </div>
         </form>
         <Resultado label={labelResultado} result={result} />

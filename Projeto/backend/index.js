@@ -11,11 +11,11 @@ const saltRounds = 10;
 const bcrypt = require("bcrypt");
 
 const db = mysql.createPool({
-  host: "localhost",
-  user: "Rafael",
-  password: "Root@123",
-  database: "cadastro_aeronave",
-});
+  host: 'localhost',
+  user: 'rodrigo',
+  password: 'fatec',
+  database: 'cadastro_aeronave'
+}); 
 
 app.use(cors());
 app.use(express.json());
@@ -97,7 +97,7 @@ app.post("/register", (req, res) => {
               const { motors } = req.body;
               const { certis } = req.body;
               const { breakConfigs } = req.body;
-
+              
               let sqlFlap = "INSERT INTO flap (nome, aeronave) VALUES ( ?, ? )";
               let sqlMotor =
                 "INSERT INTO motor (nome, aeronave) VALUES ( ?, ? )";

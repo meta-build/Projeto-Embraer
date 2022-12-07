@@ -404,10 +404,10 @@ export const Calculo = () => {
           </div>
           <div className="calcBotoes">
             <Botao tipo="submit" texto="Calculate" />
-            <Botao tipo="reset" texto="Reset" />
+            <Botao tipo="reset" texto="Reset" noClique={() => setresult(0)} />
           </div>
         </form>
-        <Resultado label={labelResultado} result={result} />
+        <Resultado label={labelResultado} result={result}/>
       </div>
     </>
   );

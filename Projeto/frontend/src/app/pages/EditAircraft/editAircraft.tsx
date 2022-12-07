@@ -18,7 +18,6 @@ export const EditAircraft = () => {
 
     const { aircraftId } = useParams();
 
-
     const [name, setName] = useState('');
     const [brand, setBrand] = useState('');
 
