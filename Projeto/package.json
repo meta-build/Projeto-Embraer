@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "dotenv": "^16.0.3",
-    "formik": "^2.2.9",
-    "nodemon": "^2.0.20",
-    "yup": "^0.32.11"
-  }
-}

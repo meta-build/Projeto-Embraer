@@ -6,6 +6,7 @@ import { faCheck, faChevronLeft, faChevronRight, faCircleArrowDown, faCircleArro
 interface configBotao {
   tipo: "submit" | "reset";
   texto: string;
+  noClique?: Function
 }
 interface configBotaoComFuncao extends ButtonHTMLAttributes<HTMLButtonElement> {
   tipo: "submit";
@@ -42,7 +43,7 @@ export const Botao = (props: configBotao) => {
 
   return (
     <>
-      <button type={props.tipo} className={classe()}>
+      <button type={props.tipo} className={classe()} onClick={() => props.noClique}>
         {props.texto}
       </button>
     </>
